@@ -1,0 +1,11 @@
+﻿namespace Project.Models
+{
+    public class ImageBlog
+    {
+        public int ImageBlogId { get; set; }
+        public int BlogId { get; set; }
+        public string ImageURL { get; set; } = null!;
+
+        public virtual Blog Blog { get; set; } = null!;
+    }
+}

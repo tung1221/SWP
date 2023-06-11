@@ -1,0 +1,47 @@
+﻿@model Project.Models.BlogViewModel
+
+<link rel="stylesheet" type="text/css" href="~/css/blog.css">
+<style>
+    .cart-icon {
+        font-size: 30px; /* Kích thước biểu tượng */
+        color: #ff0000; /* Màu sắc biểu tượng */
+    }
+</style>
+
+
+<div class="container_blogdetail" style="padding-top:120px">
+    <div id="content-container" class="container">
+        @if (Model.ImageBlogs != null && Model.ImageBlogs.Any())
+        {
+            <div class="image-gallery" >
+                @foreach (var image in Model.ImageBlogs)
+                {
+                    <img style="height:300px;" src="~/images/blog/@image.ImageURL" alt="blog image" />
+                }
+            </div>
+
+            <div class="content">
+                @foreach(var content in Model.Blogs)
+                {
+                    <h2>@content.content</h2>
+                }
+            
+             </div>
+
+             <div>
+                <i class="fas fa-shopping-cart cart-icon"></i>
+
+             </div>
+        }
+        else
+        {
+            <p>No images found.</p>
+        }
+
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+</div>
+
+

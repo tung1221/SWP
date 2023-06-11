@@ -1,0 +1,81 @@
+﻿@model Project.Models.BlogViewModel
+<link rel="stylesheet" href="~/css/blog.css" />
+
+<!-- Start Blog Area -->
+<div class="htc__blog__area bg__white ptb--120">
+    <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ; position: relative;">
+        <div class="ht__bradcaump__wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="bradcaump__inner text-center">
+                            <h2 class="bradcaump-title">Blog</h2>
+                            <nav class="bradcaump-inner">
+                                <a class="breadcrumb-item" href="/Home/Index">Home</a>
+                                <span class="brd-separetor">/</span>
+                                <span class="breadcrumb-item active">Blog</span>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+
+        <div class="row blog__wrap blog--page clearfix">
+            <!-- Thêm lớp clearfix vào đây -->
+            @foreach (var item in Model.Blogs.Zip(Model.ImageBlogs, (blog, imageBlog) => new { Blog = blog, ImageBlog = imageBlog }))
+            {
+                var blog = item.Blog;
+                var imageBlog = item.ImageBlog;
+
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                    <div class="blog foo">
+                        <div class="blog__inner">
+                            <div class="blog__thumb">
+                                <a href="/Blog/BlogDetails?blogId=@blog.Blogid">
+                                    <div class="image-container">
+                                        <img src="~/images/blog/@imageBlog.ImageURL" alt="blog images">
+                                    </div>
+                                </a>
+
+                                <div class="blog__post__time">
+                                    <div class="post__time--inner">
+                                        <span class="date">14</span>
+                                        <span class="month">sep</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blog__hover__info">
+                                <div class="blog__hover__action">
+                                    <ul class="bl__meta">
+                                        <li>By: <a href="#">Phongdz</a></li>
+                                        <li>Product</li>
+                                    </ul>
+                                    <p class="blog__des">
+                                        <a href="blog-details.html">@imageBlog.ImageURL</a>
+                                    </p>
+                                    <div class="blog__btn">
+                                        <a class="read__more__btn" href="blog-details.html">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- Start Load More Button -->
+        <div class="row mt--60">
+            <div class="col-md-12">
+                <div class="htc__loadmore__btn">
+                    <a href="#">load more</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Load More Button -->
+    </div>
+</div>
+<!-- End Blog Area -->
