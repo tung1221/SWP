@@ -1,47 +1,285 @@
-﻿@model Project.Models.BlogViewModel
+﻿
+@{
+    var imageBlogs = ViewData["ImageBlogs"] as List<ImageBlog>;
+    var blog = ViewData["Blog"] as Blog;
+    var viewProductById = ViewData["ViewProductById"] as List<Product>;
+}
 
-<link rel="stylesheet" type="text/css" href="~/css/blog.css">
-<style>
-    .cart-icon {
-        font-size: 30px; /* Kích thước biểu tượng */
-        color: #ff0000; /* Màu sắc biểu tượng */
-    }
-</style>
-
-
-<div class="container_blogdetail" style="padding-top:120px">
-    <div id="content-container" class="container">
-        @if (Model.ImageBlogs != null && Model.ImageBlogs.Any())
-        {
-            <div class="image-gallery" >
-                @foreach (var image in Model.ImageBlogs)
-                {
-                    <img style="height:300px;" src="~/images/blog/@image.ImageURL" alt="blog image" />
-                }
+<div class="htc__blog__area bg__white ptb--120">
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ; position: relative;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">Blog Details</h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="/Home/Index">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">Blog Details</span>
+                        </nav>
+                    </div>
+                </div>
             </div>
-
-            <div class="content">
-                @foreach(var content in Model.Blogs)
-                {
-                    <h2>@content.content</h2>
-                }
-            
-             </div>
-
-             <div>
-                <i class="fas fa-shopping-cart cart-icon"></i>
-
-             </div>
-        }
-        else
-        {
-            <p>No images found.</p>
-        }
-
+        </div>
     </div>
+</div>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<!-- End Bradcaump area -->
+    <!-- Start Product Details -->
+    <section class="htc__product__details pt--120 pb--100 bg__white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-6 col-sm-12">
+                    <div class="product__details__container">
+                        <!-- Start Small images -->
+                        <div class="nav product__small__images" role="tablist">
+                            <div class="row">
+                                <ul class="col-sm-12">
+                                    @foreach (var image in imageBlogs)
+                                    {
+                                        <li role="presentation" class="pot-small-img">
+                                            <a href="#img-tab-@(image.ImageBlogId)" role="tab" data-bs-toggle="tab" onclick="changeBigImage('~/images/blog/@image.ImageURL')">
+                                                <img src="~/images/blog/@image.ImageURL" alt="small-image" style="max-width: 100px">
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- End Small images -->
+                        <!-- Start Big image -->
+                        <div class="product__big__images">
+                            <div class="portfolio-full-image tab-content">
+                                @foreach (var image in imageBlogs)
+                                {
+                                    <div role="tabpanel" class="tab-pane @(image == imageBlogs.First() ? "active" : "")" id="img-tab-@(image.ImageBlogId)">
+                                        <img src="~/images/blog/@image.ImageURL" alt="full-image" style="max-width: 450px">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- End Big image -->
+
+
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-sm-12 smt-30 xmt-30">
+                    <div class="htc__product__details__inner">
+                        <div class="pro__detl__title">
+                            <h2>Blue Nè</h2>
+                        </div>
+                        <div class="pro__details">
+                            <p>
+
+                                <h2>@blog.content</h2>
+                                
+                            </p>
+                        </div>
+                        <div class="pro__social__share">
+                            <h2>Share :</h2>
+                            <ul class="pro__soaial__link">
+                                <li><a href="https://twitter.com/devitemsllc" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="https://www.instagram.com/devitems/" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a href="https://www.facebook.com/devitems/?ref=bookmarks" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="https://plus.google.com/" target="_blank"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Product Details -->
+    <!-- Start Product tab -->
+<section class="htc__product__details__tab bg__white pb--120">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <ul class="nav product__deatils__tab mb--60" role="tablist">
+                    <li role="presentation" class="active">
+                            <a class="active" href="#productinblog" role="tab" data-bs-toggle="tab">Product In Blog</a>
+                    </li>
+                  
+                    <li role="presentation">
+                        <a href="#reviews" role="tab" data-bs-toggle="tab">Reviews</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product__details__tab__content">
+                    <!-- Start Single Content -->
+                     <div role="tabpanel" id="productinblog" class="product__tab__content active">
+                            <div class="row product__list">
+                                @foreach (var item in viewProductById)
+                                {
+
+
+                                    <div class="col-md-3 single__pro col-lg-3 col-md-4 cat--1 col-sm-12">
+                                        <div class="product foo">
+                                            <div class="product__inner">
+                                                <div class="pro__thumb">
+                                                    <a href="#">
+                                                        <img src="~/images/product/@item.ImageMain" alt="product images">
+                                                    </a>
+                                                </div>
+                                                <div class="product__hover__info">
+                                                    <ul class="product__action">
+                                                        <li><a data-bs-toggle="modal" data-bs-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                        <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="add__to__wishlist">
+                                                    <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" href="wishlist.html"><span class="ti-heart"></span></a>
+                                                </div>
+                                            </div>
+                                            <div class="product__details">
+                                                <h2><a href="product-details.html">Simple Black Clock</a></h2>
+                                                <ul class="product__price">
+                                                    <li class="old__price"></li>
+                                                    <li class="new__price">@item.ProductPrice vnd</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                    </div>
+                <!-- End Single Content -->
+                    
+                    <!-- Start Single Content -->
+                    <div role="tabpanel" id="reviews" class="product__tab__content">
+                        <div class="review__address__inner">
+                            <!-- Start Single Review -->
+                            <div class="pro__review">
+                                <div class="review__thumb">
+                                    <img src="images/review/1.jpg" alt="review images">
+                                </div>
+                                <div class="review__details">
+                                    <div class="review__info">
+                                        <h4><a href="#">Gerald Barnes</a></h4>
+                                        <ul class="rating">
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                        </ul>
+                                        <div class="rating__send">
+                                            <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="review__date">
+                                        <span>27 Jun, 2022 at 2:30pm</span>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                </div>
+                            </div>
+                            <!-- End Single Review -->
+                            <!-- Start Single Review -->
+                            <div class="pro__review ans">
+                                <div class="review__thumb">
+                                    <img src="images/review/2.jpg" alt="review images">
+                                </div>
+                                <div class="review__details">
+                                    <div class="review__info">
+                                        <h4><a href="#">Gerald Barnes</a></h4>
+                                        <ul class="rating">
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                            <li><i class="zmdi zmdi-star-half"></i></li>
+                                        </ul>
+                                        <div class="rating__send">
+                                            <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="review__date">
+                                        <span>27 Jun, 2022 at 2:30pm</span>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                </div>
+                            </div>
+                            <!-- End Single Review -->
+                        </div>
+                        <!-- Start RAting Area -->
+                        <div class="rating__wrap">
+                            <h2 class="rating-title">Write  A review</h2>
+                            <h4 class="rating-title-2">Your Rating</h4>
+                            <div class="rating__list">
+                                <!-- Start Single List -->
+                                <ul class="rating">
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                </ul>
+                                <!-- End Single List -->
+                                <!-- Start Single List -->
+                                <ul class="rating">
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                </ul>
+                                <!-- End Single List -->
+                                <!-- Start Single List -->
+                                <ul class="rating">
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                </ul>
+                                <!-- End Single List -->
+                                <!-- Start Single List -->
+                                <ul class="rating">
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                </ul>
+                                <!-- End Single List -->
+                                <!-- Start Single List -->
+                                <ul class="rating">
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                </ul>
+                                <!-- End Single List -->
+                            </div>
+                        </div>
+                        <!-- End RAting Area -->
+                        <div class="review__box">
+                            <form id="review-form">
+                                <div class="single-review-form">
+                                    <div class="review-box name">
+                                        <input type="text" placeholder="Type your name">
+                                        <input type="email" placeholder="Type your email">
+                                    </div>
+                                </div>
+                                <div class="single-review-form">
+                                    <div class="review-box message">
+                                        <textarea placeholder="Write your review"></textarea>
+                                    </div>
+                                </div>
+                                <div class="review-btn">
+                                    <a class="fv-btn" href="#">submit review</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Single Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 </div>
+
 
 

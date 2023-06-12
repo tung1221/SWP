@@ -1,4 +1,11 @@
-﻿@model Project.Models.BlogViewModel
+﻿@{
+    var blogs = ViewData["Blogs"] as List<Blog>;
+    var imageBlogs = ViewData["ImageBlogs"] as List<ImageBlog>;
+}
+
+
+
+
 <link rel="stylesheet" href="~/css/blog.css" />
 
 <!-- Start Blog Area -->
@@ -26,7 +33,7 @@
 
         <div class="row blog__wrap blog--page clearfix">
             <!-- Thêm lớp clearfix vào đây -->
-            @foreach (var item in Model.Blogs.Zip(Model.ImageBlogs, (blog, imageBlog) => new { Blog = blog, ImageBlog = imageBlog }))
+            @foreach (var item in blogs.Zip(imageBlogs, (blog, imageBlog) => new { Blog = blog, ImageBlog = imageBlog }))
             {
                 var blog = item.Blog;
                 var imageBlog = item.ImageBlog;

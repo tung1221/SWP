@@ -12,14 +12,14 @@ using Project.Data;
 namespace Project.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20230602072720_V0")]
+    [Migration("20230612150416_V0")]
     partial class V0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.16")
+                .HasAnnotation("ProductVersion", "6.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -505,9 +505,6 @@ namespace Project.Migrations
                     b.Property<int?>("BlogId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("HomeStatus")
                         .HasColumnType("bit");
 
@@ -556,8 +553,6 @@ namespace Project.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("SubCategoryID");
 
                     b.ToTable("products", (string)null);
@@ -571,11 +566,16 @@ namespace Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategoryId"), 1L, 1);
 
+                    b.Property<int>("CateogoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SubCategoryId");
+
+                    b.HasIndex("CateogoryId");
 
                     b.ToTable("SubCategory");
                 });
@@ -758,13 +758,6 @@ namespace Project.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Project.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK__products__groupP__31EC6D26");
-
                     b.HasOne("Project.Models.SubCategory", "SubCategory")
                         .WithMany("Products")
                         .HasForeignKey("SubCategoryID")
@@ -773,9 +766,18 @@ namespace Project.Migrations
 
                     b.Navigation("Blog");
 
-                    b.Navigation("Category");
-
                     b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("Project.Models.SubCategory", b =>
+                {
+                    b.HasOne("Project.Models.Category", "Cateogory")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("CateogoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cateogory");
                 });
 
             modelBuilder.Entity("Project.Models.Bill", b =>
@@ -792,7 +794,7 @@ namespace Project.Migrations
 
             modelBuilder.Entity("Project.Models.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("SubCategories");
                 });
 
             modelBuilder.Entity("Project.Models.Payment", b =>

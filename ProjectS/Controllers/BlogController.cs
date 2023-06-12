@@ -24,39 +24,35 @@ namespace Project.Controllers
             var blogs = result.Select(r => r.Blog).ToList();
             var imageBlogs = result.Select(r => r.ImageBlog).ToList();
 
-            var viewModel = new BlogViewModel
-            {
-                Blogs = blogs,
-                ImageBlogs = imageBlogs
-            };
+            ViewData["Blogs"] = blogs;
+            ViewData["ImageBlogs"] = imageBlogs;
 
-            return View(viewModel);
+            return View();
         }
 
         public IActionResult BlogDetails(int blogId)
         {
-            // Lấy thông tin blog từ cơ sở dữ liệu
+            var viewProductById = _context.Products
+                .Where(p => p.HomeStatus == true && p.BlogId == blogId)
+                .ToList();
+
             var blog = _context.Blogs.FirstOrDefault(b => b.Blogid == blogId);
 
             if (blog == null)
             {
-                // Xử lý khi không tìm thấy blog
                 return NotFound();
             }
 
-            // Lấy danh sách ảnh tương ứng với blogId
             var images = _context.ImageBlogs.Where(i => i.BlogId == blogId).ToList();
 
-            // Tạo ViewModel và truyền thông tin blog và danh sách ảnh vào
-            var viewModel = new BlogViewModel
-            {
-                Blogs = new List<Blog> { blog },
-                ImageBlogs = images
-            };
+            ViewData["Blog"] = blog;
+            ViewData["ImageBlogs"] = images;
+            ViewData["ViewProductById"] = viewProductById;
 
-            // Trả về View hiển thị thông tin blog và danh sách ảnh
-            return View(viewModel);
+            return View();
         }
+
+
 
 
 
