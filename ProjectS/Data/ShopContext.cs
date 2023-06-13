@@ -13,6 +13,8 @@ namespace Project.Data
         {
         }
 
+        
+
         public virtual DbSet<Bill> Bills { get; set; } = null!;
         public virtual DbSet<BillDetail> BillDetails { get; set; } = null!;
         public virtual DbSet<Feedback> Feedbacks { get; set; } = null!;
@@ -25,6 +27,7 @@ namespace Project.Data
         public virtual DbSet<Blog> Blogs { get; set; } = null!;
         public virtual DbSet<ImageProduct> ImageProducts { get; set; } = null!;
         public virtual DbSet<ImageBlog> ImageBlogs { get; set; } = null!;
+        public virtual DbSet<SubCategory> SubCategory { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -35,7 +38,9 @@ namespace Project.Data
             modelBuilder.Entity<SubCategory>(entity =>
             {
                 entity.HasKey(s => s.SubCategoryId);
-
+                entity.HasOne(s => s.Cateogory).
+                       WithMany(c => c.SubCategories).HasForeignKey(c => c.CateogoryId)
+                       .OnDelete(DeleteBehavior.Cascade);
                 entity.Property(p => p.SubCategoryId).ValueGeneratedOnAdd();
 
             });
@@ -167,11 +172,7 @@ namespace Project.Data
                     .HasColumnType("date");
                 entity.Property(p => p.BlogId).IsRequired(false);
                 entity.Property(p => p.typeGender).IsRequired(false);
-                entity.HasOne(p => p.Category)
-                    .WithMany(c => c.Products)
-                    .HasForeignKey(p => p.CategoryId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__products__groupP__31EC6D26");
+              
                 entity.HasOne(p => p.Blog)
                     .WithMany(c => c.Products)
                     .HasForeignKey(p => p.BlogId)

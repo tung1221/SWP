@@ -4,7 +4,7 @@
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; } = null!;
-        public int CategoryId { get; set; }
+      
         public DateTime ImportDate { get; set; }
         public string ProductDescription { get; set; } = null!;
         public bool? typeGender { get; set; }
@@ -20,7 +20,7 @@
         public string ImageMain { get; set; } = null!;
         public string ListSize { get; set; } = null!;
         public virtual Blog Blog { get; set; } = null!;
-        public virtual Category Category { get; set; } = null!;
+        
 
         public virtual SubCategory SubCategory { get; set; } = null!;
         public virtual List<BillDetail> BillDetails { get; set; } = null!;

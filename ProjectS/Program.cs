@@ -3,6 +3,7 @@ using Project.Data;
 using Microsoft.AspNetCore.Identity;
 using Project.Service;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Org.BouncyCastle.Tls;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,14 @@ builder.Services.AddSingleton<IEmailSender, SendMailService>();
 
 
 builder.Services.AddControllersWithViews();
+
+//var connect = builder.Configuration.GetConnectionString("value");
+
+//builder.Services.AddDbContext<ShopContext>(options =>
+//{
+//    options.UseMySql(connect, ServerVersion.AutoDetect(connect));
+//});
+
 builder.Services.AddDbContext<ShopContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ShopConnect"));
