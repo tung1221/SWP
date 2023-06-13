@@ -1,7 +1,19 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Project.Data
+@{
+    var listCate = _shopContext.Categories.ToList();
 
+
+    foreach (var c in listCate)
+    {
+        var e = _shopContext.Entry(c);
+        e.Collection(c => c.SubCategories).Load();
+    }
+
+}
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject ShopContext _shopContext
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -23,7 +35,7 @@
 </head>
 <body>
     <div class="wrapper fixed__footer">
-        <header id="header" class="htc-header">
+        <header id="header" class="htc-header header--3 bg__white" >
             <!-- Start Mainmenu Area -->
             <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header">
                 <div class="container">
@@ -40,55 +52,47 @@
                             <nav class="mainmenu__nav  d-none d-lg-block">
                                 <ul class="main__menu">
                                     <li>
-                                        <a href="/Home/Index">Home</a></a>
+                                        <a asp-controller="Home" asp-action="Index">Home</a></a>
 
                                     </li>
-                                    <li><a href="about.html">About</a></li>
+                               
                                     <li class="drop">
                                         <a href="/blog/index">Blog</a>
                                         
                                     </li>
                                     <li class="drop">
-                                        <a href="shop.html">Shop</a>
-                                        <ul class="dropdown mega_dropdown">
-                                            <!-- Start Single Mega MEnu -->
-                                            <li>
-                                                <a class="mega__title" href="shop.html">Shop Pages</a>
-                                                <ul class="mega__item">
-                                                    <li><a href="shop.html">shop</a></li>
-                                                    <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                </ul>
-                                            </li>
-                                            <!-- End Single Mega MEnu -->
-                                            <!-- Start Single Mega MEnu -->
-                                            <li>
-                                                <a class="mega__title" href="shop.html">Product Types</a>
-                                                <ul class="mega__item">
-                                                    <li><a href="product-details.html">Simple Product</a></li>
-                                                    <li><a href="product-details.html">Variable Product</a></li>
-                                                    <li><a href="product-details.html">Grouped Product</a></li>
-                                                    <li><a href="product-details.html">Downloadable Product</a></li>
-                                                    <li><a href="product-details.html">Simple Product</a></li>
-                                                </ul>
-                                            </li>
-                                            <!-- End Single Mega MEnu -->
+                                        <a style="cursor: pointer">Nam</a>
+                                        <ul style="width: 500px"  class="dropdown mega_dropdown">
+                                            @foreach(var l in listCate)
+                                            {
+                                                <li>
+                                                    <a class="mega__title" >@l.CategoryName</a>
+                                                    <ul class="mega__item">
+                                                        @foreach(var ls in l.SubCategories)
+                                                        {
+                                                            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="false" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            }
                                         </ul>
                                     </li>
                                     <li class="drop">
-                                        <a href="#">pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="about.html">about</a></li>
-                                            <li><a href="shop.html">shop</a></li>
-                                            <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                            <li><a href="product-details.html">product details</a></li>
-                                            <li><a href="cart.html">cart</a></li>
-                                            <li><a href="wishlist.html">wishlist</a></li>
-                                            <li><a href="checkout.html">checkout</a></li>
-                                            <li><a href="team.html">team</a></li>
-                                            <li><a href="login-register.html">login & register</a></li>
+                                        <a style="cursor: pointer">Nữ</a>
+                                        <ul class="dropdown mega_dropdown">
+                                            @foreach (var l in listCate)
+                                            {
+                                                <li>
+                                                    <a class="mega__title">@l.CategoryName</a>
+                                                    <ul class="mega__item">
+                                                        @foreach (var ls in l.SubCategories)
+                                                        {
+                                                            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="true" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            }
+                                            
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">contact</a></li>
@@ -340,8 +344,7 @@
                 @RenderBody()
             </main>
         </div>
-        <!-- EndBody -->
-        <!-- styleFooter:  background: rgba(0, 0, 0, 0) url(images/bg/1.jpg) no-repeat scroll center center / cover ;-->
+       
         <footer class="htc__foooter__area" style="">
             <div class="container">
                 <div class="row footer__container clearfix">
@@ -471,30 +474,6 @@
 
 
 
-
-@* <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Project</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <partial name="_LoginPartial"></partial>
-        </nav>
-    </header>
-    *@
 
 
 
