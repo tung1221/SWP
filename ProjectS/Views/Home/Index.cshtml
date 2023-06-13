@@ -1,13 +1,12 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Home Page";
 }
 @model List<Product>
-
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 <div class="slider__container slider--one">
     <div class="slider__activation__wrap owl-carousel owl-theme">
-        Start Single Slide
+        <!-- Start Single Slide -->
         <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(/images/slider/bg/1.png) no-repeat scroll center center / cover ;">
             <div class="container">
                 <div class="row">
@@ -22,8 +21,8 @@
                 </div>
             </div>
         </div>
-        End Single Slide
-        Start Single Slide
+        <!-- End Single Slide -->
+        <!-- Start Single Slide -->
         <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(/images/slider/bg/2.png) no-repeat scroll center center / cover ;">
             <div class="container">
                 <div class="row">
@@ -38,30 +37,28 @@
                 </div>
             </div>
         </div>
-        End Single Slide
+        <!-- End Single Slide -->
     </div>
 </div>
-End Slide
-Body
+<!-- End Slide -->
+<!-- Body -->
 @if (Model.Count != 0)
 {
     <section class="htc__product__area ptb--130 bg__white">
         <div class="container">
             <div class="htc__product__container">
-                Start Product MEnu
+                <!-- Start Product MEnu -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="product__menu">
                         </div>
                     </div>
                 </div>
-                End Product MEnu
+                <!-- End Product MEnu -->
                 <div class="row product__list">
-                    Start Single Product
+                    <!-- Start Single Product -->
                     @foreach (var item in Model)
                     {
-
-
                         <div class="col-md-3 single__pro col-lg-3 col-md-4 cat--1 col-sm-12">
                             <div class="product foo">
                                 <div class="product__inner">
@@ -95,10 +92,3 @@ Body
         </div>
     </section>
 }
-
-<section class="htc__product__area ptb--130 bg__white">
-    <div class="container">
-        <div class="htc__product__container">
-        </div>
-    </div>
-</section>

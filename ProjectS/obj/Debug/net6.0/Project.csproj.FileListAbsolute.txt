@@ -1418,3 +1418,5 @@ C:\Trycode\SWP\SwpGroup3\SWP\ProjectS\obj\Debug\net6.0\refint\Project.dll
 C:\Trycode\SWP\SwpGroup3\SWP\ProjectS\obj\Debug\net6.0\Project.pdb
 C:\Trycode\SWP\SwpGroup3\SWP\ProjectS\obj\Debug\net6.0\Project.genruntimeconfig.cache
 C:\Trycode\SWP\SwpGroup3\SWP\ProjectS\obj\Debug\net6.0\ref\Project.dll
+D:\Project\ProjectS\bin\Debug\net6.0\MySqlConnector.dll
+D:\Project\ProjectS\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
