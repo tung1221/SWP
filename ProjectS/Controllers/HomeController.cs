@@ -17,9 +17,11 @@ namespace Project.Controllers
 
         public IActionResult Index()
         {
-            var temp = _shopContext.Products.Where(p => p.HomeStatus == true);
+            var listProduct = _shopContext.Products.Where(p => p.HomeStatus == true);
+          
+            
 
-            return View(temp.ToList());
+            return View(listProduct.ToList());
         }
 
         public IActionResult Privacy()

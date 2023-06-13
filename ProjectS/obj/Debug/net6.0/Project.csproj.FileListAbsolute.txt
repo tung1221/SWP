@@ -1134,3 +1134,5 @@ D:\Project\ProjectS\obj\Debug\net6.0\refint\Project.dll
 D:\Project\ProjectS\obj\Debug\net6.0\Project.pdb
 D:\Project\ProjectS\obj\Debug\net6.0\Project.genruntimeconfig.cache
 D:\Project\ProjectS\obj\Debug\net6.0\ref\Project.dll
+D:\Project\ProjectS\bin\Debug\net6.0\MySqlConnector.dll
+D:\Project\ProjectS\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll

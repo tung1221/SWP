@@ -13,6 +13,8 @@ namespace Project.Data
         {
         }
 
+        
+
         public virtual DbSet<Bill> Bills { get; set; } = null!;
         public virtual DbSet<BillDetail> BillDetails { get; set; } = null!;
         public virtual DbSet<Feedback> Feedbacks { get; set; } = null!;
@@ -25,6 +27,7 @@ namespace Project.Data
         public virtual DbSet<Blog> Blogs { get; set; } = null!;
         public virtual DbSet<ImageProduct> ImageProducts { get; set; } = null!;
         public virtual DbSet<ImageBlog> ImageBlogs { get; set; } = null!;
+        public virtual DbSet<SubCategory> SubCategory { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
