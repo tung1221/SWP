@@ -65,19 +65,6 @@ namespace Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubCategory",
-                columns: table => new
-                {
-                    SubCategoryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SubCategory", x => x.SubCategoryId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Transports",
                 columns: table => new
                 {
@@ -137,6 +124,26 @@ namespace Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SubCategory",
+                columns: table => new
+                {
+                    SubCategoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CateogoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubCategory", x => x.SubCategoryId);
+                    table.ForeignKey(
+                        name: "FK_SubCategory_Categories_CateogoryId",
+                        column: x => x.CateogoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 columns: table => new
                 {
@@ -154,51 +161,6 @@ namespace Project.Migrations
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "products",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    ImportDate = table.Column<DateTime>(type: "date", nullable: false),
-                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    typeGender = table.Column<bool>(type: "bit", nullable: true),
-                    PerDiscount = table.Column<double>(type: "float", nullable: false),
-                    ProductQuantities = table.Column<int>(type: "int", nullable: false),
-                    ProductPrice = table.Column<double>(type: "float", nullable: false),
-                    BlogId = table.Column<int>(type: "int", nullable: true),
-                    IsAvailble = table.Column<bool>(type: "bit", nullable: false),
-                    HomeStatus = table.Column<bool>(type: "bit", nullable: false),
-                    SubCategoryID = table.Column<int>(type: "int", nullable: false),
-                    ListColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageMain = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ListSize = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_products", x => x.ProductId);
-                    table.ForeignKey(
-                        name: "FK__products__groupP__31EC6D26",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_products_Blogs_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Blogs",
-                        principalColumn: "Blogid",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_products_SubCategory_SubCategoryID",
-                        column: x => x.SubCategoryID,
-                        principalTable: "SubCategory",
-                        principalColumn: "SubCategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -347,6 +309,69 @@ namespace Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "products",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImportDate = table.Column<DateTime>(type: "date", nullable: false),
+                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    typeGender = table.Column<bool>(type: "bit", nullable: true),
+                    PerDiscount = table.Column<double>(type: "float", nullable: false),
+                    ProductQuantities = table.Column<int>(type: "int", nullable: false),
+                    ProductPrice = table.Column<double>(type: "float", nullable: false),
+                    BlogId = table.Column<int>(type: "int", nullable: true),
+                    IsAvailble = table.Column<bool>(type: "bit", nullable: false),
+                    HomeStatus = table.Column<bool>(type: "bit", nullable: false),
+                    SubCategoryID = table.Column<int>(type: "int", nullable: false),
+                    ListColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageMain = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ListSize = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_products_Blogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "Blogs",
+                        principalColumn: "Blogid",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_products_SubCategory_SubCategoryID",
+                        column: x => x.SubCategoryID,
+                        principalTable: "SubCategory",
+                        principalColumn: "SubCategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BillDetails",
+                columns: table => new
+                {
+                    BillDetailId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BillId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillDetails", x => x.BillDetailId);
+                    table.ForeignKey(
+                        name: "FK__bill_deta__bill___3E52440B",
+                        column: x => x.BillId,
+                        principalTable: "Bills",
+                        principalColumn: "BillId");
+                    table.ForeignKey(
+                        name: "FK__bill_deta__produ__3F466844",
+                        column: x => x.ProductId,
+                        principalTable: "products",
+                        principalColumn: "ProductId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Feedbacks",
                 columns: table => new
                 {
@@ -393,31 +418,6 @@ namespace Project.Migrations
                         principalTable: "products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BillDetails",
-                columns: table => new
-                {
-                    BillDetailId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BillId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BillDetails", x => x.BillDetailId);
-                    table.ForeignKey(
-                        name: "FK__bill_deta__bill___3E52440B",
-                        column: x => x.BillId,
-                        principalTable: "Bills",
-                        principalColumn: "BillId");
-                    table.ForeignKey(
-                        name: "FK__bill_deta__produ__3F466844",
-                        column: x => x.ProductId,
-                        principalTable: "products",
-                        principalColumn: "ProductId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -477,11 +477,6 @@ namespace Project.Migrations
                 column: "BlogId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_products_CategoryId",
-                table: "products",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_products_SubCategoryID",
                 table: "products",
                 column: "SubCategoryID");
@@ -497,6 +492,11 @@ namespace Project.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubCategory_CateogoryId",
+                table: "SubCategory",
+                column: "CateogoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -577,13 +577,13 @@ namespace Project.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "Blogs");
 
             migrationBuilder.DropTable(
                 name: "SubCategory");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }
