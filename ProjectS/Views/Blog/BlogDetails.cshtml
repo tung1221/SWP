@@ -4,6 +4,7 @@
     var blog = ViewData["Blog"] as Blog;
     var viewProductById = ViewData["ViewProductById"] as List<Product>;
 }
+<link rel="stylesheet" href="~/css/blog.css" />
 
 <div class="htc__blog__area bg__white ptb--120">
 <!-- Start Bradcaump area -->
@@ -28,28 +29,11 @@
 
 <!-- End Bradcaump area -->
     <!-- Start Product Details -->
-    <section class="htc__product__details pt--120 pb--100 bg__white">
+    <section class="htc__product__details pt--20 pb--50 bg__white">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-6 col-sm-12">
                     <div class="product__details__container">
-                        <!-- Start Small images -->
-                        <div class="nav product__small__images" role="tablist">
-                            <div class="row">
-                                <ul class="col-sm-12">
-                                    @foreach (var image in imageBlogs)
-                                    {
-                                        <li role="presentation" class="pot-small-img">
-                                            <a href="#img-tab-@(image.ImageBlogId)" role="tab" data-bs-toggle="tab" onclick="changeBigImage('~/images/blog/@image.ImageURL')">
-                                                <img src="~/images/blog/@image.ImageURL" alt="small-image" style="max-width: 100px">
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- End Small images -->
                         <!-- Start Big image -->
                         <div class="product__big__images">
                             <div class="portfolio-full-image tab-content">
@@ -61,22 +45,17 @@
                                 }
                             </div>
                         </div>
-
                         <!-- End Big image -->
-
-
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-6 col-sm-12 smt-30 xmt-30">
                     <div class="htc__product__details__inner">
                         <div class="pro__detl__title">
-                            <h2>Blue Nè</h2>
+                            <h2>Collection</h2>
                         </div>
                         <div class="pro__details">
                             <p>
-
-                                <h2>@blog.content</h2>
-                                
+                                <h2 class="ing-content-detailblog">@blog.content</h2>
                             </p>
                         </div>
                         <div class="pro__social__share">
@@ -94,6 +73,20 @@
         </div>
     </section>
     <!-- End Product Details -->
+    <!-- Start Small images -->
+    <div class="nav product__small__images pb--50" role="tablist">
+        <div class="row">
+            @foreach (var image in imageBlogs)
+            {
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <a href="#img-tab-@(image.ImageBlogId)" role="tab" data-bs-toggle="tab" onclick="changeBigImage('~/images/blog/@image.ImageURL')">
+                        <img src="~/images/blog/@image.ImageURL" alt="small-image" style="max-width: 200px">
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- End Small images -->
     <!-- Start Product tab -->
 <section class="htc__product__details__tab bg__white pb--120">
     <div class="container">
