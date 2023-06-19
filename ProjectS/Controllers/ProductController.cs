@@ -6,7 +6,7 @@ namespace Project.Controllers
 {
     public class ProductController : Controller
     {
-
+        //testgit
         private readonly ILogger<ProductController> _logger;
         private readonly ShopContext _shopContext;
         public ProductController(ILogger<ProductController> logger, ShopContext ct)
