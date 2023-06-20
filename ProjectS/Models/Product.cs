@@ -4,23 +4,22 @@
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; } = null!;
-      
+
         public DateTime ImportDate { get; set; }
         public string ProductDescription { get; set; } = null!;
         public bool? typeGender { get; set; }
-        public double PerDiscount { get; set; }
+        public double? PerDiscount { get; set; }
         public int ProductQuantities { get; set; }
         public double ProductPrice { get; set; }
         public int? BlogId { get; set; }
-        public bool IsAvailble { get; set; } 
+        public bool IsAvailble { get; set; }
         public bool HomeStatus { get; set; }
-
-        public int SubCategoryID { get; set; } 
+        public int SubCategoryID { get; set; }
         public string ListColor { get; set; } = null!;
         public string ImageMain { get; set; } = null!;
         public string ListSize { get; set; } = null!;
         public virtual Blog Blog { get; set; } = null!;
-        
+
 
         public virtual SubCategory SubCategory { get; set; } = null!;
         public virtual List<BillDetail> BillDetails { get; set; } = null!;

@@ -17,17 +17,19 @@ builder.Services.AddSingleton<IEmailSender, SendMailService>();
 
 builder.Services.AddControllersWithViews();
 
-//var connect = builder.Configuration.GetConnectionString("value");
-
-//builder.Services.AddDbContext<ShopContext>(options =>
-//{
-//    options.UseMySql(connect, ServerVersion.AutoDetect(connect));
-//});
+var connect = builder.Configuration.GetConnectionString("ShopConnect");
 
 builder.Services.AddDbContext<ShopContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ShopConnect"));
+    options.UseMySql(connect, ServerVersion.AutoDetect(connect));
 });
+
+
+
+//builder.Services.AddDbContext<ShopContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("ShopConnect"));
+//});
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => 
 {

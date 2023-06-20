@@ -1,0 +1,156 @@
+﻿@model Product
+
+<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">Product Details</h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="index.html">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">Product Details</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="htc__product__details pt--120 pb--100 bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-6 col-sm-12">
+                <div class="product__details__container">
+                    <!-- Start Small images -->
+                    <div class="nav product__small__images" role="tablist">
+                        <div class="row">
+                            <ul class="col-sm-6">
+
+                                <li role="presentation" class="pot-small-img">
+                                    <a class="active" href="#img-tab-main" role="tab" data-bs-toggle="tab">
+                                        <img src="/images/product/@ViewData["image"]" alt="small-image" style="max-width: 50px">
+                                    </a>
+                                </li>
+
+                                @foreach (var image in Model.ImageProducts)
+                                {
+                                    <li role="presentation" class="pot-small-img">
+                                        <a href="#img-tab-@(image.ImageURL.Substring(0, image.ImageURL.Length - 4))" role="tab" data-bs-toggle="tab">
+                                            <img src="/images/DetailProduct/@(image.ImageURL)" alt="small-image" style="max-width: 50px">
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- End Small images -->
+                    <!-- Start Big image -->
+                    <div class="product__big__images">
+                        <div class="portfolio-full-image tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="img-tab-main">
+                                <img src=" /images/product/@ViewData["image"]" size="400px" alt="full-image" style="max-width: 450px">
+                            </div>
+                            @foreach (var image in Model.ImageProducts)
+                            {
+                                <div role="tabpanel" class="tab-pane" id="img-tab-@(image.ImageURL.Substring(0, image.ImageURL.Length - 4))">
+                                    <img src="/images/DetailProduct/@(image.ImageURL)" alt="full-image" style="max-width: 450px">
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- End Big image -->
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 smt-30 xmt-30">
+                <div class="htc__product__details__inner">
+                    <div class="pro__detl__title">
+                        <h2>@Model.ProductName</h2>
+                    </div>
+                    <div class="pro__dtl__rating">
+                        <ul class="pro__rating">
+                            <li><span class="ti-star"></span></li>
+                            <li><span class="ti-star"></span></li>
+                            <li><span class="ti-star"></span></li>
+                            <li><span class="ti-star"></span></li>
+                            <li><span class="ti-star"></span></li>
+                        </ul>
+                    </div>
+                    <div class="pro__details">
+                        <p>@Model.ProductDescription </p>
+                    </div>
+                    <ul class="pro__dtl__prize">
+                       
+                        @if (Model.PerDiscount == null)
+                        {
+                            <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.PerDiscount).000vnd</li>
+                        }
+                        else
+                        {
+                            if (Model.PerDiscount == 0)
+                            {
+                                <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.PerDiscount).000vnd</li>
+                            }
+                            else
+                            {
+                                <li class="old__prize">@(Model.ProductPrice).000vnd</li>
+                                <li>@(Model.ProductPrice - Model.PerDiscount).000vnd</li>
+                            }
+                        }
+                    </ul>
+                    <form asp-action="index" asp-controller="Cart" id='myform'>
+                        <div class="pro__dtl__color">
+                            <h2 class="title__5">Choose Colour</h2>
+                            <ul class="pro__choose__color">
+                                @{
+                                    char[] temp = { ' ', ',' };
+                                    string[] str1 = Model.ListColor.Split(temp, StringSplitOptions.RemoveEmptyEntries);
+                                    foreach (string word in str1)
+                                    {
+                                        <li>
+                                            <input style="height: 0px; width: 40px" type="radio" class="btn-check" value="@word" name="color" id="color-@word">
+                                            <label  style=" border-width: 5px;  background-color: @word; height: 40px; width: 40px" class="btn" for="color-@word"></label>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <div class="pro__dtl__size">
+                            <h2 class="title__5">Size</h2>
+                            <ul class="pro__choose__size">
+                                @{
+                                    char[] separators = { ' ', ',' };
+                                    string[] result = Model.ListSize.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                                    foreach (string word in result)
+                                    {
+                                        <li>
+                                            <input type="radio" class="btn-check" value="@word" name="size" id="size-@word" >
+                                            <label style="width: 40px" class="btn " for="size-@word">@word</label>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <div class="product-action-wrap">
+                            <div class="prodict-statas"><span>Quantity :</span></div>
+                            <div class="product-quantity">
+                                    <div class="product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <input class="cart-plus-minus-box" type="text" name="quantity" value="02">
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+                        <input style="width: 30vh"  class="btn btn-danger" type="submit" value="Add Cart" />
+                   
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

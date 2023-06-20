@@ -13,7 +13,7 @@ namespace Project.Data
         {
         }
 
-        
+
 
         public virtual DbSet<Bill> Bills { get; set; } = null!;
         public virtual DbSet<BillDetail> BillDetails { get; set; } = null!;
@@ -28,6 +28,8 @@ namespace Project.Data
         public virtual DbSet<ImageProduct> ImageProducts { get; set; } = null!;
         public virtual DbSet<ImageBlog> ImageBlogs { get; set; } = null!;
         public virtual DbSet<SubCategory> SubCategory { get; set; } = null!;
+        public virtual DbSet<Cart> Carts { get; set; } = null!;
+        public virtual DbSet<CartItem> CartItems { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -44,6 +46,7 @@ namespace Project.Data
                 entity.Property(p => p.SubCategoryId).ValueGeneratedOnAdd();
 
             });
+
 
             modelBuilder.Entity<Blog>(entity =>
             {
@@ -172,7 +175,7 @@ namespace Project.Data
                     .HasColumnType("date");
                 entity.Property(p => p.BlogId).IsRequired(false);
                 entity.Property(p => p.typeGender).IsRequired(false);
-              
+
                 entity.HasOne(p => p.Blog)
                     .WithMany(c => c.Products)
                     .HasForeignKey(p => p.BlogId)

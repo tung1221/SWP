@@ -4,7 +4,6 @@
 }
 <div class="body__overlay"></div>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/4.jpg) no-repeat scroll center center / cover ;">
-   
 </div>
 
 
@@ -16,16 +15,18 @@
                 <div class="col-md-12">
                     <div class="filter__menu__container">
                         <div class="product__menu">
-                        
-                        
+
+
                             @foreach (var l in ViewData["listSubCate"] as List<SubCategory>)
                             {
-                                if(l.SubCategoryId == subCate.SubCategoryId)
+                                if (l.SubCategoryId == subCate.SubCategoryId)
                                 {
                                     <a style="color: red; font-size: 17px; margin-right:25px">@l.Name</a>
-                                }else{
-                                    <a asp-controller="Product" asp-action="Index" asp-route-gender="@ViewData["gender"]" asp-route-id="@l.SubCategoryId" style="font-size: 17px; margin-right:25px" >@l.Name</a>
-                                   
+                                }
+                                else
+                                {
+                                    <a asp-controller="Product" asp-action="Index" asp-route-gender="@ViewData["gender"]" asp-route-id="@l.SubCategoryId" style="font-size: 17px; margin-right:25px">@l.Name</a>
+
                                 }
                             }
 
@@ -60,19 +61,32 @@
                                 </div>
                                 <div class="product__hover__info">
                                     <ul class="product__action">
-                                        <li><a data-bs-toggle="modal" data-bs-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                        <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
+                                        <li><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@l.ProductId" title="Quick View" class="quick-view modal-view detail-link"><span class="ti-plus"></span></a></li>
+                                        <li><a title="Add TO Cart"><span class="ti-shopping-cart"></span></a></li>
                                     </ul>
                                 </div>
-                                <div class="add__to__wishlist">
-                                    <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" href="wishlist.html"><span class="ti-heart"></span></a>
-                                </div>
+
                             </div>
                             <div class="product__details">
-                                <h2><a href="product-details.html">Brone Lamp Glasses</a></h2>
+                                <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@l.ProductId">Brone Lamp Glasses</a></h2>
                                 <ul class="product__price">
-                                    <li class="old__price">$16.00</li>
-                                    <li class="new__price">$10.00</li>
+
+                                    @if (l.PerDiscount == null)
+                                    {
+                                        <li style="padding-left: 0px" class="new__price">@(l.ProductPrice - l.PerDiscount).000vnd</li>
+                                    }
+                                    else
+                                    {
+                                        if (l.PerDiscount == 0)
+                                        {
+                                            <li style="padding-left: 0px" class="new__price">@(l.ProductPrice - l.PerDiscount).000vnd</li>
+                                        }
+                                        else
+                                        {
+                                            <li class="old__price">@(l.ProductPrice).000vnd</li>
+                                            <li class="new__price">@(l.ProductPrice - l.PerDiscount).000vnd</li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </div>
