@@ -5,16 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a35465c8-9749-489f-8bc5-08a053b5d000" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Project/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Project/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/FileContentIndex/17197b5d-2e28-405c-a2c7-bf5dbf224fd0.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/FileContentIndex/236722e5-05f6-47ef-a3a1-9887f62c24f2.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/FileContentIndex/4438b386-339e-4bd9-8502-7ee6ebe1a81d.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/FileContentIndex/a5a56620-713f-4b30-9c78-c115c5afaf9c.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Project/v17/.futdcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Project/v17/.futdcache.v2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Project/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Project/v17/.suo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/project.metadata.v7.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/project.metadata.v7.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/project.projects.v7.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/project.projects.v7.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Project.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Project.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Project.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Project.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Project.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Project.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Project.staticwebassets.runtime.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Project.staticwebassets.runtime.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Project.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Project.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Project.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Project.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Project.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Project.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Project.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Project.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/ref/Project.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/ref/Project.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/refint/Project.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/refint/Project.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.build.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.development.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.pack.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.pack.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +45,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Trycode/SWP/SwpGroup3/SWP/ProjectS&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Trycode/SWP/GitDevelop/SWP/ProjectS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -44,6 +55,21 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ProjectS" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ProjectS" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,6 +82,8 @@
       <workItem from="1686584509958" duration="6000" />
       <workItem from="1686620951998" duration="971000" />
       <workItem from="1686627803455" duration="367000" />
+      <workItem from="1687357515427" duration="88000" />
+      <workItem from="1687357660829" duration="310000" />
     </task>
     <servers />
   </component>

@@ -51,7 +51,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.SignIn.RequireConfirmedEmail = true;            // Cấu hình xác thực địa chỉ email (email phải tồn tại)
     options.SignIn.RequireConfirmedAccount = true;
     })
-    .AddEntityFrameworkStores<ShopContext>();
+	 .AddRoles<IdentityRole>()
+	.AddEntityFrameworkStores<ShopContext>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
