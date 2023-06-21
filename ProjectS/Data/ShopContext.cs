@@ -47,6 +47,30 @@ namespace Project.Data
 
             });
 
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasKey(s => s.CartId);
+                entity.Property(a => a.UserId)
+                     .HasColumnType("varchar(255)");
+              
+                entity.Property(p => p.CartId).ValueGeneratedOnAdd();
+
+            });
+
+            modelBuilder.Entity<CartItem>(entity =>
+            {
+                entity.HasKey(s => s.CartItemId);
+                entity.HasOne(s => s.cart).
+                       WithMany(s => s.CartItems).HasForeignKey(c => c.CartId)
+                       .OnDelete(DeleteBehavior.Cascade);
+                entity.Property(p => p.CartItemId).ValueGeneratedOnAdd();
+
+
+                entity.HasOne(s => s.product).
+                     WithMany(s => s.CartItems).HasForeignKey(c => c.ProductId)
+                     .OnDelete(DeleteBehavior.Cascade);
+            });
+
 
             modelBuilder.Entity<Blog>(entity =>
             {
@@ -58,10 +82,10 @@ namespace Project.Data
             modelBuilder.Entity<Address>(entity =>
             {
                 entity.HasKey(a => a.AddressId);
+                entity.Property(a => a.UserId)
+                  .HasColumnType("varchar(255)");
                 entity.Property(p => p.AddressId).ValueGeneratedOnAdd();
-                entity.HasOne(a => a.User).WithOne().
-                       HasForeignKey<Address>(a => a.UserId).
-                       OnDelete(DeleteBehavior.Cascade);
+           
 
             });
 

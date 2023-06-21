@@ -14,6 +14,7 @@ namespace Project.Models
         public string ShippingAddress { get; set; } = null!;
         public string? Note { get; set; }
         public double ShippingFee { get; set; }
+        public double TotalPrice { get; set; }
 
         public virtual Payment PaymentCodeNavigation { get; set; } = null!;
         public virtual Transport Transport { get; set; } = null!;
