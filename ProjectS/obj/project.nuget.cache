@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "m9RnSplZgZDIvv4fl7r2MO1ABy3XPEL5EP1GSGqdBG55zERqzcH5Yz9jYOizu4VpuP/3ddtZ48ngryN7r3eZhg==",
+  "dgSpecHash": "IwHHy882nsUFMD4IHeCP7aJGUMvDsNCiCNYtYrKroWrufjde1Vvo2fG2fiyETU+Rujs+LReT4D9BFMgwGe3KTA==",
   "success": true,
-  "projectFilePath": "C:\\Trycode\\SWP\\GitDevelop\\SWP\\ProjectS\\Project.csproj",
+  "projectFilePath": "C:\\Trycode\\SWP\\GitClone\\SWP\\ProjectS\\Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguye\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
     "C:\\Users\\nguye\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

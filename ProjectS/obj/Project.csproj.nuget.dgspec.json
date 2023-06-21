@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Trycode\\SWP\\GitDevelop\\SWP\\ProjectS\\Project.csproj": {}
+    "C:\\Trycode\\SWP\\GitClone\\SWP\\ProjectS\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Trycode\\SWP\\GitDevelop\\SWP\\ProjectS\\Project.csproj": {
+    "C:\\Trycode\\SWP\\GitClone\\SWP\\ProjectS\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Trycode\\SWP\\GitDevelop\\SWP\\ProjectS\\Project.csproj",
+        "projectUniqueName": "C:\\Trycode\\SWP\\GitClone\\SWP\\ProjectS\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Trycode\\SWP\\GitDevelop\\SWP\\ProjectS\\Project.csproj",
+        "projectPath": "C:\\Trycode\\SWP\\GitClone\\SWP\\ProjectS\\Project.csproj",
         "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "C:\\Trycode\\SWP\\GitDevelop\\SWP\\ProjectS\\obj\\",
+        "outputPath": "C:\\Trycode\\SWP\\GitClone\\SWP\\ProjectS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
