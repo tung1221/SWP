@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Home Page";
 }
 @model List<Product>
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="product__hover__info">
                                         <ul class="product__action">
-                                            <li><a data-bs-toggle="modal" data-bs-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                            <li><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId" title="Quick View" class="quick-view modal-view detail-link"><span class="ti-plus"></span></a></li>
                                             <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
                                         </ul>
                                     </div>
@@ -78,10 +78,24 @@
                                     </div>
                                 </div>
                                 <div class="product__details">
-                                    <h2><a href="product-details.html">Simple Black Clock</a></h2>
+                                    <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId">Simple Black Clock</a></h2>
                                     <ul class="product__price">
-                                        <li class="old__price"></li>
-                                        <li class="new__price">@item.ProductPrice vnd</li>
+                                        @if (item.PerDiscount == null)
+                                        {
+                                            <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.PerDiscount).000vnd</li>
+                                        }
+                                        else
+                                        {
+                                            if (item.PerDiscount == 0)
+                                            {
+                                                <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.PerDiscount).000vnd</li>
+                                            }
+                                            else
+                                            {
+                                                <li class="old__price">@(item.ProductPrice).000vnd</li>
+                                                <li class="new__price">@(item.ProductPrice - item.PerDiscount).000vnd</li>
+                                            }
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -92,5 +106,8 @@
         </div>
     </section>
 }
+<<<<<<< HEAD
 
                                     
+=======
+>>>>>>> feature/detailProduct
