@@ -1420,3 +1420,15 @@ C:\Trycode\SWP\SwpGroup3\SWP\ProjectS\obj\Debug\net6.0\Project.genruntimeconfig.
 C:\Trycode\SWP\SwpGroup3\SWP\ProjectS\obj\Debug\net6.0\ref\Project.dll
 D:\Project\ProjectS\bin\Debug\net6.0\MySqlConnector.dll
 D:\Project\ProjectS\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.csproj.AssemblyReference.cache
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.AssemblyInfoInputs.cache
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.AssemblyInfo.cs
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.csproj.CoreCompileInputs.cache
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.MvcApplicationPartsAssemblyInfo.cs
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.MvcApplicationPartsAssemblyInfo.cache
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.RazorAssemblyInfo.cache
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.RazorAssemblyInfo.cs
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.dll
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\refint\Project.dll
+C:\Trycode\SWP\GitDevelop\SWP\ProjectS\obj\Debug\net6.0\Project.pdb
