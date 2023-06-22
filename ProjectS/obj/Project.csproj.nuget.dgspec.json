@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\SWP\\ProjectS\\Project.csproj": {}
+    "D:\\SWP\\ProjectS\\Project.csproj": {}
   },
   "projects": {
-    "E:\\SWP\\ProjectS\\Project.csproj": {
+    "D:\\SWP\\ProjectS\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\SWP\\ProjectS\\Project.csproj",
+        "projectUniqueName": "D:\\SWP\\ProjectS\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "E:\\SWP\\ProjectS\\Project.csproj",
+        "projectPath": "D:\\SWP\\ProjectS\\Project.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "E:\\SWP\\ProjectS\\obj\\",
+        "outputPath": "D:\\SWP\\ProjectS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",

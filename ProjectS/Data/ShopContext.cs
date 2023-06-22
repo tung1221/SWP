@@ -52,7 +52,7 @@ namespace Project.Data
                 entity.HasKey(s => s.CartId);
                 entity.Property(a => a.UserId)
                      .HasColumnType("varchar(255)");
-              
+
                 entity.Property(p => p.CartId).ValueGeneratedOnAdd();
 
             });
@@ -85,7 +85,7 @@ namespace Project.Data
                 entity.Property(a => a.UserId)
                   .HasColumnType("varchar(255)");
                 entity.Property(p => p.AddressId).ValueGeneratedOnAdd();
-           
+
 
             });
 

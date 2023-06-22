@@ -84,24 +84,24 @@
                     </div>
                     <ul class="pro__dtl__prize">
                        
-                        @if (Model.PerDiscount == null)
+                        @if (Model.Discount == null)
                         {
-                            <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.PerDiscount).000vnd</li>
+                            <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.Discount).000vnd</li>
                         }
                         else
                         {
-                            if (Model.PerDiscount == 0)
+                            if (Model.Discount == 0)
                             {
-                                <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.PerDiscount).000vnd</li>
+                                <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.Discount).000vnd</li>
                             }
                             else
                             {
                                 <li class="old__prize">@(Model.ProductPrice).000vnd</li>
-                                <li>@(Model.ProductPrice - Model.PerDiscount).000vnd</li>
+                                <li>@(Model.ProductPrice - Model.Discount).000vnd</li>
                             }
                         }
                     </ul>
-                    <form asp-action="index" asp-controller="Cart" id='myform'>
+                    <form asp-action="index" asp-controller="Cart" method="post" id='myform'>
                         <div class="pro__dtl__color">
                             <h2 class="title__5">Choose Colour</h2>
                             <ul class="pro__choose__color">
@@ -145,8 +145,9 @@
 
                             </div>
                         </div>
+                        <input type="text" name="productId" value="@ViewData["productId"]" hidden>
+
                         <input style="width: 30vh"  class="btn btn-danger" type="submit" value="Add Cart" />
-                   
                     </form>
                 </div>
             </div>

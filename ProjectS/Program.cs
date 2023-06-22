@@ -31,7 +31,7 @@ builder.Services.AddDbContext<ShopContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("ShopConnect"));
 //});
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.Password.RequireDigit = false; // Không bắt phải có số
     options.Password.RequireLowercase = false; // Không bắt phải có chữ thường
@@ -52,7 +52,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     // Cấu hình đăng nhập.
     options.SignIn.RequireConfirmedEmail = true;            // Cấu hình xác thực địa chỉ email (email phải tồn tại)
     options.SignIn.RequireConfirmedAccount = true;
-    })
+})
     .AddEntityFrameworkStores<ShopContext>();
 var app = builder.Build();
 
@@ -68,7 +68,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.MapRazorPages();
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication(); ;
 
 app.UseAuthorization();
 
