@@ -5,16 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a35465c8-9749-489f-8bc5-08a053b5d000" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.vs/Project/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Project/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/FileContentIndex/17197b5d-2e28-405c-a2c7-bf5dbf224fd0.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/FileContentIndex/236722e5-05f6-47ef-a3a1-9887f62c24f2.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/FileContentIndex/4438b386-339e-4bd9-8502-7ee6ebe1a81d.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/FileContentIndex/a5a56620-713f-4b30-9c78-c115c5afaf9c.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/v17/.futdcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Project/v17/.futdcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Project/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Project/v17/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/project.metadata.v7.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/project.metadata.v7.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/project.projects.v7.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/project.projects.v7.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Create.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Create.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Delete.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Delete.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Index.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Index.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/RolePageModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Update.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/Update.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/_StatusMessage.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/Role/_ViewStart.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/AddRole.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/AddRole.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/Index.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/Index.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/SetPassword.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/SetPassword.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/_StatusMessage.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Areas/Admin/Pages/User/_ViewStart.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,21 +42,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Trycode/SWP/SwpGroup3/SWP/ProjectS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Trycode/SWP/SWPTest/SWP/ProjectS/Areas",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Trycode\SWP\SWPTest\SWP\ProjectS\Areas" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,6 +74,7 @@
       <workItem from="1686584509958" duration="6000" />
       <workItem from="1686620951998" duration="971000" />
       <workItem from="1686627803455" duration="367000" />
+      <workItem from="1687400415720" duration="430000" />
     </task>
     <servers />
   </component>
