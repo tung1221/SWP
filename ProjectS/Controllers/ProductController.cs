@@ -7,7 +7,7 @@ namespace Project.Controllers
 {
     public class ProductController : Controller
     {
-        //testgit
+
         private readonly ILogger<ProductController> _logger;
         private readonly ShopContext _shopContext;
         public ProductController(ILogger<ProductController> logger, ShopContext ct)
@@ -49,8 +49,11 @@ namespace Project.Controllers
         {
             var product = _shopContext.Products.Where(p => p.ProductId == id).FirstOrDefault();
 
+
+
             if (product != null)
             {
+                ViewData["productId"] = product.ProductId;
                 ViewData["image"] = product.ImageMain;
                 var e = _shopContext.Entry(product);
                 e.Collection(c => c.ImageProducts).Load();

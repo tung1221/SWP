@@ -35,7 +35,7 @@
 </head>
 <body>
     <div class="wrapper fixed__footer">
-        <header id="header" class="htc-header header--3 bg__white" >
+        <header id="header" class="htc-header header--3 bg__white">
             <!-- Start Mainmenu Area -->
             <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header">
                 <div class="container">
@@ -55,20 +55,20 @@
                                         <a asp-controller="Home" asp-action="Index">Home</a></a>
 
                                     </li>
-                               
+
                                     <li class="drop">
                                         <a href="/blog/index">Blog</a>
-                                        
+
                                     </li>
                                     <li class="drop">
                                         <a style="cursor: pointer">Nam</a>
-                                        <ul style="width: 500px"  class="dropdown mega_dropdown">
-                                            @foreach(var l in listCate)
+                                        <ul style="width: 500px" class="dropdown mega_dropdown">
+                                            @foreach (var l in listCate)
                                             {
                                                 <li>
-                                                    <a class="mega__title" >@l.CategoryName</a>
+                                                    <a class="mega__title">@l.CategoryName</a>
                                                     <ul class="mega__item">
-                                                        @foreach(var ls in l.SubCategories)
+                                                        @foreach (var ls in l.SubCategories)
                                                         {
                                                             <li><a asp-controller="Product" asp-action="Index" asp-route-gender="false" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
                                                         }
@@ -92,7 +92,7 @@
                                                     </ul>
                                                 </li>
                                             }
-                                            
+
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">contact</a></li>
@@ -120,7 +120,7 @@
                                         <li><a href="about.html">About</a></li>
                                         <li>
                                             <a href="blog.html">blog</a>
-                                           
+
                                         </li>
                                         <li>
                                             <a href="shop.html">Shop</a>
@@ -175,12 +175,12 @@
                                 @if (!SignInManager.IsSignedIn(User))
                                 {
                                     <li><a asp-area="Identity" asp-page="/Account/Login"><span class="ti-user"></span></a></li>
-                                  
+
                                 }
                                 else
                                 {
                                     <li><a asp-area="Identity" asp-page="/Account/Manage/Index"><span class="ti-user"></span></a></li>
-                                   
+
                                 }
 
 
@@ -339,12 +339,12 @@
         <!-- End phan tren -->
         <!-- Start sldie -->
         <div>
-        
-            <main role="main" >
+
+            <main role="main">
                 @RenderBody()
             </main>
         </div>
-       
+
         <footer class="htc__foooter__area" style="">
             <div class="container">
                 <div class="row footer__container clearfix">

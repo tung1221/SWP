@@ -80,20 +80,20 @@
                                 <div class="product__details">
                                     <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId">Simple Black Clock</a></h2>
                                     <ul class="product__price">
-                                        @if (item.PerDiscount == null)
+                                        @if (item.Discount == null)
                                         {
-                                            <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.PerDiscount).000vnd</li>
+                                            <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
                                         }
                                         else
                                         {
-                                            if (item.PerDiscount == 0)
+                                            if (item.Discount == 0)
                                             {
-                                                <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.PerDiscount).000vnd</li>
+                                                <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
                                             }
                                             else
                                             {
                                                 <li class="old__price">@(item.ProductPrice).000vnd</li>
-                                                <li class="new__price">@(item.ProductPrice - item.PerDiscount).000vnd</li>
+                                                <li class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
                                             }
                                         }
                                     </ul>
@@ -106,8 +106,3 @@
         </div>
     </section>
 }
-<<<<<<< HEAD
-
-                                    
-=======
->>>>>>> feature/detailProduct

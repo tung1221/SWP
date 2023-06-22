@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0K9Gc63KzhQgFb/3G5VtDdy9nDqahYGc5lUvyOjr2ZuK/8EDRJ4Sl2ZoKnMM9u3nSvk/rGaaqFcVcIcH+E6/WA==",
+  "dgSpecHash": "uUSPTy0D4w5RQ/wU/nGfmYlXuQogzFZY4DZlx/riFccsz7oYYj2aLoWrdkieodofplVGXPWaQYQphA3gPAsvfQ==",
   "success": true,
-  "projectFilePath": "E:\\SWP\\ProjectS\\Project.csproj",
+  "projectFilePath": "D:\\SWP\\ProjectS\\Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dell\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -190,12 +190,5 @@
     "C:\\Users\\Dell\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file E:\\SWP\\ProjectS\\obj\\project.nuget.cache : Unexpected character encountered while parsing value: <. Path '', line 0, position 0."
-    }
-  ]
+  "logs": []
 }
