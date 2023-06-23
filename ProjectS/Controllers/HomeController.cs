@@ -18,8 +18,8 @@ namespace Project.Controllers
         public IActionResult Index()
         {
             var listProduct = _shopContext.Products.Where(p => p.HomeStatus == true);
-          
-            
+
+
 
             return View(listProduct.ToList());
         }

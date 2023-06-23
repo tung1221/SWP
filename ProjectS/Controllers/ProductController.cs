@@ -21,7 +21,7 @@ namespace Project.Controllers
         {
             List<SubCategory> subCategories = new List<SubCategory>();
             var list = (from p in _shopContext.Products
-                        where p.SubCategoryID == id && p.typeGender != gender
+                        where p.SubCategoryID == id
                         select p).ToList();
             var subCate = (from c in _shopContext.SubCategory
                            where c.SubCategoryId == id

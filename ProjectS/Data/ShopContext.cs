@@ -44,6 +44,7 @@ namespace Project.Data
                        WithMany(c => c.SubCategories).HasForeignKey(c => c.CateogoryId)
                        .OnDelete(DeleteBehavior.Cascade);
                 entity.Property(p => p.SubCategoryId).ValueGeneratedOnAdd();
+                entity.Property(p => p.typeGender).IsRequired(false);
 
             });
 
@@ -198,7 +199,7 @@ namespace Project.Data
                 entity.Property(e => e.ImportDate)
                     .HasColumnType("date");
                 entity.Property(p => p.BlogId).IsRequired(false);
-                entity.Property(p => p.typeGender).IsRequired(false);
+
 
                 entity.HasOne(p => p.Blog)
                     .WithMany(c => c.Products)

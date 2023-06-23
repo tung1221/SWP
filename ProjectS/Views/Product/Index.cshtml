@@ -62,7 +62,7 @@
                                 <div class="product__hover__info">
                                     <ul class="product__action">
                                         <li><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@l.ProductId" title="Quick View" class="quick-view modal-view detail-link"><span class="ti-plus"></span></a></li>
-                                        <li><a title="Add TO Cart"><span class="ti-shopping-cart"></span></a></li>
+                                        <li><a title="Add TO Cart" asp-action="Index" asp-controller="Cart"><span class="ti-shopping-cart"></span></a></li>
                                     </ul>
                                 </div>
 

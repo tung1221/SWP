@@ -83,7 +83,7 @@
                         <p>@Model.ProductDescription </p>
                     </div>
                     <ul class="pro__dtl__prize">
-                       
+
                         @if (Model.Discount == null)
                         {
                             <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.Discount).000vnd</li>
@@ -112,7 +112,7 @@
                                     {
                                         <li>
                                             <input style="height: 0px; width: 40px" type="radio" class="btn-check" value="@word" name="color" id="color-@word">
-                                            <label  style=" border-width: 5px;  background-color: @word; height: 40px; width: 40px" class="btn" for="color-@word"></label>
+                                            <label style=" border-width: 5px;  background-color: @word; height: 40px; width: 40px" class="btn" for="color-@word"></label>
                                         </li>
                                     }
                                 }
@@ -127,7 +127,7 @@
                                     foreach (string word in result)
                                     {
                                         <li>
-                                            <input type="radio" class="btn-check" value="@word" name="size" id="size-@word" >
+                                            <input type="radio" class="btn-check" value="@word" name="size" id="size-@word">
                                             <label style="width: 40px" class="btn " for="size-@word">@word</label>
                                         </li>
                                     }
@@ -137,17 +137,17 @@
                         <div class="product-action-wrap">
                             <div class="prodict-statas"><span>Quantity :</span></div>
                             <div class="product-quantity">
-                                    <div class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="quantity" value="02">
-                                        </div>
+                                <div class="product-quantity">
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" type="text" name="quantity" value="02">
                                     </div>
+                                </div>
 
                             </div>
                         </div>
                         <input type="text" name="productId" value="@ViewData["productId"]" hidden>
 
-                        <input style="width: 30vh"  class="btn btn-danger" type="submit" value="Add Cart" />
+                        <input style="width: 30vh" class="btn btn-danger" type="submit" value="Add Cart" />
                     </form>
                 </div>
             </div>
