@@ -2,6 +2,10 @@
 @using Project.Data
 @inject SignInManager<IdentityUser> SignInManager
 @inject ShopContext _shopContext
+@{
+    string listProductId = "";
+    double? total = 0;
+}
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
         <div class="container">
@@ -27,7 +31,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-12">
-                            <form action="#">
+                            <form asp-controller="Order" asp-action="Index">
                                 <div class="table-content table-responsive">
                                     <table>
                                         <thead>
@@ -46,6 +50,7 @@
                                             @foreach (var l in Model)
                                             {
                                                 Product product = _shopContext.Products.Find(l.ProductId);
+                                                listProductId = listProductId + "," + product.ProductId + "|" + l.Quantity;
                                                 <tr>
                                                     <td class="product-thumbnail"><a href="#"><img src="/images/product/@product.ImageMain" alt="product img" /></a></td>
                                                     <td class="product-name"><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@product.ProductId">@product.ProductName</a></td>
@@ -61,6 +66,11 @@
                                                         @(
                                                             (product.ProductPrice - product.Discount) * l.Quantity
                                                             )
+
+                                                        @{
+                                                            total = total + (product.ProductPrice - product.Discount) * l.Quantity;
+                                                        }
+
                                                     </td>
                                                     <td class="product-remove"><a asp-controller="Cart" asp-action="Index" asp-route-choice="remove" asp-route-id="@l.CartItemId">X</a></td>
                                                 </tr>
@@ -88,7 +98,7 @@
                                                 <tbody>
                                                     <tr class="cart-subtotal">
                                                         <th>Subtotal</th>
-                                                        <td><span class="amount">£215.00</span></td>
+                                                        <td><span class="amount">@total + </span></td>
                                                     </tr>
                                                     <tr class="shipping">
                                                         <th>Shipping</th>
@@ -97,7 +107,7 @@
                                                                 <li>
                                                                     <input type="radio" id="ShippingMethod1" name="flexRadioShippingMethod" />
                                                                     <label for="ShippingMethod1">
-                                                                        Flat Rate: <span class="amount">£7.00</span>
+                                                                        Flat Rate: <span class="amount">0</span>
                                                                     </label>
                                                                 </li>
                                                                 <li>
@@ -114,17 +124,19 @@
                                                     <tr class="order-total">
                                                         <th>Total</th>
                                                         <td>
-                                                            <strong><span class="amount">£215.00</span></strong>
+                                                            <strong><span class="amount">@total</span></strong>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                             <div class="wc-proceed-to-checkout">
-                                                <a href="checkout.html">Proceed to Checkout</a>
+                                                <a href="checkout.html">  <input type="submit" value="Thanh toán"></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <input type="text" name="list" value="@listProductId" hidden />
+                                <input type="text" name="total" value="@total" hidden />
                             </form>
                         </div>
                     </div>
