@@ -70,7 +70,10 @@
                                                     <ul class="mega__item">
                                                         @foreach (var ls in l.SubCategories)
                                                         {
-                                                            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="false" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                            if (ls.typeGender == null || ls.typeGender == true)
+                                                            {
+                                                                <li><a asp-controller="Product" asp-action="Index" asp-route-gender="false" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                            }
                                                         }
                                                     </ul>
                                                 </li>
@@ -86,8 +89,12 @@
                                                     <a class="mega__title">@l.CategoryName</a>
                                                     <ul class="mega__item">
                                                         @foreach (var ls in l.SubCategories)
+
                                                         {
-                                                            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="true" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                            if (ls.typeGender == null || ls.typeGender == false)
+                                                            {
+                                                                <li><a asp-controller="Product" asp-action="Index" asp-route-gender="true" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                            }
                                                         }
                                                     </ul>
                                                 </li>
@@ -184,7 +191,7 @@
                                 }
 
 
-                                <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
+                                <li class=""> <a asp-action="Index" asp-controller="Cart"> <span class="ti-shopping-cart"></span></a></li>
                                 <li class="toggle__menu d-none d-md-block"><span class="ti-menu"></span></li>
                                 @if (SignInManager.IsSignedIn(User))
                                 {
@@ -443,8 +450,6 @@
     <script src="~/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
-
 </html>
 
 
