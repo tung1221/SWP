@@ -106,7 +106,7 @@
         </div>
     </section>
 }
-
+<div>
 @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
 {
     <a href="/admin/roles">
@@ -116,10 +116,16 @@
 
 @if (ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
 {
-    <button>Marketing Button</button>
+        <button>Marketing Button</button>
+
+
 }
 
 @if (ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
-{
+{    <a  href="/DashSeller/Index">
+
     <button>Seller Button</button>
+    </a>
+
 }
+</div>
