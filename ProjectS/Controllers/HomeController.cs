@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Data;
 using Project.Models;
+using Project.Service;
 using System.Diagnostics;
 namespace Project.Controllers
 {
@@ -9,10 +10,12 @@ namespace Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ShopContext _shopContext;
+      
         public HomeController(ILogger<HomeController> logger, ShopContext ct)
         {
             _shopContext = ct;
             _logger = logger;
+       
         }
 
         public IActionResult Index()
@@ -20,14 +23,9 @@ namespace Project.Controllers
             var listProduct = _shopContext.Products.Where(p => p.HomeStatus == true);
 
 
-
             return View(listProduct.ToList());
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+      
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

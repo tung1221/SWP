@@ -52,7 +52,7 @@
                                                 Product product = _shopContext.Products.Find(l.ProductId);
                                                 listProductId = listProductId + "," + product.ProductId + "|" + l.Quantity;
                                                 <tr>
-                                                    <td class="product-thumbnail"><a href="#"><img src="/images/product/@product.ImageMain" alt="product img" /></a></td>
+                                                    <td class="product-thumbnail"><a href="#"><img src="@product.ImageMain" alt="product img" /></a></td>
                                                     <td class="product-name"><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@product.ProductId">@product.ProductName</a></td>
                                                     <td class="product-price"><span class="amount">@l.color</span></td>
                                                     <td class="product-price"><span class="amount">@l.size</span></td>

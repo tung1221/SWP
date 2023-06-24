@@ -22,6 +22,16 @@ namespace Project.Controllers
         {
             ViewData["list"] = f["list"];
             ViewData["total"] = f["total"];
+            string listCartItemId = f["list"];
+            List<Product> products = new List<Product>();
+            List<int> quantity = new List<int>();
+
+
+            char[] temp = { ' ', ',' };
+            string[] str1 = listCartItemId.Split(temp, StringSplitOptions.RemoveEmptyEntries);
+
+            
+
             var total = f["total"];
 
             return View();
@@ -32,15 +42,13 @@ namespace Project.Controllers
             ViewData["list"] = f["list"];
 
             var total = f["total"];
-           
-                var bill = _shopContext.Bills.Add(new Models.Bill() { UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = 1263272, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) });
-
-           
+            Bill temp = new Models.Bill() { UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = 1263272, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
+           _shopContext.Bills.Add(temp);
 
 
             _shopContext.SaveChanges();
 
-
+            ViewData["d"] = temp.BillId;
 
             return View();
         }

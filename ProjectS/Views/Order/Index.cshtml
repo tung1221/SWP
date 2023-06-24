@@ -5,7 +5,135 @@
 }
 
 
-<form asp-controller="Order" asp-action="ProcessOrder">
-    <input type="text" name="total" value="@ViewData["total"]" />
-    <input type="submit"  value="Thanh toán"/>
-</form>
+<div class="wrapper fixed__footer">
+    <!-- End Header Style -->
+    <div class="body__overlay"></div>
+    <div class="ht__bradcaump__area" style="background:white">
+
+        <h2 class="bradcaump-title" style="margin-left: 100px; font-weight: 600;">Payment</h2>
+
+    </div>
+
+    <section class="blog-details-wrap ptb--120 bg__white" style="border-top: 2px;" ">
+        <div class="container" ">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="blog-details-left-sidebar">
+                        <div class="blog-details-top">
+                            <!--Start Blog Thumb -->
+                            <div class="blog-details-thumb-wrap">
+                                <div class="blog-details-thumb">
+                                    <h1 style="font-weight: 600;">1.DELIVERY OPTIONS</h1><br>
+                                    <h6>Eligible for free shipping.</h6><br>
+
+                                </div>
+                            </div>
+                            <!--End Blog Thumb -->
+                            <!-- Start Blog Pra -->
+                            <div class="blog-details-pra" style="border-top: 1px solid #4c4c4c; border-bottom: 1px solid #4c4c4c">
+
+                                <br><p style="color: black;"><input type="radio" name="choise" id="1"> Delivery To Address</p>
+                                <p style="color: black;">Transport fee: <span style="color: aqua;">FREE</span></p>
+                                <p style="font-weight: 600; color: black;">
+                                    Free delivery applies to home delivery orders from VND 1,500,000 and all orders received at
+                                    the store (Click & Collect). After clicking Pay, the selected products will be kept in the
+                                    cart for 30 minutes.
+                                </p>
+                                <br><p style="color: black;"><input type="radio" name="choise" id="2"> Click & Collect</p>
+                                <p style="color: black;">Transport fee: <span style="color: aqua;">FREE</span></p>
+                                <p style="font-weight: 600; color: black;">
+                                    Free delivery applies to home delivery orders from VND 1,500,000 and all orders received at
+                                    the store (Click & Collect). Order online and pick up in store, please wait for the email when
+                                    the package has arrived at the selected store.
+                                </p><br>
+                            </div>
+                            <!-- End Blog Pra -->
+                            <!-- Start Blog Tags -->
+                            <div class="blog-details-pra">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <br><p style="color: black;">Address</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <br><p style="color: black;">Bac Hong, Xã Chiềng On, Huyện Yên Châu, Sơn La 09877890987/0987890987</p>
+                                        </div>
+                                        <div class="col-4"></div>
+                                        <div class="col-2">
+                                            <br><input type="submit" value=" ✔ Selected" style="width: 100px;" "><br>
+                                            <br><input type="submit" value="Change" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blog-details-pra" style="border-bottom: 1px solid #4c4c4c" ">
+                                <br>
+                                <p>
+                                    <button>CONTINUE PAYMENT</button>
+                                    <button style="">REGISTER A NEW ADDRESS</button>
+                                </p><br>
+                            </div>
+                            <!-- End Blog Tags -->
+                            <!-- Start Blog Comment Area -->
+                            <div class="our-blog-comment mt--20">
+                            </div>
+                            <!-- End Blog Comment Area -->
+                            <!-- Start Reply Form -->
+                            <div class="our-reply-form-area mt--20">
+                            </div>
+                            <!-- End Reply Form -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4  smt-30 xmt-40">
+                    <div class="blod-details-right-sidebar">
+                        <div class="category-search-area" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <br><h3 style="font-weight: 600;color: black;">TOTAL ORDERS | 10 PRODUCT</h3>
+                                        <br><h6>Total</h6>
+                                        <br><h3 style="font-weight: 600;color: black;">TOTAL</h3>
+                                        Value added tax included<br>
+                                        <br><h3 style="font-weight: 600;color: black;">TOTAL ORDERS</h3></br>
+                                    </div>
+                                    <div class="col-5">
+                                        <br><a href="#"><h3 style="font-weight: 600;color: black; text-decoration: underline;">FIX</h3><br></a>
+                                        <br><h6>3.900.000 VND</h6>
+                                        <br><h3 style="font-weight: 600;color: black;">3.900.000 VND</h3>
+                                        317.273 VND<br>
+                                        <br><h3 style="font-weight: 600;color: black;">3.900.000 VND</h3></br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <!-- Start Category Area -->
+                        <div class="category-search-area" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;">
+
+                            <div class="container">
+                                <br><h3 style="font-weight: 600;color:  black;">ORDERS PRODUCT</h3><br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="images/product-details/small-img/1.jpg">
+                                        <h6>x3</h6><br>
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/product-details/small-img/2.jpg">
+                                        <h6>x6</h6><br>
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/product-details/small-img/3.jpg">
+                                        <h6>x1</h6><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="category-search-area" style="border-top: 1px solid; border-bottom: 1px solid;">
+                            <p style="font-weight: 600;color: black"><img src="images/icons/coupon.jpg" style="width: 30px; height: 20px;">Coupon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

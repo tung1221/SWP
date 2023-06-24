@@ -30,7 +30,7 @@
 
                                 <li role="presentation" class="pot-small-img">
                                     <a class="active" href="#img-tab-main" role="tab" data-bs-toggle="tab">
-                                        <img src="/images/product/@ViewData["image"]" alt="small-image" style="max-width: 50px">
+                                        <img src="@ViewData["image"]" alt="small-image" style="max-width: 50px">
                                     </a>
                                 </li>
 
@@ -51,7 +51,7 @@
                     <div class="product__big__images">
                         <div class="portfolio-full-image tab-content">
                             <div role="tabpanel" class="tab-pane active" id="img-tab-main">
-                                <img src=" /images/product/@ViewData["image"]" size="400px" alt="full-image" style="max-width: 450px">
+                                <img src="@ViewData["image"]" size="400px" alt="full-image" style="max-width: 450px">
                             </div>
                             @foreach (var image in Model.ImageProducts)
                             {
