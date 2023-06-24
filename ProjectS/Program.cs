@@ -54,7 +54,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.SignIn.RequireConfirmedAccount = true;
 }).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ShopContext>();
+
+builder.Services.AddSession();
+
 var app = builder.Build();
+
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

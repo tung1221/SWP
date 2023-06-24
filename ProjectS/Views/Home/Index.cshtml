@@ -106,3 +106,20 @@
         </div>
     </section>
 }
+
+@if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
+{
+    <a href="/admin/roles">
+        <button>Admin Button</button>
+    </a>
+}
+
+@if (ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
+{
+    <button>Marketing Button</button>
+}
+
+@if (ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
+{
+    <button>Seller Button</button>
+}

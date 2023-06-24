@@ -19,9 +19,20 @@ namespace Project.Controllers
         {
             var listProduct = _shopContext.Products.Where(p => p.HomeStatus == true);
 
+            // So sánh session để tạo nút chuyển hướng
+            string userRoles = HttpContext.Session.GetString("UserRoles");
+            if (!string.IsNullOrEmpty(userRoles))
+            {
+                List<string> roles = userRoles.Split(',').ToList();
+                ViewBag.ShowAdminButton = roles.Contains("Admin");
+                ViewBag.ShowMarketingButton = roles.Contains("Marketing");
+                ViewBag.ShowSellerButton = roles.Contains("Seller");
+            }
 
 
             return View(listProduct.ToList());
+
+            
         }
 
         public IActionResult Privacy()

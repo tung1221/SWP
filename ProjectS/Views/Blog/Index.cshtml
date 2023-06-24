@@ -32,6 +32,8 @@
 
 
         <div class="row blog__wrap blog--page clearfix">
+
+            <!--run at the same time-->
             @foreach (var item in blogs.Zip(imageBlogs, (blog, imageBlog) => new { Blog = blog, ImageBlog = imageBlog }))
             {
                 var blog = item.Blog;
