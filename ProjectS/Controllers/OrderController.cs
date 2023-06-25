@@ -52,7 +52,26 @@ namespace Project.Controllers
             {
                 return RedirectToAction("Index", "Order");
             }
-            Bill temp1 = new Models.Bill() { Email = email, UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = 1263272, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
+            
+            var RoldId = _shopContext.Roles.Where(c => c.NormalizedName == "SELLER").ToList().FirstOrDefault();
+            List<string> lSellerId = _shopContext.UserRoles.Where(c => c.RoleId == RoldId.Id).Select(c => c.UserId).ToList();
+            Dictionary<string, int> myDictionary = new Dictionary<string, int>();
+            foreach (var selletId  in lSellerId)
+            {
+                myDictionary.Add(selletId, 0);
+            }
+
+            foreach(var b in _shopContext.Bills.Where(c => c.BillStatus == "0").Select(c => c.sellerId).ToList())
+            {
+                var pair = myDictionary.FirstOrDefault(x => x.Key == b);
+                myDictionary[pair.Key] = myDictionary[pair.Key] + 1;
+            }
+
+            var minPair = myDictionary.MinBy(pair => pair.Value);
+
+
+
+            Bill temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = 1263272, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
             _shopContext.Bills.Add(temp1);
             _shopContext.SaveChanges();
 
@@ -62,6 +81,7 @@ namespace Project.Controllers
             }
 
             _shopContext.SaveChanges();
+            Response.Cookies.Delete("cart");
             return View();
         }
         public IActionResult ProcessOrder()

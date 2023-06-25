@@ -11,6 +11,7 @@ namespace Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ShopContext _shopContext;
+      
         public HomeController(ILogger<HomeController> logger, ShopContext ct)
         {
             _shopContext = ct;
@@ -28,6 +29,8 @@ namespace Project.Controllers
                     ViewData["EDetailProduct"] = "Error";
                 }
             }
+
+
 
 
             // So sánh session để tạo nút chuyển hướng

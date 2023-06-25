@@ -15,7 +15,7 @@ namespace Project.Models
         public string? Note { get; set; }
         public double ShippingFee { get; set; }
         public double TotalPrice { get; set; }
-
+        public string sellerId { get; set; } = null!;
         public string Email { get; set; }
 
         public virtual Payment PaymentCodeNavigation { get; set; } = null!;

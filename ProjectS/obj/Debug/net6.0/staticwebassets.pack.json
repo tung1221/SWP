@@ -1,0 +1,581 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\SWP\\ProjectS\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Project.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Project.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\Font\\slick-2.html",
+      "PackagePath": "staticwebassets\\css\\Font\\slick-2.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\Font\\slick-3.html",
+      "PackagePath": "staticwebassets\\css\\Font\\slick-3.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\Font\\slick-4.html",
+      "PackagePath": "staticwebassets\\css\\Font\\slick-4.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\Font\\slick.html",
+      "PackagePath": "staticwebassets\\css\\Font\\slick.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\Font\\slickd41d.html",
+      "PackagePath": "staticwebassets\\css\\Font\\slickd41d.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\ajax-loader.html",
+      "PackagePath": "staticwebassets\\css\\ajax-loader.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\blog.css",
+      "PackagePath": "staticwebassets\\css\\blog.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\custom.css",
+      "PackagePath": "staticwebassets\\css\\custom.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-bg_glass_75_d0e5f5_1x400.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-bg_glass_75_d0e5f5_1x400.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-bg_glass_85_dfeffc_1x400.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-bg_glass_85_dfeffc_1x400.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-bg_glass_95_fef1ec_1x400.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-bg_glass_95_fef1ec_1x400.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-bg_gloss-wave_55_5c9ccc_500x100.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-bg_gloss-wave_55_5c9ccc_500x100.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-bg_inset-hard_100_f5f8f9_1x100.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-bg_inset-hard_100_f5f8f9_1x100.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-bg_inset-hard_100_fcfdfd_1x100.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-bg_inset-hard_100_fcfdfd_1x100.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-icons_217bc0_256x240.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-icons_217bc0_256x240.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-icons_2e83ff_256x240.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-icons_2e83ff_256x240.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-icons_469bdd_256x240.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-icons_469bdd_256x240.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-icons_6da8d5_256x240.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-icons_6da8d5_256x240.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-icons_cd0a0a_256x240.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-icons_cd0a0a_256x240.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-icons_d8e7f3_256x240.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-icons_d8e7f3_256x240.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\images\\ui-icons_f9bd01_256x240.html",
+      "PackagePath": "staticwebassets\\css\\images\\ui-icons_f9bd01_256x240.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\owl.video.play.html",
+      "PackagePath": "staticwebassets\\css\\owl.video.play.html"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\plugins.css",
+      "PackagePath": "staticwebassets\\css\\plugins.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\responsive.css",
+      "PackagePath": "staticwebassets\\css\\responsive.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\shortcode\\default.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\default.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\shortcode\\footer.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\footer.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\shortcode\\header.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\header.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\shortcode\\shortcodes.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\shortcodes.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\shortcode\\slider.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\slider.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\fonts\\Material-Design-Iconic-Fontd1f1.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Material-Design-Iconic-Fontd1f1.ttf"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\fonts\\Material-Design-Iconic-Fontd1f1.woff",
+      "PackagePath": "staticwebassets\\fonts\\Material-Design-Iconic-Fontd1f1.woff"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\fonts\\Material-Design-Iconic-Fontd1f1.woff2",
+      "PackagePath": "staticwebassets\\fonts\\Material-Design-Iconic-Fontd1f1.woff2"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\fonts\\themify9f24.eot",
+      "PackagePath": "staticwebassets\\fonts\\themify9f24.eot"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\fonts\\themify9f24.svg",
+      "PackagePath": "staticwebassets\\fonts\\themify9f24.svg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\fonts\\themify9f24.ttf",
+      "PackagePath": "staticwebassets\\fonts\\themify9f24.ttf"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\fonts\\themify9f24.woff",
+      "PackagePath": "staticwebassets\\fonts\\themify9f24.woff"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\fonts\\themifyd41d.eot",
+      "PackagePath": "staticwebassets\\fonts\\themifyd41d.eot"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\DetailProduct\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\DetailProduct\\1.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\DetailProduct\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\DetailProduct\\2.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\DetailProduct\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\DetailProduct\\3.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\DetailProduct\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\DetailProduct\\4.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\bg\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\1.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\bg\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\2.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\bg\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\3.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\bg\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\4.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\bg\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\5.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\bg\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\6.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\blog\\anhblog1.jpg",
+      "PackagePath": "staticwebassets\\images\\blog\\anhblog1.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\blog\\anhblog2.jpg",
+      "PackagePath": "staticwebassets\\images\\blog\\anhblog2.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\blog\\anhblog3.jpg",
+      "PackagePath": "staticwebassets\\images\\blog\\anhblog3.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\logo\\2.png",
+      "PackagePath": "staticwebassets\\images\\logo\\2.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\logo\\uniqlo-large.png",
+      "PackagePath": "staticwebassets\\images\\logo\\uniqlo-large.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\logo\\uniqlo.png",
+      "PackagePath": "staticwebassets\\images\\logo\\uniqlo.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p1.png",
+      "PackagePath": "staticwebassets\\images\\product\\p1.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p2.png",
+      "PackagePath": "staticwebassets\\images\\product\\p2.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p3.png",
+      "PackagePath": "staticwebassets\\images\\product\\p3.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p4.png",
+      "PackagePath": "staticwebassets\\images\\product\\p4.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p5.png",
+      "PackagePath": "staticwebassets\\images\\product\\p5.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p6.png",
+      "PackagePath": "staticwebassets\\images\\product\\p6.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p7.png",
+      "PackagePath": "staticwebassets\\images\\product\\p7.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p8.png",
+      "PackagePath": "staticwebassets\\images\\product\\p8.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\product\\p9.png",
+      "PackagePath": "staticwebassets\\images\\product\\p9.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\bg\\1.png",
+      "PackagePath": "staticwebassets\\images\\slider\\bg\\1.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\bg\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\bg\\2.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\bg\\2.png",
+      "PackagePath": "staticwebassets\\images\\slider\\bg\\2.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\bg\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\bg\\3.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\bg\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\bg\\4.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\bg\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\bg\\5.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\bg\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\bg\\6.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\bg\\7.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\bg\\7.jpg"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\images\\slider\\fornt-img\\man-style.png",
+      "PackagePath": "staticwebassets\\images\\slider\\fornt-img\\man-style.png"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\js\\plugins.js",
+      "PackagePath": "staticwebassets\\js\\plugins.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\js\\vendor\\jquery-3.6.0.min.js",
+      "PackagePath": "staticwebassets\\js\\vendor\\jquery-3.6.0.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\js\\vendor\\jquery-migrate-3.3.2.min.js",
+      "PackagePath": "staticwebassets\\js\\vendor\\jquery-migrate-3.3.2.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\js\\vendor\\jquery.waypoints.js",
+      "PackagePath": "staticwebassets\\js\\vendor\\jquery.waypoints.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\js\\vendor\\modernizr-3.11.2.min.js",
+      "PackagePath": "staticwebassets\\js\\vendor\\modernizr-3.11.2.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\SWP\\ProjectS\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Project.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.Project.props",
+      "PackagePath": "build\\Project.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.Project.props",
+      "PackagePath": "buildMultiTargeting\\Project.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.Project.props",
+      "PackagePath": "buildTransitive\\Project.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
