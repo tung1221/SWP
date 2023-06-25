@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Project.Data;
 using Project.Models;
 using System.Diagnostics;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
+
 namespace Project.Controllers
 {
     public class HomeController : Controller
@@ -15,9 +17,18 @@ namespace Project.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string mode)
         {
             var listProduct = _shopContext.Products.Where(p => p.HomeStatus == true);
+
+            if (mode != null)
+            {
+                if (mode.Equals("EDetailProduct"))
+                {
+                    ViewData["EDetailProduct"] = "Error";
+                }
+            }
+
 
             // So sánh session để tạo nút chuyển hướng
             string userRoles = HttpContext.Session.GetString("UserRoles");
@@ -35,15 +46,6 @@ namespace Project.Controllers
             
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }

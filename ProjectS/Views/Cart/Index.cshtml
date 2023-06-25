@@ -31,113 +31,110 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-12">
-                            <form asp-controller="Order" asp-action="Index">
-                                <div class="table-content table-responsive">
-                                    <table>
-                                        <thead>
+
+                            <div class="table-content table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">Image</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-name">Color</th>
+                                            <th class="product-name">Size</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-subtotal">Total</th>
+                                            <th class="product-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var l in Model)
+                                        {
+                                            Product product = _shopContext.Products.Find(l.ProductId);
+                                            listProductId = listProductId + "," + product.ProductId + "|" + l.Quantity;
                                             <tr>
-                                                <th class="product-thumbnail">Image</th>
-                                                <th class="product-name">Product</th>
-                                                <th class="product-name">Color</th>
-                                                <th class="product-name">Size</th>
-                                                <th class="product-quantity">Quantity</th>
-                                                <th class="product-price">Price</th>
-                                                <th class="product-subtotal">Total</th>
-                                                <th class="product-remove">Remove</th>
+                                                <td class="product-thumbnail"><a href="#"><img src="@product.ImageMain" alt="product img" /></a></td>
+                                                <td class="product-name"><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@product.ProductId">@product.ProductName</a></td>
+                                                <td class="product-price"><span class="amount">@l.color</span></td>
+                                                <td class="product-price"><span class="amount">@l.size</span></td>
+                                                <td class="product-quantity"><input type="number" value="@l.Quantity" min="1" /></td>
+                                                <td class="product-subtotal">
+                                                    @(
+                                                        product.ProductPrice - product.Discount
+                                                        )
+                                                </td>
+                                                <td class="product-subtotal">
+                                                    @(
+                                                        (product.ProductPrice - product.Discount) * l.Quantity
+                                                        )
+
+                                                    @{
+                                                        total = total + (product.ProductPrice - product.Discount) * l.Quantity;
+                                                    }
+
+                                                </td>
+                                                <td class="product-remove"><a asp-controller="Cart" asp-action="Index" asp-route-choice="remove" asp-route-id="@l.CartItemId">X</a></td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var l in Model)
-                                            {
-                                                Product product = _shopContext.Products.Find(l.ProductId);
-                                                listProductId = listProductId + "," + product.ProductId + "|" + l.Quantity;
-                                                <tr>
-                                                    <td class="product-thumbnail"><a href="#"><img src="/images/product/@product.ImageMain" alt="product img" /></a></td>
-                                                    <td class="product-name"><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@product.ProductId">@product.ProductName</a></td>
-                                                    <td class="product-price"><span class="amount">@l.color</span></td>
-                                                    <td class="product-price"><span class="amount">@l.size</span></td>
-                                                    <td class="product-quantity"><input type="number" value="@l.Quantity" min="1" /></td>
-                                                    <td class="product-subtotal">
-                                                        @(
-                                                            product.ProductPrice - product.Discount
-                                                            )
-                                                    </td>
-                                                    <td class="product-subtotal">
-                                                        @(
-                                                            (product.ProductPrice - product.Discount) * l.Quantity
-                                                            )
-
-                                                        @{
-                                                            total = total + (product.ProductPrice - product.Discount) * l.Quantity;
-                                                        }
-
-                                                    </td>
-                                                    <td class="product-remove"><a asp-controller="Cart" asp-action="Index" asp-route-choice="remove" asp-route-id="@l.CartItemId">X</a></td>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-sm-12">
+                                    <div class="buttons-cart">
+                                        <input type="submit" value="Update Cart" />
+                                        <a href="#">Continue Shopping</a>
+                                    </div>
+                                    <div class="coupon">
+                                        <h3>Coupon</h3>
+                                        <p>Enter your coupon code if you have one.</p>
+                                        <input type="text" placeholder="Coupon code" />
+                                        <input type="submit" value="Apply Coupon" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 ">
+                                    <div class="cart_totals">
+                                        <h2>Cart Totals</h2>
+                                        <table>
+                                            <tbody>
+                                                <tr class="cart-subtotal">
+                                                    <th>Subtotal</th>
+                                                    <td><span class="amount">@total</span></td>
                                                 </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-12">
-                                        <div class="buttons-cart">
-                                            <input type="submit" value="Update Cart" />
-                                            <a href="#">Continue Shopping</a>
-                                        </div>
-                                        <div class="coupon">
-                                            <h3>Coupon</h3>
-                                            <p>Enter your coupon code if you have one.</p>
-                                            <input type="text" placeholder="Coupon code" />
-                                            <input type="submit" value="Apply Coupon" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-12 ">
-                                        <div class="cart_totals">
-                                            <h2>Cart Totals</h2>
-                                            <table>
-                                                <tbody>
-                                                    <tr class="cart-subtotal">
-                                                        <th>Subtotal</th>
-                                                        <td><span class="amount">@total + </span></td>
-                                                    </tr>
-                                                    <tr class="shipping">
-                                                        <th>Shipping</th>
-                                                        <td>
-                                                            <ul id="shipping_method">
-                                                                <li>
-                                                                    <input type="radio" id="ShippingMethod1" name="flexRadioShippingMethod" />
-                                                                    <label for="ShippingMethod1">
-                                                                        Flat Rate: <span class="amount">0</span>
-                                                                    </label>
-                                                                </li>
-                                                                <li>
-                                                                    <input type="radio" id="ShippingMethod2" name="flexRadioShippingMethod" />
-                                                                    <label for="ShippingMethod2">
-                                                                        Free Shipping
-                                                                    </label>
-                                                                </li>
-                                                                <li></li>
-                                                            </ul>
-                                                            <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="order-total">
-                                                        <th>Total</th>
-                                                        <td>
-                                                            <strong><span class="amount">@total</span></strong>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <div class="wc-proceed-to-checkout">
-                                                <a href="checkout.html">  <input type="submit" value="Thanh toán"></a>
-                                            </div>
+                                                <tr class="shipping">
+                                                    <th>Shipping</th>
+                                                    <td>
+                                                        <ul id="shipping_method">
+                                                            <li>
+                                                                <input type="radio" id="ShippingMethod1" name="flexRadioShippingMethod" />
+                                                                <label for="ShippingMethod1">
+                                                                    Flat Rate: <span class="amount">0</span>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="radio" id="ShippingMethod2" name="flexRadioShippingMethod" />
+                                                                <label for="ShippingMethod2">
+                                                                    Free Shipping
+                                                                </label>
+                                                            </li>
+                                                            <li></li>
+                                                        </ul>
+                                                        <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="order-total">
+                                                    <th>Total</th>
+                                                    <td>
+                                                        <strong><span class="amount">@total</span></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="wc-proceed-to-checkout">
+                                            <a href="/Order/Index">Thanh toán</a>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" name="list" value="@listProductId" hidden />
-                                <input type="text" name="total" value="@total" hidden />
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

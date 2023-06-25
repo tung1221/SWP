@@ -4,6 +4,14 @@
 @model List<Product>
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@if (!string.IsNullOrEmpty((string)ViewData["EDetailProduct"]))
+{
+    <script>
+        var thongBao = "Sản phảm bạn vừa tiềm kiếm không tồn tại, click OK để tiếp tục.";
+        alert(thongBao);
+    </script>
+}
+
 <div class="slider__container slider--one">
     <div class="slider__activation__wrap owl-carousel owl-theme">
         <!-- Start Single Slide -->
@@ -64,7 +72,7 @@
                                 <div class="product__inner">
                                     <div class="pro__thumb">
                                         <a href="#">
-                                            <img src="~/images/product/@item.ImageMain" alt="product images">
+                                            <img src="@item.ImageMain" alt="product images">
                                         </a>
                                     </div>
                                     <div class="product__hover__info">
@@ -106,26 +114,32 @@
         </div>
     </section>
 }
-<div>
-@if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
-{
-    <a href="/admin/roles">
-        <button>Admin Button</button>
-    </a>
-}
 
-@if (ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
-{
+<div>
+
+
+
+
+    @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
+    {
+        <a href="/admin/roles">
+            <button>Admin Button</button>
+        </a>
+    }
+
+    @if (ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
+    {
         <button>Marketing Button</button>
 
 
-}
+    }
 
-@if (ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
-{    <a  href="/DashSeller/Index">
+    @if (ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
+    {
+        <a href="/DashSeller/Index">
 
-    <button>Seller Button</button>
-    </a>
+            <button>Seller Button</button>
+        </a>
 
-}
+    }
 </div>

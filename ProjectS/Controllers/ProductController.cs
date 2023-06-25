@@ -58,6 +58,10 @@ namespace Project.Controllers
                 var e = _shopContext.Entry(product);
                 e.Collection(c => c.ImageProducts).Load();
             }
+            else
+            {
+                return RedirectToAction("Index", "Home", new { mode = "EDetailProduct" });
+            }
 
             return View(product);
         }
