@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\dashbroadcss\charts\**" />
+    <Content Remove="wwwroot\dashbroadcss\charts\**" />
+    <EmbeddedResource Remove="wwwroot\dashbroadcss\charts\**" />
+    <None Remove="wwwroot\dashbroadcss\charts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MailKit" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
