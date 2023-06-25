@@ -5,7 +5,9 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,7 +16,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Project.Admin.User
 {
-    public class AddRoleModel : PageModel
+	[Authorize(Roles = "Admin")]
+
+	public class AddRoleModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;

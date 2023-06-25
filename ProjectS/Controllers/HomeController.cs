@@ -30,21 +30,46 @@ namespace Project.Controllers
                 }
             }
 
+			var user = HttpContext.User;
+
+			if (User.Identity.IsAuthenticated)
+			{
+				if (User.IsInRole("Admin"))
+				{
+					ViewBag.ShowAdminButton = true;
+				}
+				else
+				{
+					ViewBag.ShowAdminButton = false;
+				}
+
+				if (User.IsInRole("Marketing"))
+				{
+					ViewBag.ShowMarketingButton = true;
+				}
+				else
+				{
+					ViewBag.ShowMarketingButton = false;
+				}
+
+				if (User.IsInRole("Seller"))
+				{
+					ViewBag.ShowSellerButton = true;
+				}
+				else
+				{
+					ViewBag.ShowSellerButton = false;
+				}
+			}
+			else
+			{
+				ViewBag.ShowAdminButton = false;
+				ViewBag.ShowMarketingButton = false;
+				ViewBag.ShowSellerButton = false;
+			}
 
 
-
-            // So sánh session để tạo nút chuyển hướng
-            string userRoles = HttpContext.Session.GetString("UserRoles");
-            if (!string.IsNullOrEmpty(userRoles))
-            {
-                List<string> roles = userRoles.Split(',').ToList();
-                ViewBag.ShowAdminButton = roles.Contains("Admin");
-                ViewBag.ShowMarketingButton = roles.Contains("Marketing");
-                ViewBag.ShowSellerButton = roles.Contains("Seller");
-            }
-
-
-            return View(listProduct.ToList());
+			return View(listProduct.ToList());
 
             
         }

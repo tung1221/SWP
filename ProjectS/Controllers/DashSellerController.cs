@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.Data;
 using Project.Models;
 using Project.Service;
+using System.Data;
 
 namespace Project.Controllers
 {
+	[Authorize(Roles = "Seller")]
+
 	public class DashSellerController : Controller
 	{
 		private readonly ShopContext _shopContext;
@@ -17,14 +21,44 @@ namespace Project.Controllers
 
 		public IActionResult Index()
 		{
-			string userRoles = HttpContext.Session.GetString("UserRoles");
-			if (!string.IsNullOrEmpty(userRoles))
+			var user = HttpContext.User;
+
+			if (User.Identity.IsAuthenticated)
 			{
-				List<string> roles = userRoles.Split(',').ToList();
-				ViewBag.ShowAdminButton = roles.Contains("Admin");
-				ViewBag.ShowMarketingButton = roles.Contains("Marketing");
-				ViewBag.ShowSellerButton = roles.Contains("Seller");
+				if (User.IsInRole("Admin"))
+				{
+					ViewBag.ShowAdminButton = true;
+				}
+				else
+				{
+					ViewBag.ShowAdminButton = false;
+				}
+
+				if (User.IsInRole("Marketing"))
+				{
+					ViewBag.ShowMarketingButton = true;
+				}
+				else
+				{
+					ViewBag.ShowMarketingButton = false;
+				}
+
+				if (User.IsInRole("Seller"))
+				{
+					ViewBag.ShowSellerButton = true;
+				}
+				else
+				{
+					ViewBag.ShowSellerButton = false;
+				}
 			}
+			else
+			{
+				ViewBag.ShowAdminButton = false;
+				ViewBag.ShowMarketingButton = false;
+				ViewBag.ShowSellerButton = false;
+			}
+
 
 			List<Bill> bills = _shopContext.Bills.Include(b => b.User).ToList();
             return View(bills);

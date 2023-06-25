@@ -118,18 +118,6 @@ namespace Project.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    // Thêm session vào đây
-                     var user = await _userManager.FindByEmailAsync(Input.Email);
-                    if (user != null)
-                    {
-                        var roles = await _userManager.GetRolesAsync(user);
-
-                        // Lưu trữ thông tin vai trò vào session
-                        HttpContext.Session.SetString("UserRoles", string.Join(",", roles));
-                    }
-
-
-
 
                         return LocalRedirect(returnUrl);
 

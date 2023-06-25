@@ -7,7 +7,7 @@ using Project.Data;
 
 namespace Project.Admin.Role
 {
-	//[Authorize(Roles = "Admin")]
+	[Authorize(Roles = "Admin")]
 
 	public class IndexModel : RolePageModel
 	{

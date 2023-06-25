@@ -4,14 +4,18 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Project.Admin.User
 {
-    public class SetPasswordModel : PageModel
+	[Authorize(Roles = "Admin")]
+
+	public class SetPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
