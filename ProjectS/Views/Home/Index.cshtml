@@ -4,6 +4,14 @@
 @model List<Product>
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@if (!string.IsNullOrEmpty((string)ViewData["EDetailProduct"]))
+{   
+    <script>
+        var thongBao = "Sản phảm bạn vừa tiềm kiếm không tồn tại, click OK để tiếp tục.";
+        alert(thongBao);
+    </script>
+}
+
 <div class="slider__container slider--one">
     <div class="slider__activation__wrap owl-carousel owl-theme">
         <!-- Start Single Slide -->

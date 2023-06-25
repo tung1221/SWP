@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Macs;
 using Project.Data;
 using Project.Models;
@@ -20,37 +22,75 @@ namespace Project.Controllers
 
         public IActionResult Index(IFormCollection f)
         {
-            ViewData["list"] = f["list"];
-            ViewData["total"] = f["total"];
-            string listCartItemId = f["list"];
-            List<Product> products = new List<Product>();
-            List<int> quantity = new List<int>();
+            var products = _shopContext.Products.ToList();
+            double? total = 0;
 
 
-            char[] temp = { ' ', ',' };
-            string[] str1 = listCartItemId.Split(temp, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var cartItem in getListItem())
+            {
+                foreach(var product in products)
+                {
+                    if(product.ProductId == cartItem.ProductId)
+                    {
+                        total = total + cartItem.Quantity* ( product.ProductPrice - product.Discount );
+                    }
+                }
+            }
 
-            
+            ViewData["products"] = products;
+            ViewData["total"] = total;
+            return View(getListItem());
+        }
 
+        [HttpPost]
+        public IActionResult ProcessOrder(IFormCollection f)
+        {
+            string email = f["email"];
             var total = f["total"];
 
+            if (string.IsNullOrEmpty(email))
+            {
+                return RedirectToAction("Index", "Order");
+            }
+            Bill temp1 = new Models.Bill() { Email = email, UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = 1263272, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
+            _shopContext.Bills.Add(temp1);
+            _shopContext.SaveChanges();
+
+            foreach (var cartItem in getListItem())
+            {
+                _shopContext.BillDetails.Add(new BillDetail() { BillId = temp1.BillId, ProductId = cartItem.ProductId, quantity = cartItem.Quantity });
+            }
+
+            _shopContext.SaveChanges();
+            return View();
+        }
+        public IActionResult ProcessOrder()
+        {
             return View();
         }
 
-        public IActionResult ProcessOrder(IFormCollection f)
+        public List<CartItem> getListItem()
         {
-            ViewData["list"] = f["list"];
+            List<CartItem> cartItems = new List<CartItem>();
 
-            var total = f["total"];
-            Bill temp = new Models.Bill() { UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = 1263272, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
-           _shopContext.Bills.Add(temp);
+            if (_SignInManager.IsSignedIn(User))
+            {
+                string userId = _SignInManager.UserManager.GetUserId(User);
+                int cartId = (from c in _shopContext.Carts
+                              where c.UserId == userId
+                              select c.CartId).FirstOrDefault();
+                cartItems = _shopContext.CartItems.Include(i => i.product).Where(i => i.CartId == cartId).ToList();
+            }
 
+            string? cookieValue = Request.Cookies["cart"];
+            if (cookieValue != null)
+            {
+                List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+                cartItems.AddRange(cartListFromCookie);
+            }
+            cartItems = cartItems.OrderByDescending(p => p.CartItemId).ToList();
 
-            _shopContext.SaveChanges();
-
-            ViewData["d"] = temp.BillId;
-
-            return View();
+            return cartItems;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Project.Controllers
 
 
         public IActionResult Index(int id, bool gender)
-        {
+        {   
             List<SubCategory> subCategories = new List<SubCategory>();
             var list = (from p in _shopContext.Products
                         where p.SubCategoryID == id
@@ -57,6 +57,10 @@ namespace Project.Controllers
                 ViewData["image"] = product.ImageMain;
                 var e = _shopContext.Entry(product);
                 e.Collection(c => c.ImageProducts).Load();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home", new {mode = "EDetailProduct"});
             }
 
             return View(product);

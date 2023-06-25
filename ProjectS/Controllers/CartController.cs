@@ -112,6 +112,12 @@ namespace Project.Controllers
                     {
                         cartListFromCookie = cartListFromCookie.OrderBy(p => p.CartItemId).ToList();
                         var cartItemId = cartListFromCookie[cartListFromCookie.Count - 1].CartItemId;
+                        if (cartItemId == 0)
+                        {
+                            Response.Cookies.Delete("cart");
+                            return RedirectToAction("Index", "Home");
+                        }
+
                         cartListFromCookie.Add(new Models.CartItem() { CartItemId = cartItemId + 1, ProductId = pId, color = color, Quantity = qua, size = size });
                         cartItems.Add((new Models.CartItem() { CartItemId = cartItemId + 1, ProductId = pId, color = color, Quantity = qua, size = size }));
 
@@ -125,7 +131,7 @@ namespace Project.Controllers
                 }
                 else
                 {
-                    CartItem cartItem = new Models.CartItem() { CartItemId = -99, ProductId = pId, color = color, Quantity = qua, size = size };
+                    CartItem cartItem = new Models.CartItem() { CartItemId = -999999999, ProductId = pId, color = color, Quantity = qua, size = size };
                     List<CartItem> saveCookie = new List<CartItem>() { cartItem };
                     string json = JsonConvert.SerializeObject(saveCookie);
 
