@@ -43,16 +43,16 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProcessOrder(IFormCollection f)
+        public IActionResult ProcessOrder(string email, string total)
         {
-            string email = f["email"];
-            var total = f["total"];
-
+            _logger.LogError("yyyyyyyy");
+            _logger.LogError("dendayx" + email);
             if (string.IsNullOrEmpty(email))
             {
+                _logger.LogError("email: " + email);
                 return RedirectToAction("Index", "Order");
             }
-            
+
             var RoldId = _shopContext.Roles.Where(c => c.NormalizedName == "SELLER").ToList().FirstOrDefault();
             List<string> lSellerId = _shopContext.UserRoles.Where(c => c.RoleId == RoldId.Id).Select(c => c.UserId).ToList();
             Dictionary<string, int> myDictionary = new Dictionary<string, int>();
@@ -88,6 +88,7 @@ namespace Project.Controllers
             Response.Cookies.Delete("cart");
             return View();
         }
+
         public IActionResult ProcessOrder()
         {
             return View();

@@ -1,5 +1,7 @@
 ﻿@model Product
-
+@{
+    int count = 0;
+}
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
         <div class="container">
@@ -53,11 +55,15 @@
                             <div role="tabpanel" class="tab-pane active" id="img-tab-main">
                                 <img src="@ViewData["image"]" size="400px" alt="full-image" style="max-width: 450px">
                             </div>
+                        
                             @foreach (var image in Model.ImageProducts)
                             {
-                                <div role="tabpanel" class="tab-pane" id="img-tab-@(image.ImageURL.Substring(0, image.ImageURL.Length - 4))">
-                                    <img src="/images/DetailProduct/@(image.ImageURL)" alt="full-image" style="max-width: 450px">
-                                </div>
+                                
+                                    <div role="tabpanel" class="tab-pane" id="img-tab-@(image.ImageURL.Substring(0, image.ImageURL.Length - 4))">
+                                        <img src="/images/DetailProduct/@(image.ImageURL)" alt="full-image" style="max-width: 450px">
+                                    </div>
+                               
+
                             }
                         </div>
                     </div>
@@ -109,11 +115,23 @@
                                     char[] temp = { ' ', ',' };
                                     string[] str1 = Model.ListColor.Split(temp, StringSplitOptions.RemoveEmptyEntries);
                                     foreach (string word in str1)
-                                    {
-                                        <li>
-                                            <input style="height: 0px; width: 40px" type="radio" class="btn-check" value="@word" name="color" id="color-@word">
-                                            <label style=" border-width: 5px;  background-color: @word; height: 40px; width: 40px" class="btn" for="color-@word"></label>
-                                        </li>
+                                    {   
+                                        if(count == 0)
+                                        {
+                                            <li>
+                                                <input checked style="height: 0px; width: 40px" type="radio" class="btn-check" value="@word" name="color" id="color-@word">
+                                                <label style=" border-width: 5px;  background-color: @word; height: 40px; width: 40px" class="btn" for="color-@word"></label>
+                                            </li>
+                                            count++;
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <input style="height: 0px; width: 40px" type="radio" class="btn-check" value="@word" name="color" id="color-@word">
+                                                <label style=" border-width: 5px;  background-color: @word; height: 40px; width: 40px" class="btn" for="color-@word"></label>
+                                            </li>
+                                        }
+
                                     }
                                 }
                             </ul>
@@ -122,14 +140,27 @@
                             <h2 class="title__5">Size</h2>
                             <ul class="pro__choose__size">
                                 @{
+                                    count = 0;
                                     char[] separators = { ' ', ',' };
                                     string[] result = Model.ListSize.Split(separators, StringSplitOptions.RemoveEmptyEntries);
                                     foreach (string word in result)
-                                    {
-                                        <li>
-                                            <input type="radio" class="btn-check" value="@word" name="size" id="size-@word">
-                                            <label style="width: 40px" class="btn " for="size-@word">@word</label>
-                                        </li>
+                                    {   
+                                        if(count == 0)
+                                        {
+                                            <li>
+                                                <input checked type="radio" class="btn-check" value="@word" name="size" id="size-@word">
+                                                <label style="width: 40px" class="btn " for="size-@word">@word</label>
+                                            </li>
+                                            count++;
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <input type="radio" class="btn-check" value="@word" name="size" id="size-@word">
+                                                <label style="width: 40px" class="btn " for="size-@word">@word</label>
+                                            </li>
+                                        }
+
                                     }
                                 }
                             </ul>
