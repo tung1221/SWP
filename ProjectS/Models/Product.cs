@@ -8,7 +8,7 @@
         public DateTime ImportDate { get; set; }
         public string ProductDescription { get; set; } = null!;
 
-        public double? Discount { get; set; }
+        public double Discount { get; set; }
         public int ProductQuantities { get; set; }
         public double ProductPrice { get; set; }
         public int? BlogId { get; set; }

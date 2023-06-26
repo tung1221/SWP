@@ -220,8 +220,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="search__inner">
-                                <form action="#" method="get">
-                                    <input placeholder="Search here... " type="text">
+                                <form asp-action="Search" asp-controller="Product" method="get">
+                                    <input name="name" placeholder="Search here... " type="text">
                                     <button type="submit"></button>
                                 </form>
                                 <div class="search__close__btn">

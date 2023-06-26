@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Project.Data;
 using Project.Models;
 using System.Collections.Generic;
@@ -17,8 +18,9 @@ namespace Project.Controllers
         }
 
 
-        public IActionResult Index(int id, bool gender)
-        {
+        public IActionResult Index(int id, bool gender,int mode)
+        {   
+ 
             List<SubCategory> subCategories = new List<SubCategory>();
             var list = (from p in _shopContext.Products
                         where p.SubCategoryID == id
@@ -36,11 +38,20 @@ namespace Project.Controllers
                 subCategories = cateGory.SubCategories;
             }
             subCategories.Sort((x, y) => x.SubCategoryId.CompareTo(y.SubCategoryId));
-
+            ViewData["id"] = id;
+            ViewData["gender"] = gender;
             ViewData["listSubCate"] = subCategories;
             ViewData["subCate"] = subCate;
             ViewData["gender"] = gender;
 
+            if(mode == 1)
+            {
+                list.Sort((x, y) => (x.ProductPrice - x.Discount).CompareTo(y.ProductPrice - y.Discount));
+            }
+            if (mode == 2)
+            {
+                list.Sort((x, y) => (y.ProductPrice - y.Discount).CompareTo(x.ProductPrice - x.Discount));
+            }
             return View(list);
 
         }
@@ -64,6 +75,16 @@ namespace Project.Controllers
             }
 
             return View(product);
+        }
+
+        public IActionResult Search(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return View(null);
+
+            _logger.LogError(_shopContext.Products.Where(c => c.ProductName.Contains(name)).ToList().Count() + "");
+
+            return View("Index", _shopContext.Products.Where(c => c.ProductName.Contains(name)).ToList());
         }
     }
 }

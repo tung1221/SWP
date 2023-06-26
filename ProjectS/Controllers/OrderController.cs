@@ -78,6 +78,10 @@ namespace Project.Controllers
             foreach (var cartItem in getListItem())
             {
                 _shopContext.BillDetails.Add(new BillDetail() { BillId = temp1.BillId, ProductId = cartItem.ProductId, quantity = cartItem.Quantity });
+                if(cartItem.CartItemId >= 0)
+                {
+                    _shopContext.CartItems.Remove(cartItem);
+                }
             }
 
             _shopContext.SaveChanges();
