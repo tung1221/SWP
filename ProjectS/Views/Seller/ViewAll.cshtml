@@ -61,7 +61,32 @@ else
 									</div>
 								</td>
 								<td>@bill.Email</td>
-								<td><div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>@bill.BillStatus</div></td>
+								<td>
+										@if (bill.BillStatus == "0")
+										{
+										<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+											<i class='bx bxs-circle me-1'></i>Not in Process
+										</div>
+										}
+										else if (bill.BillStatus == "1")
+										{
+										<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
+											<i class='bx bxs-circle me-1'></i>In Progress
+										</div>
+										}
+										else if (bill.BillStatus == "2")
+										{
+										<div class="badge rounded-pill text-primary bg-light-primary p-2 text-uppercase px-3">
+											<i class='bx bxs-circle me-1'></i>Delivery
+										</div>
+										}
+										else if (bill.BillStatus == "3")
+										{
+										<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+											<i class='bx bxs-circle me-1'></i>Done
+										</div>
+										}
+								</td>
 								<td>@bill.TotalPrice</td>
 								<td>@bill.PurchaseDate</td>
 									@*<td><a type="button" class="btn btn-primary btn-sm radius-30 px-4">@bill.ShippingAddress</a></td>*@

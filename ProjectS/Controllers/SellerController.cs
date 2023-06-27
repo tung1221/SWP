@@ -100,7 +100,7 @@ namespace Project.Controllers
             }
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewOrder");
         }
 
         public IActionResult DetailBill(int billId)
