@@ -158,7 +158,14 @@ namespace Project.Controllers
                 int cartId = (from c in _shopContext.Carts
                               where c.UserId == userId
                               select c.CartId).FirstOrDefault();
-                cartItems = _shopContext.CartItems.Include(i => i.product).Where(i => i.CartId == cartId).ToList();
+                var temp = _shopContext.CartItems.Include(i => i.product).Where(i => i.CartId == cartId);
+
+
+                if (temp != null)
+                {
+                    cartItems = temp.ToList();
+                }
+               
             }
 
             string? cookieValue = Request.Cookies["cart"];

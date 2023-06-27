@@ -55,14 +55,14 @@
                             <div role="tabpanel" class="tab-pane active" id="img-tab-main">
                                 <img src="@ViewData["image"]" size="400px" alt="full-image" style="max-width: 450px">
                             </div>
-                        
+
                             @foreach (var image in Model.ImageProducts)
                             {
-                                
-                                    <div role="tabpanel" class="tab-pane" id="img-tab-@(image.ImageURL.Substring(0, image.ImageURL.Length - 4))">
-                                        <img src="/images/DetailProduct/@(image.ImageURL)" alt="full-image" style="max-width: 450px">
-                                    </div>
-                               
+
+                                <div role="tabpanel" class="tab-pane" id="img-tab-@(image.ImageURL.Substring(0, image.ImageURL.Length - 4))">
+                                    <img src="/images/DetailProduct/@(image.ImageURL)" alt="full-image" style="max-width: 450px">
+                                </div>
+
 
                             }
                         </div>
@@ -89,14 +89,7 @@
                         <p>@Model.ProductDescription </p>
                     </div>
                     <ul class="pro__dtl__prize">
-
-                        @if (Model.Discount == null)
-                        {
-                            <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.Discount).000vnd</li>
-                        }
-                        else
-                        {
-                            if (Model.Discount == 0)
+                            @if (Model.Discount == 0)
                             {
                                 <li style="padding-left: 0px" class="new__price">@(Model.ProductPrice - Model.Discount).000vnd</li>
                             }
@@ -105,7 +98,6 @@
                                 <li class="old__prize">@(Model.ProductPrice).000vnd</li>
                                 <li>@(Model.ProductPrice - Model.Discount).000vnd</li>
                             }
-                        }
                     </ul>
                     <form asp-action="index" asp-controller="Cart" method="post" id='myform'>
                         <div class="pro__dtl__color">
@@ -115,8 +107,8 @@
                                     char[] temp = { ' ', ',' };
                                     string[] str1 = Model.ListColor.Split(temp, StringSplitOptions.RemoveEmptyEntries);
                                     foreach (string word in str1)
-                                    {   
-                                        if(count == 0)
+                                    {
+                                        if (count == 0)
                                         {
                                             <li>
                                                 <input checked style="height: 0px; width: 40px" type="radio" class="btn-check" value="@word" name="color" id="color-@word">
@@ -144,8 +136,8 @@
                                     char[] separators = { ' ', ',' };
                                     string[] result = Model.ListSize.Split(separators, StringSplitOptions.RemoveEmptyEntries);
                                     foreach (string word in result)
-                                    {   
-                                        if(count == 0)
+                                    {
+                                        if (count == 0)
                                         {
                                             <li>
                                                 <input checked type="radio" class="btn-check" value="@word" name="size" id="size-@word">
@@ -178,7 +170,17 @@
                         </div>
                         <input type="text" name="productId" value="@ViewData["productId"]" hidden>
 
-                        <input style="width: 30vh" class="btn btn-danger" type="submit" value="Add Cart" />
+                        @if (Model.IsAvailble == true)
+                        {
+                            <input style="width: 30vh" class="btn btn-danger" type="submit" value="Add Cart" />
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-danger">Hết hàng</button>
+                        }
+
+
+
                     </form>
                 </div>
             </div>

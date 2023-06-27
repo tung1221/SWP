@@ -77,17 +77,24 @@
                             <div class="product__details">
                                 <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@l.ProductId">@l.ProductName</a></h2>
                                 <ul class="product__price">
-
-
-                                    @if (l.Discount == 0)
+                                    @if(l.IsAvailble == false)
                                     {
-                                        <li style="padding-left: 0px" class="new__price">@(l.ProductPrice - l.Discount).000vnd</li>
+                                        <li style="padding-left: 0px" class="new__price">Hết hàng</li>
                                     }
                                     else
                                     {
-                                        <li class="old__price">@(l.ProductPrice).000vnd</li>
-                                        <li class="new__price">@(l.ProductPrice - l.Discount).000vnd</li>
+                                        if (l.Discount == 0)
+                                        {
+                                            <li style="padding-left: 0px" class="new__price">@(l.ProductPrice - l.Discount).000vnd</li>
+                                        }
+                                        else
+                                        {
+                                            <li class="old__price">@(l.ProductPrice).000vnd</li>
+                                            <li class="new__price">@(l.ProductPrice - l.Discount).000vnd</li>
+                                        }
                                     }
+
+                               
                                 </ul>
                             </div>
                         </div>
