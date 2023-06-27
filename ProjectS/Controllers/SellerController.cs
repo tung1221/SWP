@@ -8,38 +8,65 @@ using System.Data;
 
 namespace Project.Controllers
 {
-	[Authorize(Roles = "Seller")]
+    [Authorize(Roles = "Seller")]
 
-	public class SellerController : Controller
-	{
-		private readonly ShopContext _shopContext;
-		public SellerController(ShopContext shopContext)
-		{
-			_shopContext = shopContext;
-		}
+    public class SellerController : Controller
+    {
+        private readonly ShopContext _shopContext;
+        public SellerController(ShopContext shopContext)
+        {
+            _shopContext = shopContext;
+        }
 
 
-		public IActionResult Index()
-		{
-			LoadRoleUser();
-			List<Bill> bills = _shopContext.Bills.Include(b => b.User).ToList();
+        public IActionResult Index()
+        {
+            LoadRoleUser();
+
+            return View();
+        }
+
+        public IActionResult ViewAll()
+        {
+            LoadRoleUser();
+            List<Bill> bills = _shopContext.Bills.ToList();
             return View(bills);
-		}
+        }
 
-		public IActionResult ProcessBill(int billId)
-		{
-			
-				
-				var bill = _shopContext.Bills.FirstOrDefault(b => b.BillId == billId);
-				
+        public IActionResult ViewOrder()
+        {
+            LoadRoleUser();
+            var currentUser = HttpContext.User;
 
-				if (bill != null)
-				{
-					
-					string fromEmail = "huongdl40@gmail.com";
-					string toEmail = bill.Email;
-					string subject = "Xác nhận đơn hàng";
-					string body = @"
+            if (currentUser.Identity.IsAuthenticated)
+            {
+                List<Bill> bills = _shopContext.Bills
+                    .Where(bill => bill.Email == currentUser.Identity.Name)
+                    .ToList();
+
+                return View(bills);
+            }
+            else
+            {
+                // Handle the case when the user is not authenticated
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult ProcessBill(int billId)
+        {
+
+
+            var bill = _shopContext.Bills.FirstOrDefault(b => b.BillId == billId);
+
+
+            if (bill != null)
+            {
+
+                string fromEmail = "huongdl40@gmail.com";
+                string toEmail = bill.Email;
+                string subject = "Xác nhận đơn hàng";
+                string body = @"
                                     <html>
                                     <head>
                                         <style>
@@ -56,7 +83,7 @@ namespace Project.Controllers
                                     </body>
                                     </html>";
                 string gmail = "huongdl40@gmail.com";
-				string password = "gepcdegcpjjzceke";
+                string password = "gepcdegcpjjzceke";
                 var sendResult = SendMailConfirmOrder.SendGmail(fromEmail, toEmail, subject, body, gmail, password).GetAwaiter().GetResult();
                 if (sendResult == "gui email thanh cong")
                 {
@@ -70,68 +97,68 @@ namespace Project.Controllers
                     // ...
                 }
 
-				}
+            }
 
-			
-			return RedirectToAction("Index");
-		}
 
-		public IActionResult DetailBill(int billId)
-		{
-			LoadRoleUser();
+            return RedirectToAction("Index");
+        }
 
-			var bill = _shopContext.Bills.FirstOrDefault(b => b.BillId == billId);
-			if (bill != null)
-			{
-				return View(bill);
+        public IActionResult DetailBill(int billId)
+        {
+            LoadRoleUser();
 
-			}
-			else
-			{
-				return Redirect("Index");
-			}
+            var bill = _shopContext.Bills.FirstOrDefault(b => b.BillId == billId);
+            if (bill != null)
+            {
+                return View(bill);
 
-		}
-		private void LoadRoleUser()
-		{
-			var user = HttpContext.User;
+            }
+            else
+            {
+                return Redirect("Index");
+            }
 
-			if (user.Identity.IsAuthenticated)
-			{
-				if (user.IsInRole("Admin"))
-				{
-					ViewBag.ShowAdminButton = true;
-				}
-				else
-				{
-					ViewBag.ShowAdminButton = false;
-				}
+        }
+        private void LoadRoleUser()
+        {
+            var user = HttpContext.User;
 
-				if (user.IsInRole("Marketing"))
-				{
-					ViewBag.ShowMarketingButton = true;
-				}
-				else
-				{
-					ViewBag.ShowMarketingButton = false;
-				}
+            if (user.Identity.IsAuthenticated)
+            {
+                if (user.IsInRole("Admin"))
+                {
+                    ViewBag.ShowAdminButton = true;
+                }
+                else
+                {
+                    ViewBag.ShowAdminButton = false;
+                }
 
-				if (user.IsInRole("Seller"))
-				{
-					ViewBag.ShowSellerButton = true;
-				}
-				else
-				{
-					ViewBag.ShowSellerButton = false;
-				}
-			}
-			else
-			{
-				ViewBag.ShowAdminButton = false;
-				ViewBag.ShowMarketingButton = false;
-				ViewBag.ShowSellerButton = false;
-			}
-		}
+                if (user.IsInRole("Marketing"))
+                {
+                    ViewBag.ShowMarketingButton = true;
+                }
+                else
+                {
+                    ViewBag.ShowMarketingButton = false;
+                }
 
-	}
+                if (user.IsInRole("Seller"))
+                {
+                    ViewBag.ShowSellerButton = true;
+                }
+                else
+                {
+                    ViewBag.ShowSellerButton = false;
+                }
+            }
+            else
+            {
+                ViewBag.ShowAdminButton = false;
+                ViewBag.ShowMarketingButton = false;
+                ViewBag.ShowSellerButton = false;
+            }
+        }
+
+    }
 }

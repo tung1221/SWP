@@ -24,7 +24,7 @@
         <!-- navbar -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">Concept</a>
+                <a class="navbar-brand" href="index.html">Dash Broad</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -131,76 +131,58 @@
 
                                         }
 
-                                        
-                                        
-                                        
-                                    </ul>
-                                </div>
-                            </li>
 
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Forms</a>
-                                <div id="submenu-4" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Form Elements</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Parsely Validations</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Multiselect</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Date Picker</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Bootstrap Select</a>
-                                        </li>
+
+
                                     </ul>
                                 </div>
                             </li>
+                            @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton || ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
+                            {
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="/Seller/Order" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Order</a>
+                                    <div id="submenu-4" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/Seller/ViewAll">View All Order</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/Seller/ViewOrder">Order for Seller</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Tables</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Product</a>
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">General Tables</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Data Tables</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-divider">
-                                Features
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> Pages </a>
-                                <div id="submenu-6" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Home Page</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href=""> Order Page</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Blog Page</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">404 page</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Sign up Page</a>
+                                            <a class="nav-link" href="">List all Product</a>
                                         </li>
 
                                     </ul>
                                 </div>
                             </li>
+                            @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton || ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> Blog </a>
+                                    <div id="submenu-6" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="">View Blog</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="">Edit Blog</a>
+                                            </li>
 
-                            
+                                        </ul>
+                                    </div>
+                                </li>
+
+                            }
 
                         </ul>
                     </div>
@@ -208,7 +190,7 @@
             </div>
         </div>
         <!-- end left sidebar -->
-        
+
 
 
         <div class="dashboard-wrapper">
@@ -264,9 +246,7 @@
     </div>
 
     <!-- end footer -->
-
     <!-- end wrapper  -->
-
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
     <script src="~/dashbroadcss/vendor/jquery/jquery-3.3.1.min.js"></script>
