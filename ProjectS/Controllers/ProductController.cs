@@ -18,9 +18,9 @@ namespace Project.Controllers
         }
 
 
-        public IActionResult Index(int id, bool gender,int mode)
-        {   
- 
+        public IActionResult Index(int id, bool gender, int mode)
+        {
+
             List<SubCategory> subCategories = new List<SubCategory>();
             var list = (from p in _shopContext.Products
                         where p.SubCategoryID == id
@@ -44,7 +44,7 @@ namespace Project.Controllers
             ViewData["subCate"] = subCate;
             ViewData["gender"] = gender;
 
-            if(mode == 1)
+            if (mode == 1)
             {
                 list.Sort((x, y) => (x.ProductPrice - x.Discount).CompareTo(y.ProductPrice - y.Discount));
             }
@@ -68,6 +68,7 @@ namespace Project.Controllers
                 ViewData["image"] = product.ImageMain;
                 var e = _shopContext.Entry(product);
                 e.Collection(c => c.ImageProducts).Load();
+                e.Collection(c => c.PoductDetails).Load();
             }
             else
             {
