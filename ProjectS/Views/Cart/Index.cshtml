@@ -3,7 +3,6 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject ShopContext _shopContext
 @{
-    string listProductId = "";
     double? total = 0;
 }
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ;">
@@ -46,30 +45,37 @@
                                             <th class="product-remove">Remove</th>
                                         </tr>
                                     </thead>
+
+
                                     <tbody>
                                         @foreach (var l in Model)
                                         {
                                             Product product = _shopContext.Products.Find(l.ProductId);
-                                            listProductId = listProductId + "," + product.ProductId + "|" + l.Quantity;
                                             <tr>
                                                 <td class="product-thumbnail"><a href="#"><img src="@product.ImageMain" alt="product img" /></a></td>
                                                 <td class="product-name"><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@product.ProductId">@product.ProductName</a></td>
                                                 <td class="product-price"><span class="amount">@l.color</span></td>
                                                 <td class="product-price"><span class="amount">@l.size</span></td>
-                                                <td class="product-quantity"><input type="number" value="@l.Quantity" min="1" /></td>
-                                                <td class="product-subtotal">
-                                                    @(
-                                                        product.ProductPrice - product.Discount
-                                                        )
+                                                <td class="product-quantity">
+                                                    <h3>
+                                                        <a asp-controller="Cart" asp-action="Index" asp-route-choice="up" asp-route-id="@l.CartItemId"><span class="ti-angle-up"></span></a>
+                                                        @l.Quantity
+                                                        <a asp-controller="Cart" asp-action="Index" asp-route-choice="down" asp-route-id="@l.CartItemId"><span class="ti-angle-down"></span></a>
+                                                    </h3>
                                                 </td>
                                                 <td class="product-subtotal">
-                                                    @(
-                                                        (product.ProductPrice - product.Discount) * l.Quantity
-                                                        )
+                                                @(
+                                                    product.ProductPrice - product.Discount
+                                                    )
+                                                </td>
+                                                <td class="product-subtotal">
+                                                @(
+                                                    (product.ProductPrice - product.Discount) * l.Quantity
+                                                    )
 
-                                                    @{
-                                                        total = total + (product.ProductPrice - product.Discount) * l.Quantity;
-                                                    }
+                                                @{
+                                                    total = total + (product.ProductPrice - product.Discount) * l.Quantity;
+                                                }
 
                                                 </td>
                                                 <td class="product-remove"><a asp-controller="Cart" asp-action="Index" asp-route-choice="remove" asp-route-id="@l.CartItemId">X</a></td>
