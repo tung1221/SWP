@@ -46,7 +46,6 @@ namespace Project.Controllers
                             _shopContext.CartItems.Remove(item);
                             _shopContext.SaveChanges();
                         }
-                        _shopContext.SaveChanges();
                         cartItems = getListItem();
                     }
                     else
@@ -75,6 +74,91 @@ namespace Project.Controllers
                                 };
                                 Response.Cookies.Append("cart", json, option);
                             }
+                        }
+                    }
+                }
+
+                if (choice.Equals("up"))
+                {
+                    if (id >= 0)
+                    {
+                        var item = _shopContext.CartItems.Find(id);
+                        if (item != null)
+                        {
+                            item.Quantity = item.Quantity + 1;
+                            _shopContext.SaveChanges();
+                        }
+                        cartItems = getListItem();
+                    }
+                    else
+                    {
+                        string? cookieValue = Request.Cookies["cart"];
+                        if (cookieValue != null)
+                        {
+                            cartItems = getListItem();
+                            List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+                            var cartItem = cartListFromCookie.Find(p => p.CartItemId == id);
+                            var cartItem2 = cartItems.Find(p => p.CartItemId == id);
+                            if (cartItem != null)
+                            {
+                                //cartListFromCookie.Remove(cartItem);
+                                //cartItems.Remove(cartItems.Find(p => p.CartItemId == id));
+                                cartItem.Quantity = cartItem.Quantity + 1;
+                                if (cartItem2 != null)
+                                    cartItem2.Quantity = cartItem2.Quantity + 1;
+                            }
+
+
+                            string json = JsonConvert.SerializeObject(cartListFromCookie);
+                            var option = new CookieOptions()
+                            {
+                                Expires = DateTime.Now.AddDays(90)
+                            };
+                            Response.Cookies.Append("cart", json, option);
+                        }
+                    }
+                }
+
+
+                if (choice.Equals("down"))
+                {
+                    if (id >= 0)
+                    {
+                        var item = _shopContext.CartItems.Find(id);
+                        if (item != null)
+                        {
+                            item.Quantity = item.Quantity - 1;
+                            _shopContext.SaveChanges();
+                        }
+                        cartItems = getListItem();
+                    }
+                    else
+                    {
+                        string? cookieValue = Request.Cookies["cart"];
+                        if (cookieValue != null)
+                        {
+                            cartItems = getListItem();
+                            List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+                            var cartItem = cartListFromCookie.Find(p => p.CartItemId == id);
+                            var cartItem2 = cartItems.Find(p => p.CartItemId == id);
+                            if (cartItem != null)
+                            {
+                                if (cartItem.Quantity != 1)
+                                {
+                                    cartItem.Quantity = cartItem.Quantity - 1;
+                                    if (cartItem2 != null)
+                                        cartItem2.Quantity = cartItem2.Quantity - 1;
+                                }
+
+                            }
+
+
+                            string json = JsonConvert.SerializeObject(cartListFromCookie);
+                            var option = new CookieOptions()
+                            {
+                                Expires = DateTime.Now.AddDays(90)
+                            };
+                            Response.Cookies.Append("cart", json, option);
                         }
                     }
                 }
@@ -165,7 +249,7 @@ namespace Project.Controllers
                 {
                     cartItems = temp.ToList();
                 }
-               
+
             }
 
             string? cookieValue = Request.Cookies["cart"];

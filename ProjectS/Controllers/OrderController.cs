@@ -43,15 +43,14 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProcessOrder(string email, string total)
+        public IActionResult ProcessOrder(string email, string total, int payment)
         {
-            _logger.LogError("yyyyyyyy");
-            _logger.LogError("dendayx" + email);
+
             if (string.IsNullOrEmpty(email))
             {
-                _logger.LogError("email: " + email);
                 return RedirectToAction("Index", "Order");
             }
+
 
             var RoldId = _shopContext.Roles.Where(c => c.NormalizedName == "SELLER").ToList().FirstOrDefault();
             List<string> lSellerId = _shopContext.UserRoles.Where(c => c.RoleId == RoldId.Id).Select(c => c.UserId).ToList();
@@ -71,13 +70,13 @@ namespace Project.Controllers
 
 
 
-            Bill temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = 1263272, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
+            Bill temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
             _shopContext.Bills.Add(temp1);
             _shopContext.SaveChanges();
 
             foreach (var cartItem in getListItem())
             {
-                _shopContext.BillDetails.Add(new BillDetail() { BillId = temp1.BillId, ProductId = cartItem.ProductId, quantity = cartItem.Quantity });
+                _shopContext.BillDetails.Add(new BillDetail() {  BillId = temp1.BillId, ProductId = cartItem.ProductId, quantity = cartItem.Quantity, color = cartItem.color, size = cartItem.size });
                 if(cartItem.CartItemId >= 0)
                 {
                     _shopContext.CartItems.Remove(cartItem);
