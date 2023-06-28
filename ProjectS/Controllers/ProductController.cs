@@ -75,6 +75,30 @@ namespace Project.Controllers
                 return RedirectToAction("Index", "Home", new { mode = "EDetailProduct" });
             }
 
+            string size = "";
+            string color = "";
+            var list = new List<string>();
+            foreach (var l in product.PoductDetails)
+            {
+                if(l.quantity > 0)
+                {
+                    size = l.size;
+                    color = l.color;
+                    break;
+                }
+            }
+
+            foreach (var l in product.PoductDetails)
+            {
+                if (l.color.Equals(color) && l.quantity == 0)
+                {
+                    list.Add(l.size);
+                }
+            }
+            ViewData["list"] = list;
+            ViewData["c"] = color;
+            ViewData["s"] = size;
+
             return View(product);
         }
 
@@ -89,3 +113,4 @@ namespace Project.Controllers
         }
     }
 }
+ 
