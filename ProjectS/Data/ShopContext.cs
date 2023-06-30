@@ -28,6 +28,7 @@ namespace Project.Data
         public virtual DbSet<SubCategory> SubCategory { get; set; } = null!;
         public virtual DbSet<Cart> Carts { get; set; } = null!;
         public virtual DbSet<CartItem> CartItems { get; set; } = null!;
+        public virtual DbSet<WishList> WishList { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -45,6 +46,15 @@ namespace Project.Data
                 entity.Property(p => p.typeGender).IsRequired(false);
 
             });
+
+
+            modelBuilder.Entity<WishList>(entity =>
+            {
+                entity.HasKey(s => s.WishListId);
+
+
+            });
+
 
 
 

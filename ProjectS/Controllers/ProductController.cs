@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Project.Data;
 using Project.Models;
 using System.Collections.Generic;
@@ -11,10 +15,12 @@ namespace Project.Controllers
 
         private readonly ILogger<ProductController> _logger;
         private readonly ShopContext _shopContext;
-        public ProductController(ILogger<ProductController> logger, ShopContext ct)
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public ProductController(ILogger<ProductController> logger, ShopContext ct, SignInManager<IdentityUser> s1)
         {
             _shopContext = ct;
             _logger = logger;
+            _signInManager = s1;
         }
 
 
@@ -80,7 +86,7 @@ namespace Project.Controllers
             var list = new List<string>();
             foreach (var l in product.PoductDetails)
             {
-                if(l.quantity > 0)
+                if (l.quantity > 0)
                 {
                     size = l.size;
                     color = l.color;
@@ -111,6 +117,58 @@ namespace Project.Controllers
 
             return View("Index", _shopContext.Products.Where(c => c.ProductName.Contains(name)).ToList());
         }
+
+
+        public IActionResult AddWishList(int id, int choice)
+        {
+            if (!_signInManager.IsSignedIn(User))
+            {
+
+                string? cookieValue = Request.Cookies["wish"];
+                if (cookieValue == null)
+                {
+                    var option = new CookieOptions()
+                    {
+                        Expires = DateTime.Now.AddDays(90)
+                    };
+                    Response.Cookies.Append("wish", id + ",", option);
+                }
+                else
+                {
+                    var option = new CookieOptions()
+                    {
+                        Expires = DateTime.Now.AddDays(90)
+                    };
+                    Response.Cookies.Append("wish", cookieValue + id + "," + ",", option);
+                }
+            }
+
+            if (choice == 1)
+                return Redirect("/Home/Index");
+
+            return Redirect("/Home/Index");
+        }
+
+        public IActionResult WishList(int id, int choice)
+        {
+            List<int> list = new List<int>();
+            if (!_signInManager.IsSignedIn(User))
+            {
+
+                string? cookieValue = Request.Cookies["wish"];
+                if (cookieValue != null)
+                {
+                    foreach (var c in cookieValue.Split(","))
+                    {
+                        if (!string.IsNullOrEmpty(c))
+                            list.Add(int.Parse(c));
+                    }
+                }
+            }
+
+
+
+            return View(_shopContext.Products.Where(c => list.Contains(c.ProductId)).ToList());
+        }
     }
 }
- 
