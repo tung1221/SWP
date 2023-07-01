@@ -55,12 +55,12 @@ namespace Project.Controllers
             var RoldId = _shopContext.Roles.Where(c => c.NormalizedName == "SELLER").ToList().FirstOrDefault();
             List<string> lSellerId = _shopContext.UserRoles.Where(c => c.RoleId == RoldId.Id).Select(c => c.UserId).ToList();
             Dictionary<string, int> myDictionary = new Dictionary<string, int>();
-            foreach (var selletId  in lSellerId)
+            foreach (var selletId in lSellerId)
             {
                 myDictionary.Add(selletId, 0);
             }
 
-            foreach(var b in _shopContext.Bills.Where(c => c.BillStatus == "0").Select(c => c.sellerId).ToList())
+            foreach (var b in _shopContext.Bills.Where(c => c.BillStatus == "0").Select(c => c.sellerId).ToList())
             {
                 var pair = myDictionary.FirstOrDefault(x => x.Key == b);
                 myDictionary[pair.Key] = myDictionary[pair.Key] + 1;
@@ -76,8 +76,8 @@ namespace Project.Controllers
 
             foreach (var cartItem in getListItem())
             {
-                _shopContext.BillDetails.Add(new BillDetail() {  BillId = temp1.BillId, ProductId = cartItem.ProductId, quantity = cartItem.Quantity, color = cartItem.color, size = cartItem.size });
-                if(cartItem.CartItemId >= 0)
+                _shopContext.BillDetails.Add(new BillDetail() { BillId = temp1.BillId, ProductId = cartItem.ProductId, quantity = cartItem.Quantity, color = cartItem.color, size = cartItem.size });
+                if (cartItem.CartItemId >= 0)
                 {
                     _shopContext.CartItems.Remove(cartItem);
                 }

@@ -12,7 +12,7 @@
 <section class="htc__product__area shop__page ptb--130 bg__white">
     <div class="container">
         <div class="htc__product__container">
-            
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="filter__menu__container">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
 
             <div class="row product__list">
@@ -77,7 +77,7 @@
                             <div class="product__details">
                                 <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@l.ProductId">@l.ProductName</a></h2>
                                 <ul class="product__price">
-                                    @if(l.IsAvailble == false)
+                                    @if (l.IsAvailble == false)
                                     {
                                         <li style="padding-left: 0px" class="new__price">Hết hàng</li>
                                     }
@@ -94,7 +94,7 @@
                                         }
                                     }
 
-                               
+
                                 </ul>
                             </div>
                         </div>

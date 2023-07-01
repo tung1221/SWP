@@ -139,7 +139,29 @@ namespace Project.Controllers
                     {
                         Expires = DateTime.Now.AddDays(90)
                     };
-                    Response.Cookies.Append("wish", cookieValue + id + "," + ",", option);
+                    Response.Cookies.Append("wish", cookieValue + id + ",", option);
+                }
+            }
+            else
+            {
+                var p = _shopContext.Products.Find(id);
+
+                if (p != null)
+                {
+                    var l = _shopContext.WishList.Where(p => p.UserId == _signInManager.UserManager.GetUserId(User) && p.ProductId == id).ToList();
+
+                    if (l.Count != 0)
+                    {
+                        _shopContext.WishList.Add(new WishList()
+                        {
+                            UserId = _signInManager.UserManager.GetUserId(User),
+                            ProductId = p.ProductId
+
+                        });
+                    }
+
+
+                    _shopContext.SaveChanges();
                 }
             }
 
@@ -149,24 +171,70 @@ namespace Project.Controllers
             return Redirect("/Home/Index");
         }
 
-        public IActionResult WishList(int id, int choice)
-        {
-            List<int> list = new List<int>();
-            if (!_signInManager.IsSignedIn(User))
-            {
 
-                string? cookieValue = Request.Cookies["wish"];
-                if (cookieValue != null)
+        public IActionResult RemoveWishList(int id)
+        {
+
+
+            List<int> wishList = new List<int>();
+            string? cookieValue = Request.Cookies["wish"];
+            if (cookieValue != null)
+            {
+                foreach (var c in cookieValue.Split(","))
                 {
-                    foreach (var c in cookieValue.Split(","))
+                    if (!string.IsNullOrEmpty(c))
+                        wishList.Add(int.Parse(c));
+                }
+                wishList.Remove(id);
+                if (wishList.Count == 0)
+                {
+                    Response.Cookies.Delete("cart");
+                }
+                else
+                {
+                    string temp = "";
+                    foreach (var c in wishList)
                     {
-                        if (!string.IsNullOrEmpty(c))
-                            list.Add(int.Parse(c));
+                        temp = temp + c + ",";
                     }
+
+                    var option = new CookieOptions()
+                    {
+                        Expires = DateTime.Now.AddDays(90)
+                    };
+                    Response.Cookies.Append("wish", temp, option);
                 }
             }
 
+            var wish = _shopContext.WishList.Where(p => p.UserId == _signInManager.UserManager.GetUserId(User) && p.ProductId == id).ToList();
+            if (wish.Count > 0)
+            {
+                _shopContext.WishList.Remove(wish[0]);
+                _shopContext.SaveChanges();
+            }
 
+            return Redirect("/Product/WishList");
+        }
+
+        public IActionResult WishList()
+        {
+            List<int> list = new List<int>();
+
+            if (_signInManager.IsSignedIn(User))
+            {
+                list.AddRange(_shopContext.WishList.Where(p => p.UserId == _signInManager.UserManager.GetUserId(User)).Select(p => p.ProductId).ToList());
+            }
+
+
+            string? cookieValue = Request.Cookies["wish"];
+            if (cookieValue != null)
+            {
+                foreach (var c in cookieValue.Split(","))
+                {
+                    if (!string.IsNullOrEmpty(c))
+                        list.Add(int.Parse(c));
+                }
+            }
 
             return View(_shopContext.Products.Where(c => list.Contains(c.ProductId)).ToList());
         }
