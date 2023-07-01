@@ -46,7 +46,7 @@ else
 					<tbody>
 						@foreach (var bill in Model)
 						{
-							<form method="post" asp-controller="Seller" asp-action="ProcessBill">
+							<form method="post" asp-controller="Seller" asp-action="ProcessBillAll">
 								<input type="hidden" name="billId" value="@bill.BillId" />
 
 							<tr>

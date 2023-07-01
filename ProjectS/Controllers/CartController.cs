@@ -262,5 +262,22 @@ namespace Project.Controllers
 
             return cartItems;
         }
+
+
+        public IActionResult ProcessBill()
+        {
+            var user = HttpContext.User;
+
+            if (User.Identity.IsAuthenticated)
+            { 
+            
+            }
+            else
+            {
+                return RedirectToAction("Identity/Account/Login");
+            }
+
+                return View();
+        }
     }
 }
