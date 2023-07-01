@@ -50,7 +50,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>	BÀI LIÊN QUAN	</h2>
+                    <h2>HÌNH ẢNH TRONG BỘ SƯU TẬP</h2>
                 </div>
                 @if (Blog.ImageBlogs != null)
                 {
@@ -64,7 +64,7 @@
                                         <img src="~/images/blog/@imageBlog.ImageURL" class="img-responsive" alt="Image">
                                     </a>
                                     <div class="desc">
-                                        <h4><a href="single_blog.html">RIDICULUS ADIPISCING TETUR</a></h4>
+                                        <h4><a href="/blog/BlogDetails?blogId=@Blog.Blogid">RIDICULUS ADIPISCING TETUR</a></h4>
                                         <p class="date-post">@imageBlog.DateUp?.ToString("MMMM, dd\"th\", yyyy")</p>
                                     </div>
                                 </div>
