@@ -156,7 +156,6 @@ namespace Project.Controllers
                         {
                             UserId = _signInManager.UserManager.GetUserId(User),
                             ProductId = p.ProductId
-
                         });
                     }
 
@@ -188,7 +187,7 @@ namespace Project.Controllers
                 wishList.Remove(id);
                 if (wishList.Count == 0)
                 {
-                    Response.Cookies.Delete("cart");
+                    Response.Cookies.Delete("wish");
                 }
                 else
                 {
@@ -229,7 +228,6 @@ namespace Project.Controllers
             string? cookieValue = Request.Cookies["wish"];
             if (cookieValue != null)
             {
-                _logger.LogError("dd" + cookieValue + "");
                 foreach (var c in cookieValue.Split(","))
                 {
                     if (!string.IsNullOrEmpty(c)) 

@@ -203,13 +203,17 @@
                             {
                                 <div class="product-quantity">
                                     <div class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="quantity" value="02">
-                                        </div>
+                                        <h3>
+                                            <span id="up" style=" cursor:pointer; margin-right: 6px" class="ti-angle-up"></span>
+                                            <span  id="qua" style="font-size: 1.3em; font-weight: 200">1</span>
+                                            <span id="down" style="cursor:pointer; margin-left:6px" class="ti-angle-down"></span>
+                                        </h3>
                                     </div>
                                 </div>
                             }
                         </div>
+                 
+                        <input id="quant" type="text" name="Quantity" value="1" hidden>
                         <input type="text" name="productId" value="@ViewData["productId"]" hidden>
                         @if (Model.IsAvailble == true)
                         {
@@ -317,4 +321,26 @@
 
         });
     });
+
+    
+    var Iquan = document.getElementById("quant");
+    var paragraph = document.getElementById("up");
+    var paragraph2 = document.getElementById("down");
+    var text = document.getElementById("qua");
+    var count = 1;
+
+    paragraph.addEventListener("click", function () {
+        count++;
+        text.textContent = count;
+        Iquan.value = count
+    });
+
+    paragraph2.addEventListener("click", function () {
+        if(count != 1){
+            count--;
+            text.textContent = count;
+            Iquan.value = count
+        }
+    });
+
 </script>
