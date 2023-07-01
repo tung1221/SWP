@@ -229,9 +229,10 @@ namespace Project.Controllers
             string? cookieValue = Request.Cookies["wish"];
             if (cookieValue != null)
             {
+                _logger.LogError("dd" + cookieValue + "");
                 foreach (var c in cookieValue.Split(","))
                 {
-                    if (!string.IsNullOrEmpty(c))
+                    if (!string.IsNullOrEmpty(c)) 
                         list.Add(int.Parse(c));
                 }
             }

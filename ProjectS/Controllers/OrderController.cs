@@ -67,10 +67,17 @@ namespace Project.Controllers
             }
 
             var minPair = myDictionary.MinBy(pair => pair.Value);
+            Bill temp1 = new Bill();
+            if (_SignInManager.IsSignedIn(User))
+            {
+                temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, UserId = _SignInManager.UserManager.GetUserId(User), TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
+            }
+            else
+            {
+                temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
 
+            }
 
-
-            Bill temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, UserId = "bffd4951-7d06-4f94-9848-63297a8f838c", TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
             _shopContext.Bills.Add(temp1);
             _shopContext.SaveChanges();
 
