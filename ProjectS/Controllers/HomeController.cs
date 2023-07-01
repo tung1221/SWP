@@ -30,43 +30,7 @@ namespace Project.Controllers
                 }
             }
 
-			var user = HttpContext.User;
-
-			if (User.Identity.IsAuthenticated)
-			{
-				if (User.IsInRole("Admin"))
-				{
-					ViewBag.ShowAdminButton = true;
-				}
-				else
-				{
-					ViewBag.ShowAdminButton = false;
-				}
-
-				if (User.IsInRole("Marketing"))
-				{
-					ViewBag.ShowMarketingButton = true;
-				}
-				else
-				{
-					ViewBag.ShowMarketingButton = false;
-				}
-
-				if (User.IsInRole("Seller"))
-				{
-					ViewBag.ShowSellerButton = true;
-				}
-				else
-				{
-					ViewBag.ShowSellerButton = false;
-				}
-			}
-			else
-			{
-				ViewBag.ShowAdminButton = false;
-				ViewBag.ShowMarketingButton = false;
-				ViewBag.ShowSellerButton = false;
-			}
+		
 
 
 			return View(listProduct.ToList());
