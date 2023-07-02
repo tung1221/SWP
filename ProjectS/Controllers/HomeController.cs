@@ -29,8 +29,6 @@ namespace Project.Controllers
                 }
             }
 
-		
-
 
 			return View(listProduct.ToList());
 
