@@ -21,7 +21,7 @@ namespace Project.Controllers
 		{
 			var blogs = _context.Blogs
 			.Include(b => b.ImageBlogs)
-			.Where(b => b.HomeStatus == true && b.ImageBlogs.Any(ib => ib.IsBigImg == true))
+			.Where(b => b.ImageBlogs.Any(ib => ib.IsBigImg == true))
 			.Select(b => new
 			{
 				b.Blogid,

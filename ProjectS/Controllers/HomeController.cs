@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project.Data;
 using Project.Models;
 using System.Diagnostics;
@@ -29,7 +30,7 @@ namespace Project.Controllers
                 }
             }
 
-
+            ViewData["listBlog"] = _shopContext.Blogs.Include(p => p.ImageBlogs).Where(p => p.HomeStatus == true).OrderBy(p => p.Blogid).ToList();
 			return View(listProduct.ToList());
 
             

@@ -1,5 +1,7 @@
 ﻿﻿@{
     ViewData["Title"] = "Home Page";
+    var listBlog = ViewData["listBlog"] as List<Blog>;
+    var count = 0;
 }
 @model List<Product>
 @inject SignInManager<IdentityUser> SignInManager
@@ -15,36 +17,81 @@
 <div class="slider__container slider--one">
     <div class="slider__activation__wrap owl-carousel owl-theme">
         <!-- Start Single Slide -->
-        <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(/images/slider/bg/1.png) no-repeat scroll center center / cover ;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-4">
-                        <div class="slider__inner">
-                            <h1>New Product <span class="text--theme">Collection</span></h1>
-                            <div class="slider__btn">
-                                <a class="htc__btn" href="cart.html">shop now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        @*<div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688301717/Blog/1_x58c3r.png) no-repeat scroll center center / cover ;">
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-8 offset-lg-4">
+        <div class="slider__inner">
+        <h1>New Product <span class="text--theme">Collection</span></h1>
+        <div class="slider__btn">
+        <a class="htc__btn" href="cart.html">shop now</a>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>
         <!-- End Single Slide -->
         <!-- Start Single Slide -->
         <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(/images/slider/bg/2.png) no-repeat scroll center center / cover ;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="slider__inner">
-                            <h1>New Product <span class="text--theme">Collection</span></h1>
-                            <div class="slider__btn">
-                                <a class="htc__btn" href="cart.html">shop now</a>
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-8">
+        <div class="slider__inner">
+        <h1>New Product <span class="text--theme">Collection</span></h1>
+        <div class="slider__btn">
+        <a class="htc__btn" href="cart.html">shop now</a>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>*@
+        @if (listBlog != null)
+        {
+            foreach (var l in listBlog)
+            {
+                foreach (var i in l.ImageBlogs)
+                {
+                    if (i.IsBigImg == true)
+                    {
+                        <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(@i.ImageURL) no-repeat scroll center center / cover ;">
+                            <div class="container">
+                                <div class="row">
+                                    @if (count % 2 == 0)
+                                    {
+                                        count++;
+                                        <div class="col-lg-8  offset-lg-4">
+                                            <div class="slider__inner">
+                                                <h1>New Product <span class="text--theme">Collection</span></h1>
+                                                <div class="slider__btn">
+                                                    <a class="htc__btn" href="cart.html">shop now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        count++;
+                                        <div class="col-lg-8">
+                                            <div class="slider__inner">
+                                                <h1>New Product <span class="text--theme">Collection</span></h1>
+                                                <div class="slider__btn">
+                                                    <a class="htc__btn" href="cart.html">shop now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    }
+                    break;
+                }
+
+
+            }
+        }
         <!-- End Single Slide -->
     </div>
 </div>
