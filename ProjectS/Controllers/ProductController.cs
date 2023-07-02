@@ -74,7 +74,7 @@ namespace Project.Controllers
                 ViewData["image"] = product.ImageMain;
                 var e = _shopContext.Entry(product);
                 e.Collection(c => c.ImageProducts).Load();
-                e.Collection(c => c.PoductDetails).Load();
+                e.Collection(c => c.ProductDetails).Load();
             }
             else
             {
@@ -84,7 +84,7 @@ namespace Project.Controllers
             string size = "";
             string color = "";
             var list = new List<string>();
-            foreach (var l in product.PoductDetails)
+            foreach (var l in product.ProductDetails)
             {
                 if (l.quantity > 0)
                 {
@@ -94,7 +94,7 @@ namespace Project.Controllers
                 }
             }
 
-            foreach (var l in product.PoductDetails)
+            foreach (var l in product.ProductDetails)
             {
                 if (l.color.Equals(color) && l.quantity == 0)
                 {
@@ -230,7 +230,7 @@ namespace Project.Controllers
             {
                 foreach (var c in cookieValue.Split(","))
                 {
-                    if (!string.IsNullOrEmpty(c)) 
+                    if (!string.IsNullOrEmpty(c))
                         list.Add(int.Parse(c));
                 }
             }

@@ -1,0 +1,40 @@
+﻿@model List<Bill>
+@if (Model == null)
+{
+    <p>Không có đơn hàng nào.</p>
+}
+else
+{
+    foreach (var bill in Model)
+    {
+        
+        <p>Hóa đơn ID: @bill.BillId</p>
+        <p>Tên người dùng: @bill.User.UserName</p>
+		<h2>Tình trạng đơn</h2>
+		@if (bill.BillStatus == "0")
+		{
+			<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+				
+				<i class='bx bxs-circle me-1'></i>Not in Process
+			</div>
+		}
+		else if (bill.BillStatus == "1")
+		{
+			<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
+				<i class='bx bxs-circle me-1'></i>In Progress
+			</div>
+		}
+		else if (bill.BillStatus == "2")
+		{
+			<div class="badge rounded-pill text-primary bg-light-primary p-2 text-uppercase px-3">
+				<i class='bx bxs-circle me-1'></i>Delivery
+			</div>
+		}
+		else if (bill.BillStatus == "3")
+		{
+			<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+				<i class='bx bxs-circle me-1'></i>Done
+			</div>
+		}
+    }
+}

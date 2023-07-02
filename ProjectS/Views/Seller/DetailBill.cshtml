@@ -2,6 +2,14 @@
 @{
 	Layout = "~/Views/Shared/_DashLayout.cshtml";
 }
+@if (!string.IsNullOrEmpty(ViewBag.OutOfStockMessage))
+{
+    <div class="alert alert-warning">
+        @ViewBag.OutOfStockMessage
+    </div>
+}
+
+
 <h1>this is the bill id detail</h1>
 <h1>bill id: @Model.BillId</h1>
 <h1>Name customer: @Model.Email</h1

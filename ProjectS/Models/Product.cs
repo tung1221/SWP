@@ -21,7 +21,7 @@
         public virtual List<BillDetail> BillDetails { get; set; } = null!;
         public virtual List<Feedback> Feedbacks { get; set; } = null!;
         public virtual List<ImageProduct> ImageProducts { get; set; } = null!;
-        public virtual List<PoductDetails> PoductDetails { get; set; } = null!;
+        public virtual List<ProductDetails> ProductDetails { get; set; } = null!;
         public virtual List<CartItem> CartItems { get; set; } = null!;
 
     }

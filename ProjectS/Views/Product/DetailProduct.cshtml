@@ -112,7 +112,7 @@
                             <ul class="pro__choose__color">
                                 @if (Model.IsAvailble == true)
                                 {
-                                    foreach (var d in Model.PoductDetails)
+                                    foreach (var d in Model.ProductDetails)
                                     {
 
                                         if (!myDictionary.ContainsKey(d.color.ToUpper()))
@@ -151,7 +151,7 @@
                                     {
                                         myDictionary.Clear();
                                     }
-                                    foreach (var d in Model.PoductDetails)
+                                    foreach (var d in Model.ProductDetails)
                                     {
 
                                         if (!myDictionary.ContainsKey(d.size.ToUpper()))
@@ -205,14 +205,14 @@
                                     <div class="product-quantity">
                                         <h3>
                                             <span id="up" style=" cursor:pointer; margin-right: 6px" class="ti-angle-up"></span>
-                                            <span  id="qua" style="font-size: 1.3em; font-weight: 200">1</span>
+                                            <span id="qua" style="font-size: 1.3em; font-weight: 200">1</span>
                                             <span id="down" style="cursor:pointer; margin-left:6px" class="ti-angle-down"></span>
                                         </h3>
                                     </div>
                                 </div>
                             }
                         </div>
-                 
+
                         <input id="quant" type="text" name="Quantity" value="1" hidden>
                         <input type="text" name="productId" value="@ViewData["productId"]" hidden>
                         @if (Model.IsAvailble == true)
@@ -232,7 +232,7 @@
 </section>
 
 @{
-    var danhSachDuLieu = Model.PoductDetails;
+    var danhSachDuLieu = Model.ProductDetails;
 }
 
 
@@ -322,7 +322,7 @@
         });
     });
 
-    
+
     var Iquan = document.getElementById("quant");
     var paragraph = document.getElementById("up");
     var paragraph2 = document.getElementById("down");
@@ -336,7 +336,7 @@
     });
 
     paragraph2.addEventListener("click", function () {
-        if(count != 1){
+        if (count != 1) {
             count--;
             text.textContent = count;
             Iquan.value = count

@@ -6,7 +6,7 @@ namespace Project.Models
     {
         public int BillId { get; set; }
         public int PaymentCode { get; set; }
-        public string? UserId { get; set; } = null!;
+        public string? UserId { get; set; }
         public int TransportId { get; set; }
         public DateTime PurchaseDate { get; set; }
         public string BillStatus { get; set; } = null!;

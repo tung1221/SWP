@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Project.Data;
 using Project.Models;
 using System.Drawing;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Policy;
 
@@ -262,5 +263,32 @@ namespace Project.Controllers
 
             return cartItems;
         }
+        public IActionResult ProcessBill()
+        {
+            var user = HttpContext.User;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = user.FindFirstValue(ClaimTypes.NameIdentifier); // Lấy ID của người dùng từ Claims
+
+                var bills = _shopContext.Bills
+                    .Include(b => b.User) // Lấy thông tin của người dùng
+                    .Include(b => b.BillDetails) // Lấy thông tin của các hóa đơn chi tiết
+                    .Where(b => b.UserId == userId)
+                    .ToList();
+
+                if (bills.Count == 0)
+                {
+                    return View(null);
+                }
+
+                return View(bills);
+            }
+            else
+            {
+                return Redirect("/Identity/Account/Login");
+            }
+        }
+
     }
 }

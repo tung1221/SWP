@@ -12,7 +12,7 @@ namespace Project.Data
         public ShopContext(DbContextOptions options) : base(options)
         {
         }
-        public virtual DbSet<PoductDetails> productdetails { get; set; } = null!;
+        public virtual DbSet<ProductDetails> productdetails { get; set; } = null!;
         public virtual DbSet<Bill> Bills { get; set; } = null!;
         public virtual DbSet<BillDetail> BillDetails { get; set; } = null!;
         public virtual DbSet<Feedback> Feedbacks { get; set; } = null!;
@@ -68,7 +68,7 @@ namespace Project.Data
 
             });
 
-            modelBuilder.Entity<PoductDetails>(entity =>
+            modelBuilder.Entity<ProductDetails>(entity =>
             {
                 entity.HasKey(s => s.productDetailId);
 
