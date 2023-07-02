@@ -8,135 +8,135 @@ using System.Data;
 
 namespace Project.Controllers
 {
-    [Authorize(Roles = "Seller")]
+	[Authorize(Roles = "Seller")]
 
-    public class SellerController : Controller
-    {
-        private readonly ShopContext _shopContext;
-        private readonly MailSettings _mailSettings;
+	public class SellerController : Controller
+	{
+		private readonly ShopContext _shopContext;
+		private readonly MailSettings _mailSettings;
 
-        public SellerController(ShopContext shopContext)
-        {
-            _shopContext = shopContext;
-        }
-
-
-        public IActionResult Index()
-        {
-            LoadRoleUser();
-
-            return View();
-        }
-
-        public IActionResult ViewAll()
-        {
-            LoadRoleUser();
-            List<Bill> bills = _shopContext.Bills.ToList()
-                .Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 4)
-                .ToList();
-
-            return View(bills);
-        }
+		public SellerController(ShopContext shopContext)
+		{
+			_shopContext = shopContext;
+		}
 
 
-        public IActionResult ViewOrder()
-        {
-            LoadRoleUser();
-            var currentUser = HttpContext.User;
+		public IActionResult Index()
+		{
+			LoadRoleUser();
 
-            if (currentUser.Identity.IsAuthenticated)
-            {
-                List<Bill> bills = _shopContext.Bills
-                    .Where(bill => bill.Email == currentUser.Identity.Name)
-                    .ToList();
+			return View();
+		}
 
-                bills = bills.Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 4)
-                    .ToList();
+		public IActionResult ViewAll()
+		{
+			LoadRoleUser();
+			List<Bill> bills = _shopContext.Bills.ToList()
+				.Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 4)
+				.ToList();
 
-                return View(bills);
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-        }
+			return View(bills);
+		}
 
 
+		public IActionResult ViewOrder()
+		{
+			LoadRoleUser();
+			var currentUser = HttpContext.User;
+
+			if (currentUser.Identity.IsAuthenticated)
+			{
+				List<Bill> bills = _shopContext.Bills
+					.Where(bill => bill.Email == currentUser.Identity.Name)
+					.ToList();
+
+				bills = bills.Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 4)
+					.ToList();
+
+				return View(bills);
+			}
+			else
+			{
+				return RedirectToAction("Index");
+			}
+		}
 
 
 
-        public IActionResult DetailBill(int billId)
-        {
-            LoadRoleUser();
 
-            var bill = _shopContext.Bills.FirstOrDefault(b => b.BillId == billId);
-            if (bill != null)
-            {
-                if (TempData.ContainsKey("OutOfStockFlag"))
-                {
-                    ViewBag.OutOfStockMessage = "Hàng đã hết. Bạn có muốn xóa không?";
-                    TempData.Remove("OutOfStockFlag");
-                }
 
-                return View(bill);
+		public IActionResult DetailBill(int billId)
+		{
+			LoadRoleUser();
 
-            }
-            else
-            {
-                return Redirect("Index");
-            }
+			var bill = _shopContext.Bills.FirstOrDefault(b => b.BillId == billId);
+			if (bill != null)
+			{
+				if (TempData.ContainsKey("OutOfStockFlag"))
+				{
+					ViewBag.OutOfStockMessage = "Hàng đã hết. Bạn có muốn xóa không?";
+					TempData.Remove("OutOfStockFlag");
+				}
 
-        }
-        private void LoadRoleUser()
-        {
-            var user = HttpContext.User;
+				return View(bill);
 
-            if (user.Identity.IsAuthenticated)
-            {
-                if (user.IsInRole("Admin"))
-                {
-                    ViewBag.ShowAdminButton = true;
-                }
-                else
-                {
-                    ViewBag.ShowAdminButton = false;
-                }
+			}
+			else
+			{
+				return Redirect("Index");
+			}
 
-                if (user.IsInRole("Marketing"))
-                {
-                    ViewBag.ShowMarketingButton = true;
-                }
-                else
-                {
-                    ViewBag.ShowMarketingButton = false;
-                }
+		}
+		private void LoadRoleUser()
+		{
+			var user = HttpContext.User;
 
-                if (user.IsInRole("Seller"))
-                {
-                    ViewBag.ShowSellerButton = true;
-                }
-                else
-                {
-                    ViewBag.ShowSellerButton = false;
-                }
-            }
-            else
-            {
-                ViewBag.ShowAdminButton = false;
-                ViewBag.ShowMarketingButton = false;
-                ViewBag.ShowSellerButton = false;
-            }
-        }
+			if (user.Identity.IsAuthenticated)
+			{
+				if (user.IsInRole("Admin"))
+				{
+					ViewBag.ShowAdminButton = true;
+				}
+				else
+				{
+					ViewBag.ShowAdminButton = false;
+				}
 
-        public IActionResult Delete(int billId)
-        {
-            var bill = _shopContext.Bills.Include(b => b.BillDetails).FirstOrDefault(b => b.BillId == billId);
-            if (bill != null)
-            {
-                string fromEmail = "huongdl40@gmail.com";
-                string toEmail = bill.Email;
-                string subject = "Xác nhận đơn hàng";
-                string body = @"
+				if (user.IsInRole("Marketing"))
+				{
+					ViewBag.ShowMarketingButton = true;
+				}
+				else
+				{
+					ViewBag.ShowMarketingButton = false;
+				}
+
+				if (user.IsInRole("Seller"))
+				{
+					ViewBag.ShowSellerButton = true;
+				}
+				else
+				{
+					ViewBag.ShowSellerButton = false;
+				}
+			}
+			else
+			{
+				ViewBag.ShowAdminButton = false;
+				ViewBag.ShowMarketingButton = false;
+				ViewBag.ShowSellerButton = false;
+			}
+		}
+
+		public IActionResult Delete(int billId)
+		{
+			var bill = _shopContext.Bills.Include(b => b.BillDetails).FirstOrDefault(b => b.BillId == billId);
+			if (bill != null)
+			{
+				string fromEmail = "huongdl40@gmail.com";
+				string toEmail = bill.Email;
+				string subject = "Xác nhận đơn hàng";
+				string body = @"
                                     <html>
                                     <head>
                                         <style>
@@ -152,70 +152,70 @@ namespace Project.Controllers
                                         </ul>
                                     </body>
                                     </html>";
-                string gmail = "huongdl40@gmail.com";
-                string password = "gepcdegcpjjzceke";
-                var sendResult = SendMailConfirmOrder.SendGmail(fromEmail, toEmail, subject, body, gmail, password).GetAwaiter().GetResult();
-                if (sendResult == "gui email thanh cong")
-                {
-                    // Xóa tất cả các đối tượng BillDetail liên quan
-                    _shopContext.BillDetails.RemoveRange(bill.BillDetails);
-                    _shopContext.Bills.Remove(bill);
-                    _shopContext.SaveChanges();
-                }
-                else
-                {
-                    // Xử lý khi gửi email thất bại
-                    // ...
-                }
+				string gmail = "huongdl40@gmail.com";
+				string password = "gepcdegcpjjzceke";
+				var sendResult = SendMailConfirmOrder.SendGmail(fromEmail, toEmail, subject, body, gmail, password).GetAwaiter().GetResult();
+				if (sendResult == "gui email thanh cong")
+				{
+					// Xóa tất cả các đối tượng BillDetail liên quan
+					_shopContext.BillDetails.RemoveRange(bill.BillDetails);
+					_shopContext.Bills.Remove(bill);
+					_shopContext.SaveChanges();
+				}
+				else
+				{
+					// Xử lý khi gửi email thất bại
+					// ...
+				}
 
-            }
+			}
 
-            return RedirectToAction("ViewAll", "Seller");
+			return RedirectToAction("ViewAll", "Seller");
 
-        }
-        public IActionResult ProcessBill(int billId)
-        {
-
-
-            var bill = _shopContext.Bills
-        .Include(b => b.BillDetails)
-            .ThenInclude(bd => bd.Product)
-                .ThenInclude(p => p.ProductDetails)
-        .FirstOrDefault(b => b.BillId == billId);
-
-            if (bill != null)
-            {
-                if (bill.BillStatus == "0")
-                {
-                    foreach (var billDetail in bill.BillDetails)
-                    {
-                        var product = billDetail.Product;
-                        var productDetail = product.ProductDetails
-                            .FirstOrDefault(pd => pd.color == billDetail.color && pd.size == billDetail.size);
-
-                        if (productDetail != null && productDetail.quantity >= billDetail.quantity)
-                        {
-
-                            productDetail.quantity -= billDetail.quantity;
+		}
+		public IActionResult ProcessBill(int billId)
+		{
 
 
-                            _shopContext.SaveChanges();
-                        }
-                        else
-                        {
-                            TempData["OutOfStockFlag"] = true;
-                            return RedirectToAction("DetailBill", new { billId });
-                        }
-                    }
+			var bill = _shopContext.Bills
+		.Include(b => b.BillDetails)
+			.ThenInclude(bd => bd.Product)
+				.ThenInclude(p => p.ProductDetails)
+		.FirstOrDefault(b => b.BillId == billId);
 
-                    int billStatus = int.Parse(bill.BillStatus) + 1;
-                    bill.BillStatus = billStatus.ToString();
-                    _shopContext.SaveChanges();
+			if (bill != null)
+			{
+				if (bill.BillStatus == "0")
+				{
+					foreach (var billDetail in bill.BillDetails)
+					{
+						var product = billDetail.Product;
+						var productDetail = product.ProductDetails
+							.FirstOrDefault(pd => pd.color == billDetail.color && pd.size == billDetail.size);
 
-                    string fromEmail = "huongdl40@gmail.com";
-                    string toEmail = bill.Email;
-                    string subject = "Xác nhận đơn hàng";
-                    string body = @"
+						if (productDetail != null && productDetail.quantity >= billDetail.quantity)
+						{
+
+							productDetail.quantity -= billDetail.quantity;
+
+
+							_shopContext.SaveChanges();
+						}
+						else
+						{
+							TempData["OutOfStockFlag"] = true;
+							return RedirectToAction("DetailBill", new { billId });
+						}
+					}
+
+					int billStatus = int.Parse(bill.BillStatus) + 1;
+					bill.BillStatus = billStatus.ToString();
+					_shopContext.SaveChanges();
+
+					string fromEmail = "huongdl40@gmail.com";
+					string toEmail = bill.Email;
+					string subject = "Xác nhận đơn hàng";
+					string body = @"
                 <html>
                 <head>
                     <style>
@@ -231,70 +231,70 @@ namespace Project.Controllers
                     </ul>
                 </body>
                 </html>";
-                    string gmail = "huongdl40@gmail.com";
-                    string password = "gepcdegcpjjzceke";
+					string gmail = "huongdl40@gmail.com";
+					string password = "gepcdegcpjjzceke";
 
-                    var sendResult = SendMailConfirmOrder.SendGmail(fromEmail, toEmail, subject, body, gmail, password).GetAwaiter().GetResult();
-                    if (sendResult != "gui email thanh cong")
-                    {
-                        // Handle email sending failure
-                        // ...
-                    }
-                }
-                else
-                {
-                    int billStatus = int.Parse(bill.BillStatus) + 1;
-                    bill.BillStatus = billStatus.ToString();
-                    _shopContext.SaveChanges();
-                }
-            }
-
-
-            return RedirectToAction("ViewOrder");
-        }
-        public IActionResult ProcessBillAll(int billId)
-        {
+					var sendResult = SendMailConfirmOrder.SendGmail(fromEmail, toEmail, subject, body, gmail, password).GetAwaiter().GetResult();
+					if (sendResult != "gui email thanh cong")
+					{
+						// Handle email sending failure
+						// ...
+					}
+				}
+				else
+				{
+					int billStatus = int.Parse(bill.BillStatus) + 1;
+					bill.BillStatus = billStatus.ToString();
+					_shopContext.SaveChanges();
+				}
+			}
 
 
-            var bill = _shopContext.Bills
-        .Include(b => b.BillDetails)
-            .ThenInclude(bd => bd.Product)
-                .ThenInclude(p => p.ProductDetails)
-        .FirstOrDefault(b => b.BillId == billId);
-
-            if (bill != null)
-            {
-                if (bill.BillStatus == "0")
-                {
-                    foreach (var billDetail in bill.BillDetails)
-                    {
-                        var product = billDetail.Product;
-                        var productDetail = product.ProductDetails
-                            .FirstOrDefault(pd => pd.color == billDetail.color && pd.size == billDetail.size);
-
-                        if (productDetail != null && productDetail.quantity >= billDetail.quantity)
-                        {
-
-                            productDetail.quantity -= billDetail.quantity;
+			return RedirectToAction("ViewOrder");
+		}
+		public IActionResult ProcessBillAll(int billId)
+		{
 
 
-                            _shopContext.SaveChanges();
-                        }
-                        else
-                        {
-                            TempData["OutOfStockFlag"] = true;
-                            return RedirectToAction("DetailBill", new { billId });
-                        }
-                    }
+			var bill = _shopContext.Bills
+		.Include(b => b.BillDetails)
+			.ThenInclude(bd => bd.Product)
+				.ThenInclude(p => p.ProductDetails)
+		.FirstOrDefault(b => b.BillId == billId);
 
-                    int billStatus = int.Parse(bill.BillStatus) + 1;
-                    bill.BillStatus = billStatus.ToString();
-                    _shopContext.SaveChanges();
+			if (bill != null)
+			{
+				if (bill.BillStatus == "0")
+				{
+					foreach (var billDetail in bill.BillDetails)
+					{
+						var product = billDetail.Product;
+						var productDetail = product.ProductDetails
+							.FirstOrDefault(pd => pd.color == billDetail.color && pd.size == billDetail.size);
 
-                    string fromEmail = "huongdl40@gmail.com";
-                    string toEmail = bill.Email;
-                    string subject = "Xác nhận đơn hàng";
-                    string body = @"
+						if (productDetail != null && productDetail.quantity >= billDetail.quantity)
+						{
+
+							productDetail.quantity -= billDetail.quantity;
+
+
+							_shopContext.SaveChanges();
+						}
+						else
+						{
+							TempData["OutOfStockFlag"] = true;
+							return RedirectToAction("DetailBill", new { billId });
+						}
+					}
+
+					int billStatus = int.Parse(bill.BillStatus) + 1;
+					bill.BillStatus = billStatus.ToString();
+					_shopContext.SaveChanges();
+
+					string fromEmail = "huongdl40@gmail.com";
+					string toEmail = bill.Email;
+					string subject = "Xác nhận đơn hàng";
+					string body = @"
                 <html>
                 <head>
                     <style>
@@ -310,29 +310,29 @@ namespace Project.Controllers
                     </ul>
                 </body>
                 </html>";
-                    string gmail = "huongdl40@gmail.com";
-                    string password = "gepcdegcpjjzceke";
+					string gmail = "huongdl40@gmail.com";
+					string password = "gepcdegcpjjzceke";
 
-                    var sendResult = SendMailConfirmOrder.SendGmail(fromEmail, toEmail, subject, body, gmail, password).GetAwaiter().GetResult();
-                    if (sendResult != "gui email thanh cong")
-                    {
-                        // Handle email sending failure
-                        // ...
-                    }
-                }
-                else
-                {
-                    int billStatus = int.Parse(bill.BillStatus) + 1;
-                    bill.BillStatus = billStatus.ToString();
-                    _shopContext.SaveChanges();
-                }
-            }
-
-
-
-            return RedirectToAction("ViewAll");
-        }
+					var sendResult = SendMailConfirmOrder.SendGmail(fromEmail, toEmail, subject, body, gmail, password).GetAwaiter().GetResult();
+					if (sendResult != "gui email thanh cong")
+					{
+						// Handle email sending failure
+						// ...
+					}
+				}
+				else
+				{
+					int billStatus = int.Parse(bill.BillStatus) + 1;
+					bill.BillStatus = billStatus.ToString();
+					_shopContext.SaveChanges();
+				}
+			}
 
 
-    }
+
+			return RedirectToAction("ViewAll");
+		}
+
+
+	}
 }

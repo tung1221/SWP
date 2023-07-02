@@ -19,8 +19,36 @@ namespace Project.Controllers
 			return View();
         }
 
-       
-        private void LoadRoleUser()
+		public IActionResult cfFeedback()
+		{
+			var feedbacks = _shopContext.Feedbacks.ToList();
+
+			LoadRoleUser();
+			return View(feedbacks);
+		}
+
+		public IActionResult confirmFeedback(int feedbackId)
+		{
+			var feedback = _shopContext.Feedbacks.FirstOrDefault(f => f.FeedbackId == feedbackId);
+			if (feedback != null)
+			{
+				feedback.FeedbackStatus = "1";
+				_shopContext.SaveChanges();
+			}
+
+			return RedirectToAction("cfFeedback", "admin");
+		}
+		public IActionResult deleteFb(int feedbackId)
+		{
+			var feedback = _shopContext.Feedbacks.FirstOrDefault(f => f.FeedbackId == feedbackId);
+			if (feedback != null)
+			{
+				_shopContext.Feedbacks.Remove(feedback);
+				_shopContext.SaveChanges();
+			}
+			return RedirectToAction("cfFeedback", "admin");
+		}
+		private void LoadRoleUser()
 		{
 			var user = HttpContext.User;
 

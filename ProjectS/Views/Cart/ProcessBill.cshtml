@@ -1,5 +1,4 @@
-﻿@model List<Bill>
-@if (Model == null)
+﻿@if (Model == null)
 {
     <p>Không có đơn hàng nào.</p>
 }
@@ -7,34 +6,60 @@ else
 {
     foreach (var bill in Model)
     {
-        
         <p>Hóa đơn ID: @bill.BillId</p>
         <p>Tên người dùng: @bill.User.UserName</p>
-		<h2>Tình trạng đơn</h2>
-		@if (bill.BillStatus == "0")
-		{
-			<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
-				
-				<i class='bx bxs-circle me-1'></i>Not in Process
-			</div>
-		}
-		else if (bill.BillStatus == "1")
-		{
-			<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
-				<i class='bx bxs-circle me-1'></i>In Progress
-			</div>
-		}
-		else if (bill.BillStatus == "2")
-		{
-			<div class="badge rounded-pill text-primary bg-light-primary p-2 text-uppercase px-3">
-				<i class='bx bxs-circle me-1'></i>Delivery
-			</div>
-		}
-		else if (bill.BillStatus == "3")
-		{
-			<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
-				<i class='bx bxs-circle me-1'></i>Done
-			</div>
-		}
+
+        <p>Tình trạng đơn</p>
+        @if (bill.BillStatus == "0")
+        {
+            <div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+                <i class='bx bxs-circle me-1'></i>Not in Process
+            </div>
+        }
+        else if (bill.BillStatus == "1")
+        {
+            <div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
+                <i class='bx bxs-circle me-1'></i>In Progress
+            </div>
+        }
+        else if (bill.BillStatus == "2")
+        {
+            <div class="badge rounded-pill text-primary bg-light-primary p-2 text-uppercase px-3">
+                <i class='bx bxs-circle me-1'></i>Delivery
+            </div>
+        }
+        else if (bill.BillStatus == "3")
+        {
+            <div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+                <i class='bx bxs-circle me-1'></i>Done
+            </div>
+        }
+
+        @if (int.TryParse(bill.BillStatus, out int billStatus) && billStatus >= 4)
+        {
+            @foreach (var billDetail in bill.BillDetails)
+            {
+                @if (!billDetail.IsFeedbackSubmitted)
+                {
+                    <p>Gửi phản hồi</p>
+                    <h2>Feedback for Product @billDetail.ProductId</h2>
+                    <form method="post" asp-controller="Feedback" asp-action="Create">
+                        <input type="hidden" name="billId" value="@bill.BillId" />
+                        <input type="hidden" name="productId" value="@billDetail.ProductId" />
+                        <div class="mb-3">
+                            <label for="feedbackTitle_@billDetail.ProductId" class="form-label">Tiêu đề</label>
+                            <input type="text" class="form-control" id="feedbackTitle_@billDetail.ProductId" name="feedbackTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="feedbackDetail_@billDetail.ProductId" class="form-label">Nội dung</label>
+                            <textarea class="form-control" id="feedbackDetail_@billDetail.ProductId" name="feedbackDetail" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gửi</button>
+                    </form>
+                }
+            }
+
+        }
+        <hr>
     }
 }

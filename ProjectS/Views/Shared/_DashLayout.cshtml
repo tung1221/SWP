@@ -154,18 +154,22 @@
                                     </div>
                                 </li>
                             }
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Product</a>
-                                <div id="submenu-5" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">List all Product</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </li>
-                        
+                            @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Product</a>
+                                    <div id="submenu-5" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="">List all Product</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/admin/cfFeedback">Confirm Feedback</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
                             @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton || ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
                             {
                                 <li class="nav-item">
