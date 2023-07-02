@@ -109,6 +109,8 @@ namespace Project.Data
 
             modelBuilder.Entity<Bill>(entity =>
             {
+                entity.Property(e => e.UserId)
+                  .IsRequired(false);
                 entity.HasKey(b => b.BillId);
                 entity.Property(p => p.BillId).ValueGeneratedOnAdd();
                 entity.Property(e => e.PurchaseDate)
