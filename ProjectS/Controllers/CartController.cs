@@ -315,8 +315,45 @@ namespace Project.Controllers
 				return Redirect("/Identity/Account/Login");
 			}
 		}
+        public IActionResult processbillfb(string status)
+		{
+            var user = HttpContext.User;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = user.FindFirstValue(ClaimTypes.NameIdentifier); // Lấy ID của người dùng từ Claims
+
+                var bills = _shopContext.Bills
+                    .Include(b => b.User)
+                    .Include(b => b.BillDetails)
+                    .ThenInclude(bd => bd.Product)
+                    .Where(b => b.UserId == userId);
+
+                if (!string.IsNullOrEmpty(status))
+                {
+                    if (status == "4")
+                    {
+                        bills = bills.Where(b => b.BillStatus == "4");
+                    }
+                    
+                }
+
+                var billList = bills.ToList();
+
+                if (billList.Count == 0)
+                {
+                    return View(null);
+                }
+
+                return View(billList);
+            }
+            else
+            {
+                return Redirect("/Identity/Account/Login");
+            }
+		}
 
 
 
-	}
+    }
 }

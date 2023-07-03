@@ -47,7 +47,7 @@
 
                 </li>
                 <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
-                    <a href="/cart/processbill?status=4">Đã giao hàng</a>
+                    <a href="/cart/processbillfb?status=4">Đã giao hàng</a>
                 </li>
             </ul>
         </nav>
@@ -117,19 +117,11 @@
                                                     {
                                                         <div class="feedback-form">
                                                             <h3>Phản hồi cho sản phẩm: @billDetail.Product.ProductName</h3>
-                                                            <form method="post" asp-controller="Feedback" asp-action="Create">
-                                                                <input type="hidden" name="billId" value="@bill.BillId" />
-                                                                <input type="hidden" name="productId" value="@billDetail.ProductId" />
-                                                                <div class="mb-3">
-                                                                    <label for="feedbackTitle_@billDetail.ProductId" class="form-label">Tiêu đề</label>
-                                                                    <input type="text" class="form-control" id="feedbackTitle_@billDetail.ProductId" name="feedbackTitle" required>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="feedbackDetail_@billDetail.ProductId" class="form-label">Nội dung</label>
-                                                                    <textarea class="form-control" id="feedbackDetail_@billDetail.ProductId" name="feedbackDetail" rows="3" required></textarea>
-                                                                </div>
-                                                                <button type="submit" class="btn btn-primary">Gửi</button>
-                                                            </form>
+                                                            <img src="@billDetail.Product.ImageMain">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                <a href="/cart/processbillfb?status=4">Gửi Feedback</a>
+                                                                    </button>
+                                                            
                                                         </div>
                                                     }
                                                 }
