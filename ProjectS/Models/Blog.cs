@@ -6,8 +6,10 @@
 		public bool? HomeStatus { get; set; }
 		public string content { get; set; } = null!;
 		public DateTime? DateUp { get; set; }
+        public string name { get; set; } = null!;
+        public Boolean isCollection { get; set; }
 
-		public virtual List<ImageBlog> ImageBlogs { get; set; } = null!;
+        public virtual List<ImageBlog> ImageBlogs { get; set; } = null!;
 		public virtual List<Product> Products { get; set; } = null!;
 	}
 }
