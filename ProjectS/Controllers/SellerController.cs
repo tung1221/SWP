@@ -69,13 +69,21 @@ namespace Project.Controllers
 		{
 			LoadRoleUser();
 
-			var bill = _shopContext.Bills.FirstOrDefault(b => b.BillId == billId);
+			var bill = _shopContext.Bills.
+					Include(b => b.BillDetails)
+					.ThenInclude(bd => bd.Product)
+					.FirstOrDefault(b => b.BillId == billId);
 			if (bill != null)
 			{
 				if (TempData.ContainsKey("OutOfStockFlag"))
 				{
 					ViewBag.OutOfStockMessage = "Hàng đã hết. Bạn có muốn xóa không?";
 					TempData.Remove("OutOfStockFlag");
+				}
+				else
+				{
+					ViewBag.OutOfStockMessage = "Bạn không thể khôi phục được đơn hàng đã xóa";
+
 				}
 
 				return View(bill);

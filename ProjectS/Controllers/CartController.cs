@@ -12,284 +12,311 @@ using System.Security.Policy;
 
 namespace Project.Controllers
 {
-    public class CartController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
-        private readonly ShopContext _shopContext;
-        private readonly SignInManager<IdentityUser> _SignInManager;
-        public CartController(ILogger<HomeController> logger, ShopContext ct, SignInManager<IdentityUser> SignInManager)
-        {
-            _shopContext = ct;
-            _logger = logger;
-            _SignInManager = SignInManager;
-        }
+	public class CartController : Controller
+	{
+		private readonly ILogger<HomeController> _logger;
+		private readonly ShopContext _shopContext;
+		private readonly SignInManager<IdentityUser> _SignInManager;
+		public CartController(ILogger<HomeController> logger, ShopContext ct, SignInManager<IdentityUser> SignInManager)
+		{
+			_shopContext = ct;
+			_logger = logger;
+			_SignInManager = SignInManager;
+		}
 
-        public IActionResult Index(string choice, int id)
-        {
-            List<CartItem> cartItems = new List<CartItem>();
-
-
-
-            if (string.IsNullOrEmpty(choice) || id == 0)
-            {
-                cartItems = getListItem();
-
-            }
-            else
-            {
-                if (choice.Equals("remove"))
-                {
-                    if (id >= 0)
-                    {
-                        var item = _shopContext.CartItems.Find(id);
-                        if (item != null)
-                        {
-                            _shopContext.CartItems.Remove(item);
-                            _shopContext.SaveChanges();
-                        }
-                        cartItems = getListItem();
-                    }
-                    else
-                    {
-                        string? cookieValue = Request.Cookies["cart"];
-                        if (cookieValue != null)
-                        {
-                            cartItems = getListItem();
-                            List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
-                            var cartItem = cartListFromCookie.Find(p => p.CartItemId == id);
-                            if (cartItem != null)
-                            {
-                                cartListFromCookie.Remove(cartItem);
-                                cartItems.Remove(cartItems.Find(p => p.CartItemId == id));
-                            }
-                            if (cartListFromCookie.Count == 0 || cartListFromCookie == null)
-                            {
-                                Response.Cookies.Delete("cart");
-                            }
-                            else
-                            {
-                                string json = JsonConvert.SerializeObject(cartListFromCookie);
-                                var option = new CookieOptions()
-                                {
-                                    Expires = DateTime.Now.AddDays(90)
-                                };
-                                Response.Cookies.Append("cart", json, option);
-                            }
-                        }
-                    }
-                }
-
-                if (choice.Equals("up"))
-                {
-                    if (id >= 0)
-                    {
-                        var item = _shopContext.CartItems.Find(id);
-                        if (item != null)
-                        {
-                            item.Quantity = item.Quantity + 1;
-                            _shopContext.SaveChanges();
-                        }
-                        cartItems = getListItem();
-                    }
-                    else
-                    {
-                        string? cookieValue = Request.Cookies["cart"];
-                        if (cookieValue != null)
-                        {
-                            cartItems = getListItem();
-                            List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
-                            var cartItem = cartListFromCookie.Find(p => p.CartItemId == id);
-                            var cartItem2 = cartItems.Find(p => p.CartItemId == id);
-                            if (cartItem != null)
-                            {
-                                //cartListFromCookie.Remove(cartItem);
-                                //cartItems.Remove(cartItems.Find(p => p.CartItemId == id));
-                                cartItem.Quantity = cartItem.Quantity + 1;
-                                if (cartItem2 != null)
-                                    cartItem2.Quantity = cartItem2.Quantity + 1;
-                            }
+		public IActionResult Index(string choice, int id)
+		{
+			List<CartItem> cartItems = new List<CartItem>();
 
 
-                            string json = JsonConvert.SerializeObject(cartListFromCookie);
-                            var option = new CookieOptions()
-                            {
-                                Expires = DateTime.Now.AddDays(90)
-                            };
-                            Response.Cookies.Append("cart", json, option);
-                        }
-                    }
-                }
+
+			if (string.IsNullOrEmpty(choice) || id == 0)
+			{
+				cartItems = getListItem();
+
+			}
+			else
+			{
+				if (choice.Equals("remove"))
+				{
+					if (id >= 0)
+					{
+						var item = _shopContext.CartItems.Find(id);
+						if (item != null)
+						{
+							_shopContext.CartItems.Remove(item);
+							_shopContext.SaveChanges();
+						}
+						cartItems = getListItem();
+					}
+					else
+					{
+						string? cookieValue = Request.Cookies["cart"];
+						if (cookieValue != null)
+						{
+							cartItems = getListItem();
+							List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+							var cartItem = cartListFromCookie.Find(p => p.CartItemId == id);
+							if (cartItem != null)
+							{
+								cartListFromCookie.Remove(cartItem);
+								cartItems.Remove(cartItems.Find(p => p.CartItemId == id));
+							}
+							if (cartListFromCookie.Count == 0 || cartListFromCookie == null)
+							{
+								Response.Cookies.Delete("cart");
+							}
+							else
+							{
+								string json = JsonConvert.SerializeObject(cartListFromCookie);
+								var option = new CookieOptions()
+								{
+									Expires = DateTime.Now.AddDays(90)
+								};
+								Response.Cookies.Append("cart", json, option);
+							}
+						}
+					}
+				}
+
+				if (choice.Equals("up"))
+				{
+					if (id >= 0)
+					{
+						var item = _shopContext.CartItems.Find(id);
+						if (item != null)
+						{
+							item.Quantity = item.Quantity + 1;
+							_shopContext.SaveChanges();
+						}
+						cartItems = getListItem();
+					}
+					else
+					{
+						string? cookieValue = Request.Cookies["cart"];
+						if (cookieValue != null)
+						{
+							cartItems = getListItem();
+							List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+							var cartItem = cartListFromCookie.Find(p => p.CartItemId == id);
+							var cartItem2 = cartItems.Find(p => p.CartItemId == id);
+							if (cartItem != null)
+							{
+								//cartListFromCookie.Remove(cartItem);
+								//cartItems.Remove(cartItems.Find(p => p.CartItemId == id));
+								cartItem.Quantity = cartItem.Quantity + 1;
+								if (cartItem2 != null)
+									cartItem2.Quantity = cartItem2.Quantity + 1;
+							}
 
 
-                if (choice.Equals("down"))
-                {
-                    if (id >= 0)
-                    {
-                        var item = _shopContext.CartItems.Find(id);
-                        if (item != null)
-                        {
-                            item.Quantity = item.Quantity - 1;
-                            _shopContext.SaveChanges();
-                        }
-                        cartItems = getListItem();
-                    }
-                    else
-                    {
-                        string? cookieValue = Request.Cookies["cart"];
-                        if (cookieValue != null)
-                        {
-                            cartItems = getListItem();
-                            List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
-                            var cartItem = cartListFromCookie.Find(p => p.CartItemId == id);
-                            var cartItem2 = cartItems.Find(p => p.CartItemId == id);
-                            if (cartItem != null)
-                            {
-                                if (cartItem.Quantity != 1)
-                                {
-                                    cartItem.Quantity = cartItem.Quantity - 1;
-                                    if (cartItem2 != null)
-                                        cartItem2.Quantity = cartItem2.Quantity - 1;
-                                }
-
-                            }
+							string json = JsonConvert.SerializeObject(cartListFromCookie);
+							var option = new CookieOptions()
+							{
+								Expires = DateTime.Now.AddDays(90)
+							};
+							Response.Cookies.Append("cart", json, option);
+						}
+					}
+				}
 
 
-                            string json = JsonConvert.SerializeObject(cartListFromCookie);
-                            var option = new CookieOptions()
-                            {
-                                Expires = DateTime.Now.AddDays(90)
-                            };
-                            Response.Cookies.Append("cart", json, option);
-                        }
-                    }
-                }
-            }
+				if (choice.Equals("down"))
+				{
+					if (id >= 0)
+					{
+						var item = _shopContext.CartItems.Find(id);
+						if (item != null)
+						{
+							item.Quantity = item.Quantity - 1;
+							_shopContext.SaveChanges();
+						}
+						cartItems = getListItem();
+					}
+					else
+					{
+						string? cookieValue = Request.Cookies["cart"];
+						if (cookieValue != null)
+						{
+							cartItems = getListItem();
+							List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+							var cartItem = cartListFromCookie.Find(p => p.CartItemId == id);
+							var cartItem2 = cartItems.Find(p => p.CartItemId == id);
+							if (cartItem != null)
+							{
+								if (cartItem.Quantity != 1)
+								{
+									cartItem.Quantity = cartItem.Quantity - 1;
+									if (cartItem2 != null)
+										cartItem2.Quantity = cartItem2.Quantity - 1;
+								}
 
-            return View(cartItems);
-        }
-
-        [HttpPost]
-        public IActionResult Index(IFormCollection f)
-        {
-
-            var color = f["color"];
-            var size = f["size"];
-            var qua = int.Parse(f["Quantity"]);
-            int pId = int.Parse(f["productId"]);
-            List<CartItem> cartItems = new List<CartItem>();
-            if (_SignInManager.IsSignedIn(User))
-            {
-                string userId = _SignInManager.UserManager.GetUserId(User);
-                int cartId = (from c in _shopContext.Carts
-                              where c.UserId == userId
-                              select c.CartId).FirstOrDefault();
-
-                _shopContext.CartItems.Add(new Models.CartItem() { CartId = cartId, ProductId = pId, color = color, Quantity = qua, size = size });
-                _shopContext.SaveChanges();
-            }
-            else
-            {
-                string? cookieValue = Request.Cookies["cart"];
-                if (!string.IsNullOrEmpty(cookieValue))
-                {
-                    List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
-                    if (cartListFromCookie.Count != 0)
-                    {
-                        cartListFromCookie = cartListFromCookie.OrderBy(p => p.CartItemId).ToList();
-                        var cartItemId = cartListFromCookie[cartListFromCookie.Count - 1].CartItemId;
-                        if (cartItemId == 0)
-                        {
-                            Response.Cookies.Delete("cart");
-                            return RedirectToAction("Index", "Home");
-                        }
-
-                        cartListFromCookie.Add(new Models.CartItem() { CartItemId = cartItemId + 1, ProductId = pId, color = color, Quantity = qua, size = size });
-                        cartItems.Add((new Models.CartItem() { CartItemId = cartItemId + 1, ProductId = pId, color = color, Quantity = qua, size = size }));
-
-                        string json = JsonConvert.SerializeObject(cartListFromCookie);
-                        var option = new CookieOptions()
-                        {
-                            Expires = DateTime.Now.AddDays(90)
-                        };
-                        Response.Cookies.Append("cart", json, option);
-                    }
-                }
-                else
-                {
-                    CartItem cartItem = new Models.CartItem() { CartItemId = -999999999, ProductId = pId, color = color, Quantity = qua, size = size };
-                    List<CartItem> saveCookie = new List<CartItem>() { cartItem };
-                    string json = JsonConvert.SerializeObject(saveCookie);
-
-                    var option = new CookieOptions()
-                    {
-                        Expires = DateTime.Now.AddDays(90)
-                    };
-
-                    Response.Cookies.Append("cart", json, option);
-                    cartItems.Add(cartItem);
-                }
-            }
-            cartItems.AddRange(getListItem());
-            return View(cartItems);
-        }
-
-        public List<CartItem> getListItem()
-        {
-            List<CartItem> cartItems = new List<CartItem>();
-
-            if (_SignInManager.IsSignedIn(User))
-            {
-                string userId = _SignInManager.UserManager.GetUserId(User);
-                int cartId = (from c in _shopContext.Carts
-                              where c.UserId == userId
-                              select c.CartId).FirstOrDefault();
-                var temp = _shopContext.CartItems.Include(i => i.product).Where(i => i.CartId == cartId);
+							}
 
 
-                if (temp != null)
-                {
-                    cartItems = temp.ToList();
-                }
+							string json = JsonConvert.SerializeObject(cartListFromCookie);
+							var option = new CookieOptions()
+							{
+								Expires = DateTime.Now.AddDays(90)
+							};
+							Response.Cookies.Append("cart", json, option);
+						}
+					}
+				}
+			}
 
-            }
+			return View(cartItems);
+		}
 
-            string? cookieValue = Request.Cookies["cart"];
-            if (cookieValue != null)
-            {
-                List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
-                cartItems.AddRange(cartListFromCookie);
-            }
-            cartItems = cartItems.OrderByDescending(p => p.CartItemId).ToList();
+		[HttpPost]
+		public IActionResult Index(IFormCollection f)
+		{
 
-            return cartItems;
-        }
-        public IActionResult ProcessBill()
-        {
-            var user = HttpContext.User;
+			var color = f["color"];
+			var size = f["size"];
+			var qua = int.Parse(f["Quantity"]);
+			int pId = int.Parse(f["productId"]);
+			List<CartItem> cartItems = new List<CartItem>();
+			if (_SignInManager.IsSignedIn(User))
+			{
+				string userId = _SignInManager.UserManager.GetUserId(User);
+				int cartId = (from c in _shopContext.Carts
+							  where c.UserId == userId
+							  select c.CartId).FirstOrDefault();
 
-            if (User.Identity.IsAuthenticated)
-            {
-                var userId = user.FindFirstValue(ClaimTypes.NameIdentifier); // Lấy ID của người dùng từ Claims
+				_shopContext.CartItems.Add(new Models.CartItem() { CartId = cartId, ProductId = pId, color = color, Quantity = qua, size = size });
+				_shopContext.SaveChanges();
+			}
+			else
+			{
+				string? cookieValue = Request.Cookies["cart"];
+				if (!string.IsNullOrEmpty(cookieValue))
+				{
+					List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+					if (cartListFromCookie.Count != 0)
+					{
+						cartListFromCookie = cartListFromCookie.OrderBy(p => p.CartItemId).ToList();
+						var cartItemId = cartListFromCookie[cartListFromCookie.Count - 1].CartItemId;
+						if (cartItemId == 0)
+						{
+							Response.Cookies.Delete("cart");
+							return RedirectToAction("Index", "Home");
+						}
 
-                var bills = _shopContext.Bills
-                    .Include(b => b.User) // Lấy thông tin của người dùng
-                    .Include(b => b.BillDetails) // Lấy thông tin của các hóa đơn chi tiết
-                    .Where(b => b.UserId == userId)
-                    .ToList();
+						cartListFromCookie.Add(new Models.CartItem() { CartItemId = cartItemId + 1, ProductId = pId, color = color, Quantity = qua, size = size });
+						cartItems.Add((new Models.CartItem() { CartItemId = cartItemId + 1, ProductId = pId, color = color, Quantity = qua, size = size }));
 
-                if (bills.Count == 0)
-                {
-                    return View(null);
-                }
+						string json = JsonConvert.SerializeObject(cartListFromCookie);
+						var option = new CookieOptions()
+						{
+							Expires = DateTime.Now.AddDays(90)
+						};
+						Response.Cookies.Append("cart", json, option);
+					}
+				}
+				else
+				{
+					CartItem cartItem = new Models.CartItem() { CartItemId = -999999999, ProductId = pId, color = color, Quantity = qua, size = size };
+					List<CartItem> saveCookie = new List<CartItem>() { cartItem };
+					string json = JsonConvert.SerializeObject(saveCookie);
 
-                return View(bills);
-            }
-            else
-            {
-                return Redirect("/Identity/Account/Login");
-            }
+					var option = new CookieOptions()
+					{
+						Expires = DateTime.Now.AddDays(90)
+					};
 
-        }
+					Response.Cookies.Append("cart", json, option);
+					cartItems.Add(cartItem);
+				}
+			}
+			cartItems.AddRange(getListItem());
+			return View(cartItems);
+		}
 
-    }
+		public List<CartItem> getListItem()
+		{
+			List<CartItem> cartItems = new List<CartItem>();
+
+			if (_SignInManager.IsSignedIn(User))
+			{
+				string userId = _SignInManager.UserManager.GetUserId(User);
+				int cartId = (from c in _shopContext.Carts
+							  where c.UserId == userId
+							  select c.CartId).FirstOrDefault();
+				var temp = _shopContext.CartItems.Include(i => i.product).Where(i => i.CartId == cartId);
+
+
+				if (temp != null)
+				{
+					cartItems = temp.ToList();
+				}
+
+			}
+
+			string? cookieValue = Request.Cookies["cart"];
+			if (cookieValue != null)
+			{
+				List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+				cartItems.AddRange(cartListFromCookie);
+			}
+			cartItems = cartItems.OrderByDescending(p => p.CartItemId).ToList();
+
+			return cartItems;
+		}
+		public IActionResult ProcessBill(string status)
+		{
+			var user = HttpContext.User;
+
+			if (User.Identity.IsAuthenticated)
+			{
+				var userId = user.FindFirstValue(ClaimTypes.NameIdentifier); // Lấy ID của người dùng từ Claims
+
+				var bills = _shopContext.Bills
+					.Include(b => b.User)
+					.Include(b => b.BillDetails)
+					.ThenInclude(bd => bd.Product)
+					.Where(b => b.UserId == userId);
+
+				if (!string.IsNullOrEmpty(status))
+				{
+					if (status == "0")
+					{
+						bills = bills.Where(b => b.BillStatus == "0");
+					}
+					else if (status == "1")
+					{
+						bills = bills.Where(b => b.BillStatus == "1");
+					}
+					else if (status == "2")
+					{
+						bills = bills.Where(b => b.BillStatus == "2");
+					}
+					else if (status == "3")
+					{
+						bills = bills.Where(b => b.BillStatus == "3");
+					}
+					else if (status == "4")
+					{
+						bills = bills.Where(b => b.BillStatus == "4");
+					}
+				}
+
+				var billList = bills.ToList();
+
+				if (billList.Count == 0)
+				{
+					return View(null);
+				}
+
+				return View(billList);
+			}
+			else
+			{
+				return Redirect("/Identity/Account/Login");
+			}
+		}
+
+
+
+	}
 }
