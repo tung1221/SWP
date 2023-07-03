@@ -10,6 +10,5 @@ namespace Project.Models
         public string Town { get; set; } = null!;
         public string District { get; set; } = null!;
         public virtual IdentityUser User { get; set; } = null!;
-        public bool HomeStatus { get; set; }
     }
 }
