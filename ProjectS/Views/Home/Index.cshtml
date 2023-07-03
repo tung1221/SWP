@@ -16,37 +16,6 @@
 
 <div class="slider__container slider--one">
     <div class="slider__activation__wrap owl-carousel owl-theme">
-        <!-- Start Single Slide -->
-        @*<div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688301717/Blog/1_x58c3r.png) no-repeat scroll center center / cover ;">
-        <div class="container">
-        <div class="row">
-        <div class="col-lg-8 offset-lg-4">
-        <div class="slider__inner">
-        <h1>New Product <span class="text--theme">Collection</span></h1>
-        <div class="slider__btn">
-        <a class="htc__btn" href="cart.html">shop now</a>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        <!-- End Single Slide -->
-        <!-- Start Single Slide -->
-        <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(/images/slider/bg/2.png) no-repeat scroll center center / cover ;">
-        <div class="container">
-        <div class="row">
-        <div class="col-lg-8">
-        <div class="slider__inner">
-        <h1>New Product <span class="text--theme">Collection</span></h1>
-        <div class="slider__btn">
-        <a class="htc__btn" href="cart.html">shop now</a>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>*@
         @if (listBlog != null)
         {
             foreach (var l in listBlog)
@@ -65,7 +34,7 @@
                                             <div class="slider__inner">
                                                 <h1>New Product <span class="text--theme">Collection</span></h1>
                                                 <div class="slider__btn">
-                                                    <a class="htc__btn" href="cart.html">shop now</a>
+                                                    <a class="htc__btn" href="/blog/BlogDetails?blogId=@l.Blogid">shop now</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -77,7 +46,7 @@
                                             <div class="slider__inner">
                                                 <h1>New Product <span class="text--theme">Collection</span></h1>
                                                 <div class="slider__btn">
-                                                    <a class="htc__btn" href="cart.html">shop now</a>
+                                                    <a class="htc__btn" href="/blog/BlogDetails?blogId=@l.Blogid">shop now</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,32 +133,3 @@
     </section>
 }
 
-<div>
-
-
-
-
-    @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
-    {
-        <a href="/admin/index">
-            <button>Admin Button</button>
-        </a>
-    }
-
-    @if (ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
-    {
-        <a href="/Marketing/Index">
-            <button>Marketing Button</button>
-        </a>
-
-    }
-
-    @if (ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
-    {
-        <a href="/Seller/Index">
-
-            <button>Seller Button</button>
-        </a>
-
-    }
-</div>

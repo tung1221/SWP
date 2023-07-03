@@ -1,6 +1,17 @@
 ﻿@{
     var Blog = ViewData["Blog"] as Blog;
+
+    var check = 0;
+    var check1 = 0;
+    var check2 = 0;
+    if (Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 1)
+        check1 = 1;
+    if (Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 2 && Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 2)
+        check = 1;
+    if (Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 3 && Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 4)
+        check2 = 1;
 }
+@model Blog
 <!-- blogcss -->
 <link rel="stylesheet" href="~/blogcss/css/style.css">
 <!-- end blogcss -->
@@ -13,41 +24,22 @@
         <!-- Mobile Menu -->
         <!-- /Mobile Menu -->
         <!-- /End Header 1 Warp -->
-
-        <section class="boxed no-padding bg-img" style="background-image: url(https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688301717/Blog/1_x58c3r.png)">
-            <div class="sub-header full">
-                <div class="container">
-                    <div class="sub-header-inner bottom-left">
-                        <h2>Karl Lagerfeld </h2>
-                        <ol class="breadcrumb">
-                            <li>
-                                <a href="#">HOME</a>
-                            </li>
-                            <li class="active">SINGLE BLOG POST</li>
-                        </ol>
-                        <!-- meta post -->
-                    </div>
+        @if (check1 == 1)
+        {
+            <section class="boxed no-padding bg-img" style="background-image: url(@Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[0])">
+                <div class="sub-header full">
                 </div>
-            </div>
-        </section>
+            </section>
+        }
+
         <!-- /subheader -->
 
-        <section>
+        <section style="padding-top: 0px">
             <div class="container">
                 <div class="row">
-                    <article style="padding: 135px" class="post">
-                        <div class="col-md-12">
-                            <p style="color: #585656; font-family: Merriweather;font-size: 23px;font-weight: 300;line-height: 35px;">
-                                Tháng 9/2022, Vogue công bố Karl Lagerfeld: A Line of Beauty là chủ đề của Met Gala 2023. Sự kiện diễn ra vào ngày 1/5/2023 tại Bảo tàng Nghệ thuật Metropolitan ở New York nhằm tôn vinh cuộc đời, sự nghiệp, nét thẩm mỹ của huyền thoại quá cố.
-
-                                Kể từ khi rời xa thế giới năm 2019, hình bóng của Karl vẫn luôn được nhắc nhở. Cứ đến ngày 19/2 hằng năm, trang Instagram của mèo Choupette, thú cưng nổi tiếng của nhà thiết kế lại đăng một bài viết để tưởng nhớ ông. Tổng biên tập Vogue Anna Wintour nói rằng Karl chính là nhân vật quá cố mà bà muốn nghe nhận định về đời sống xã hội hiện nay. Chanel, Fendi và cả thương hiệu Karl Lagerfeld giờ đã có những giám đốc sáng tạo mới nhưng sức ảnh hưởng và di sản mà Karl Lagerfeld để lại vẫn mãi còn.
-
-                                Ngoài tài năng thiết kế, Karl còn được gọi là “Vua của trích dẫn" (King of quotes) của giới thời trang bởi những phát ngôn đặc sắc và đôi khi gây tranh cãi. Trong đó, các tín đồ thời trang vẫn xem câu nói dưới đây như là cách Karl mô tả cuộc sống và sự sáng tạo của mình:
-
-                                “I am down to earth. Just not this earth”. Thế giới thời trang, sáng tạo vốn được cho là nơi của những tiệc tùng xa hoa, thú vui phù phiếm. Điều thú vị là Karl Lagerfeld tung hoành trong thế giới này nhưng ông chọn một đời sống cá nhân khác biệt. Tính cách khép kín của Karl được hình thành khi ông có một tuổi thơ bình lặng tại một ngôi làng ở Đức. Sau này lớn lên, đến Paris để bắt đầu sự nghiệp, Karl cũng có một vùng trời rất riêng.
-                            </p>
-                        </div>
-                        <div class="col-md-12">
+                    <article style="padding: 0px 135px; " class="post">
+                        <h1 style="  margin-top: 60px; font-family: Poppins-SVN, Kailasa, Noto Sans; margin-bottom: 30px; font-weight: 800">@Model.name</h1>
+                        <div style="margin-top: 45px; margin-bottom: 45px" class="col-md-12">
                             <strong class="dark-color">SHARE THIS ARTICLE</strong> <br />
                             <ul class="widget-social-list-2 left">
                                 <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://vietcetera.com/" target="_blank"><i class="fa ti-facebook" aria-hidden="true"></i></a></li>
@@ -58,37 +50,70 @@
                                 <li><a href="#"><i class="fa ti-pinterest" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
-                                    <img src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688349543/Blog/230419-gocquote_fhme6q.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="Image">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
-                                            <img src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688349675/Blog/a-journal-768x512_wnocyo.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
-                                            <img src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688349675/Blog/arte-distribution-1-768x509_guoog6.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-12">
+                            <p style="color: #585656; font-family: Merriweather;font-size: 23px;font-weight: 300;line-height: 35px;">
+                                @Model.content
+                            </p>
                         </div>
+
+                        @if (check == 1)
+                        {
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                        <img src="@Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[1]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="Image">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                                <img src="@Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[0]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                                <img src="@Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[1]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (Model.isCollection)
+                        {
+                            @if (check2 == 1)
+                            {
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                                    <img src="@Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[2]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                                    <img src="@Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[3]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                            <img src="@Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[2]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="Image">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
 
                         <div style="margin-top: 50px" class="col-md-12">
                             <p style="color: #585656; font-family: Merriweather;font-size: 23px;font-weight: 300;line-height: 35px;">
-                                Tháng 9/2022, Vogue công bố Karl Lagerfeld: A Line of Beauty là chủ đề của Met Gala 2023. Sự kiện diễn ra vào ngày 1/5/2023 tại Bảo tàng Nghệ thuật Metropolitan ở New York nhằm tôn vinh cuộc đời, sự nghiệp, nét thẩm mỹ của huyền thoại quá cố.
-
-                                Kể từ khi rời xa thế giới năm 2019, hình bóng của Karl vẫn luôn được nhắc nhở. Cứ đến ngày 19/2 hằng năm, trang Instagram của mèo Choupette, thú cưng nổi tiếng của nhà thiết kế lại đăng một bài viết để tưởng nhớ ông. Tổng biên tập Vogue Anna Wintour nói rằng Karl chính là nhân vật quá cố mà bà muốn nghe nhận định về đời sống xã hội hiện nay. Chanel, Fendi và cả thương hiệu Karl Lagerfeld giờ đã có những giám đốc sáng tạo mới nhưng sức ảnh hưởng và di sản mà Karl Lagerfeld để lại vẫn mãi còn.
-
-                                Ngoài tài năng thiết kế, Karl còn được gọi là “Vua của trích dẫn" (King of quotes) của giới thời trang bởi những phát ngôn đặc sắc và đôi khi gây tranh cãi. Trong đó, các tín đồ thời trang vẫn xem câu nói dưới đây như là cách Karl mô tả cuộc sống và sự sáng tạo của mình:
-
-                                “I am down to earth. Just not this earth”. Thế giới thời trang, sáng tạo vốn được cho là nơi của những tiệc tùng xa hoa, thú vui phù phiếm. Điều thú vị là Karl Lagerfeld tung hoành trong thế giới này nhưng ông chọn một đời sống cá nhân khác biệt. Tính cách khép kín của Karl được hình thành khi ông có một tuổi thơ bình lặng tại một ngôi làng ở Đức. Sau này lớn lên, đến Paris để bắt đầu sự nghiệp, Karl cũng có một vùng trời rất riêng.
+                                @Model.content2
                             </p>
                         </div>
                     </article>
@@ -100,143 +125,132 @@
 
         <section class=" no-padding">
             <div class="container">
-                <div style="padding: 135px" class="row">
-                    <div class="col-md-12">
-                        <h2>RELATED POSTS</h2>
-                    </div>
-                    <div class="related-posts mgt-60">
-                        <div class="col-md-4">
-                            <div class="item-latest-post">
-                                <a href="single_blog.html">
-                                    <img src="images/blog/relate-post2.jpg" class="img-responsive" alt="Image">
-                                </a>
-                                <div class="desc">
-                                    <h4><a href="single_blog.html">NULLAM QUIS RISUS EGET URANA</a></h4>
-                                    <p class="date-post">April 15, 2016</p>
+                <div style="padding: 0px 135px" class="row">
+                    @if (Model.isCollection)
+                    {
+                        <div style="padding-left: 0px" class="col-md-12">
+                            <h2 style="text-align: center">Bộ sưu tập</h2>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="padding-left: 0px" class="col-md-12">
+                            <h2>RELATED POSTS</h2>
+                        </div>
+                    }
+                    <div class="row">
+                        @foreach (var item in Model.Products)
+                        {
+                            <div style="padding-left: 0px" class="col-md-3 single__pro col-lg-3 col-md-4 cat--1 col-sm-12">
+                                <div style="padding-left: 0px" class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            <a href="#">
+                                                <img src="@item.ImageMain" alt="product images">
+                                            </a>
+                                        </div>
+                                        <div class="product__hover__info">
+                                            <ul class="product__action">
+                                                <li><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId" title="Quick View" class="quick-view modal-view detail-link"><span class="ti-plus"></span></a></li>
+                                                <li><a title="Add TO Cart" asp-controller="Cart" asp-action="Index"><span class="ti-shopping-cart"></span></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="add__to__wishlist">
+                                            <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" asp-route-id="@item.ProductId" asp-action="AddWishList" asp-controller="Product"><span class="ti-heart"></span></a>
+                                        </div>
+                                    </div>
+                                    <div class="product__details">
+                                        <h2 style="margin-bottom: 10px"><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId">@item.ProductName</a></h2>
+                                        <ul class="product__price">
+                                            @if (item.IsAvailble == false)
+                                            {
+                                                <li style="padding-left: 0px" class="new__price">Hết hàng</li>
+                                            }
+                                            else
+                                            {
+                                                if (item.Discount == 0)
+                                                {
+                                                    <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="old__price">@(item.ProductPrice).000vnd</li>
+                                                    <li class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="item-latest-post">
-                                <a href="single_blog.html">
-                                    <img src="images/blog/relate-post1.jpg" class="img-responsive" alt="Image">
-                                </a>
-                                <div class="desc">
-                                    <h4><a href="single_blog.html">SOLLICITDUDIN PARTURIENT</a></h4>
-                                    <p class="date-post">April 15, 2016</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="item-latest-post">
-                                <a href="single_blog.html">
-                                    <img src="images/blog/relate-post3.jpg" class="img-responsive" alt="Image">
-                                </a>
-                                <div class="desc">
-                                    <h4><a href="single_blog.html">RIDICULUS ADIPISCING TETUR</a></h4>
-                                    <p class="date-post">July, 28th, 2016</p>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
-            <div class="line-top-right w-680"></div>
         </section>
         <!-- /relate post -->
-
-        <section class="no-padding mgt-60">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="list-comments">
-                            <h2>04 COMMENTS</h2>
-                            <ul class="commentlist">
-                                <li>
-                                    <div class="user-image"><img src="images/avatar/1.jpg" alt="" class="img-responsive"></div>
-                                    <div class="comment-right">
-                                        <div class="comment-info">
-                                            <strong class="dark-color pull-left name">Angela Allen</strong> <div class="date-comment grey-color pull-right">July, 19th, 2016 on 10.30 PM</div>
-                                        </div>
-                                        <p>Nunc risus ex, tempus quis purus ac, tempor consequat ex. Vivamus sem magna, maximus at est id, maximus aliquet nunc. Suspendisse lacinia velit a eros porttitor, in interdum ante faucibus.</p>
-                                        <a class="c-reply" href="#">Reply</a>
-                                    </div>
-                                </li>
-                                <ul class="children">
+        @if (Model.isCollection != true)
+        {
+            <section class="no-padding mgt-60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="padding: 0px 135px" class="list-comments">
+                                <h2>COMMENTS</h2>
+                                <ul class="commentlist">
                                     <li>
-                                        <div class="user-image"><img class="img-responsive" src="images/avatar/2.jpg" alt=""></div>
+                                        <div class="user-image"><img src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688368768/4_ntnoty.jpg" alt="" class="img-responsive"></div>
                                         <div class="comment-right">
                                             <div class="comment-info">
-                                                <strong class="dark-color pull-left name">Smatha Hughes</strong> <div class="date-comment grey-color pull-right">23 minutes ago</div>
+                                                <strong class="dark-color pull-left name">Angela Allen</strong> <div class="date-comment grey-color pull-right">July, 19th, 2016 on 10.30 PM</div>
                                             </div>
-                                            <p>Tristique Aenean Ultricies Amet.</p>
+                                            <p>Nunc risus ex, tempus quis purus ac, tempor consequat ex. Vivamus sem magna, maximus at est id, maximus aliquet nunc. Suspendisse lacinia velit a eros porttitor, in interdum ante faucibus.</p>
                                             <a class="c-reply" href="#">Reply</a>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="user-image"><img class="img-responsive" src="images/avatar/3.jpg" alt=""></div>
+                                        <ul class="children">
+                                            <li>
+                                                <div class="user-image"><img class="img-responsive" src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688368768/4_ntnoty.jpg" alt=""></div>
+                                                <div class="comment-right">
+                                                    <div class="comment-info">
+                                                        <strong class="dark-color pull-left name">Smatha Hughes</strong> <div class="date-comment grey-color pull-right">23 minutes ago</div>
+                                                    </div>
+                                                    <p>Tristique Aenean Ultricies Amet.</p>
+                                                    <a class="c-reply" href="#">Reply</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="user-image"><img class="img-responsive" src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688368768/4_ntnoty.jpg" alt=""></div>
+                                                <div class="comment-right">
+                                                    <div class="comment-info">
+                                                        <strong class="dark-color pull-left name">James Cemeron</strong> <div class="date-comment grey-color pull-right">53 minutes ago</div>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                                                    <a class="c-reply" href="#">Reply</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="user-image"><img class="img-responsive" src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688368768/4_ntnoty.jpg" alt=""></div>
                                         <div class="comment-right">
                                             <div class="comment-info">
-                                                <strong class="dark-color pull-left name">James Cemeron</strong> <div class="date-comment grey-color pull-right">53 minutes ago</div>
+                                                <strong class="dark-color pull-left name">Betty Perterson</strong> <div class="date-comment grey-color pull-right">19 hours ago</div>
                                             </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                                            <p>Dolor Condimentum Lorem Vestibulum Sollicitudin.</p>
                                             <a class="c-reply" href="#">Reply</a>
                                         </div>
                                     </li>
                                 </ul>
-                                <li>
-                                    <div class="user-image"><img class="img-responsive" src="images/avatar/4.jpg" alt=""></div>
-                                    <div class="comment-right">
-                                        <div class="comment-info">
-                                            <strong class="dark-color pull-left name">Betty Perterson</strong> <div class="date-comment grey-color pull-right">19 hours ago</div>
-                                        </div>
-                                        <p>Dolor Condimentum Lorem Vestibulum Sollicitudin.</p>
-                                        <a class="c-reply" href="#">Reply</a>
-                                    </div>
-                                </li>
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="line-top-right w-680"></div>
-        </section>
+                <div class="line-top-right w-680"></div>
+            </section>
+        }
+
         <!-- /Comment List -->
-
-        <section class="">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="comments-area">
-                            <h2>LEAVE A COMMENT</h2>
-                            <form action="http://templates.thememodern.com/donald-arch-light/POST" class="comment-form">
-                                <div class="col-md-4 col-sm-6">
-                                    <input class="contact-input" type="text" required="required" placeholder="Name">
-                                    <input class="contact-input" type="text" required="required" placeholder="Phone Number">
-                                </div>
-                                <div class="col-md-4 col-sm-6">
-                                    <input class="contact-input" type="email" required="required" placeholder="E-Mail">
-                                    <input class="contact-input" type="text" required="required" placeholder="Topic">
-                                </div>
-                                <div class="col-md-4 ">
-                                    <textarea class="textarea-contact" rows="4" required="required" placeholder="Message"></textarea>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-4 ">
-                                    <button type="submit" class="ot-btn border-dark btn-contact">Comment</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="line-top-right w-680"></div>
-        </section>
-        <!-- /comment area -->
-        <!-- /Footer home 1 -->
-
-
     </div>
-
 </section>
 

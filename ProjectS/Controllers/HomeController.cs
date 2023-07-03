@@ -12,7 +12,7 @@ namespace Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ShopContext _shopContext;
-      
+
         public HomeController(ILogger<HomeController> logger, ShopContext ct)
         {
             _shopContext = ct;
@@ -31,11 +31,11 @@ namespace Project.Controllers
             }
 
             ViewData["listBlog"] = _shopContext.Blogs.Include(p => p.ImageBlogs).Where(p => p.HomeStatus == true).OrderBy(p => p.Blogid).ToList();
-			return View(listProduct.ToList());
+            return View(listProduct.ToList());
 
-            
+
         }
 
-       
+
     }
 }
