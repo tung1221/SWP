@@ -144,61 +144,48 @@
                                 </ul>
                             </nav>
 
-                            <div class="mobile-menu clearfix d-block d-lg-none">
-                                <nav id="mobile_dropdown">
-                                    <ul>
-                                        <li>
-                                            <a href="index.html">Home</a>
-                                        </li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li>
-                                            <a href="blog.html">blog</a>
+                            @*   <div class="mobile-menu clearfix d-block d-lg-none">
+                            <nav id="mobile_dropdown">
+                            <ul>
+                            <li>
+                            <a href="index.html">Home</a>
+                            </li>
+                            <li><a href="about.html">About</a></li>
+                            <li>
+                            <a href="blog.html">blog</a>
 
-                                        </li>
-                                        <li>
-                                            <a href="shop.html">Shop</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="shop.html">Shop Pages</a>
-                                                    <ul>
-                                                        <li><a href="shop.html">shop</a></li>
-                                                        <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                                        <li><a href="cart.html">cart</a></li>
-                                                        <li><a href="checkout.html">checkout</a></li>
-                                                        <li><a href="wishlist.html">wishlist</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="shop.html">Product Types</a>
-                                                    <ul>
-                                                        <li><a href="product-details.html">Simple Product</a></li>
-                                                        <li><a href="product-details.html">Variable Product</a></li>
-                                                        <li><a href="product-details.html">Grouped Product</a></li>
-                                                        <li><a href="product-details.html">Downloadable Product</a></li>
-                                                        <li><a href="product-details.html">Simple Product</a></li>
-                                                    </ul>
-                                                </li>
-                                                <!-- End Single Mega MEnu -->
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">pages</a>
-                                            <ul>
-                                                <li><a href="about.html">about</a></li>
-                                                <li><a href="shop.html">shop</a></li>
-                                                <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                                <li><a href="product-details.html">product details</a></li>
-                                                <li><a href="cart.html">cart</a></li>
-                                                <li><a href="wishlist.html">wishlist</a></li>
-                                                <li><a href="checkout.html">checkout</a></li>
-                                                <li><a href="team.html">team</a></li>
-                                                <li><a href="login-register.html">login & register</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                            </li>
+                            <li>
+                            <a href="shop.html">Shop</a>
+                            <ul>
+                            <li>
+                            <a href="shop.html">Shop Pages</a>
+                            <ul>
+                            <li><a href="shop.html">shop</a></li>
+                            <li><a href="shop-sidebar.html">shop sidebar</a></li>
+                            <li><a href="cart.html">cart</a></li>
+                            <li><a href="checkout.html">checkout</a></li>
+                            <li><a href="wishlist.html">wishlist</a></li>
+                            </ul>
+                            </li>
+                            <li>
+                            <a href="shop.html">Product Types</a>
+                            <ul>
+                            <li><a href="product-details.html">Simple Product</a></li>
+                            <li><a href="product-details.html">Variable Product</a></li>
+                            <li><a href="product-details.html">Grouped Product</a></li>
+                            <li><a href="product-details.html">Downloadable Product</a></li>
+                            <li><a href="product-details.html">Simple Product</a></li>
+                            </ul>
+                            </li>
+                            <!-- End Single Mega MEnu -->
+                            </ul>
+                            </li>
+
+                            <li><a href="contact.html">contact</a></li>
+                            </ul>
+                            </nav>
+                            </div>*@
                         </div>
                         <!-- End MAinmenu Ares -->
                         <div class="col-md-2 col-lg-2 col-6">
@@ -208,7 +195,6 @@
                                 @if (!SignInManager.IsSignedIn(User))
                                 {
                                     <li><a asp-area="Identity" asp-page="/Account/Login"><span class="ti-user"></span></a></li>
-
                                 }
                                 else
                                 {
@@ -219,8 +205,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a asp-area="Identity" asp-page="/Account/Manage/Index" class="dropdown-item">Hồ sơ</a></li>
-                                                <li  style=" cursor: pointer; padding-left: 0px" class="nav-item">
+                                                <li><a href="/Home/Address" class="dropdown-item">Hồ sơ</a></li>
+                                                <li style=" cursor: pointer; padding-left: 0px" class="nav-item">
                                                     <a class="dropdown-item" href="/Cart/ProcessBill">
                                                         Đơn hàng
                                                     </a>
@@ -260,7 +246,7 @@
                                                 </li>
 
 
-                                              
+
                                             </ul>
                                         </div>
                                     </li>
