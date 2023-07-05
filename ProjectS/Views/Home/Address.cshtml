@@ -57,7 +57,7 @@
                                     <span>@l.District</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <a href="/Home/Remove?id=@l.AddressId"><i class="ti-close"></i></a>
+                                    <span>@l.SpecificAdd</span> <a href="/Home/Remove?id=@l.AddressId"><i class="ti-close"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -94,6 +94,11 @@
                                 </div>
                                 <div class="col-md-3">
                                     @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                   <input type="text" asp-for="@Model.SpecificAdd">
                                 </div>
                             </div>
                         </div>

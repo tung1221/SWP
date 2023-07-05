@@ -64,7 +64,7 @@ namespace Project.Controllers
             else
             {
                 _shopContext.Users.Find(signInManager.UserManager.GetUserId(User)).PhoneNumber = phone;
-                _shopContext.Addresses.Add(new Address() { UserId = signInManager.UserManager.GetUserId(User), District = a.District, Province = a.Province, Town = a.Town });
+                _shopContext.Addresses.Add(new Address() { UserId = signInManager.UserManager.GetUserId(User), District = a.District, Province = a.Province, Town = a.Town , SpecificAdd = a.SpecificAdd });
                 _shopContext.SaveChanges();
                 return View();
             }
