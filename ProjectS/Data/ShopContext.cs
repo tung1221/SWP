@@ -17,7 +17,7 @@ namespace Project.Data
 		public virtual DbSet<BillDetail> BillDetails { get; set; } = null!;
 		public virtual DbSet<Feedback> Feedbacks { get; set; } = null!;
 		public virtual DbSet<Category> Categories { get; set; } = null!;
-		public virtual DbSet<Payment> Payments { get; set; } = null!;
+		public virtual DbSet<Payments> Payments { get; set; } = null!;
 		public virtual DbSet<Product> Products { get; set; } = null!;
 		public virtual DbSet<Transport> Transports { get; set; } = null!;
 		public virtual DbSet<IdentityUser> Users { get; set; } = null!;
@@ -204,7 +204,7 @@ namespace Project.Data
 				entity.Property(p => p.CategoryId).ValueGeneratedOnAdd();
 			});
 
-			modelBuilder.Entity<Payment>(entity =>
+			modelBuilder.Entity<Payments>(entity =>
 			{
 				entity.HasKey(e => e.PaymentCode);
 				entity.Property(p => p.PaymentCode).ValueGeneratedOnAdd();

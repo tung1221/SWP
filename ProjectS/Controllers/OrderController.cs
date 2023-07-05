@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Macs;
+using Org.BouncyCastle.Utilities;
+using PayPal.Api;
 using Project.Data;
 using Project.Models;
+using System.Globalization;
 
 namespace Project.Controllers
 {
@@ -42,30 +45,66 @@ namespace Project.Controllers
             return View(getListItem());
         }
 
+
         [HttpPost]
-        public IActionResult ProcessOrder(string email, string total, int payment, string address)
+        public IActionResult ProcessOrder(string email, string total, string payment, string address)
         {
+            
 
             if (string.IsNullOrEmpty(email))
             {
                 TempData["Error"] = "Không được để rỗng";
                 return RedirectToAction("Index", "Order");
             }
-
-            _logger.LogError("xxxxx" + address);
-            if (string.IsNullOrEmpty(address))
+            if (payment == "2")
             {
-                TempData["ErrorA"] = "Thêm địa chỉ nhận hàng";
+                TempData["publicemail"] = email;
+                TempData["publictotal"] = total;
+                decimal totalAmount;
+                if (decimal.TryParse(total, out totalAmount))
+                {
+                    decimal totalAmountVND = totalAmount * 1000;
+                    decimal exchangeRate = 23745;
+                    decimal totalAmountUSD = totalAmountVND / exchangeRate;
+
+
+                    return RedirectToAction("PaymentWithPayPal", "Order", new { total = totalAmountUSD });
+
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Order");
+
+                }
+            }
+            else if (payment == "1")
+            {
+                _logger.LogError("xxxxx" + address);
+                if (string.IsNullOrEmpty(address))
+                {
+                    TempData["ErrorA"] = "Thêm địa chỉ nhận hàng";
+                    return RedirectToAction("Index", "Order");
+                }
+                var newBill = CreateBill(email, total, "1", address);
+
+            }
+            else{
                 return RedirectToAction("Index", "Order");
             }
 
+            
 
-            var RoldId = _shopContext.Roles.Where(c => c.NormalizedName == "SELLER").ToList().FirstOrDefault();
+            return View();
+        }
+        private Bill CreateBill(string email, string totalAmount, string paymentCode, string address)
+        {
+            var RoldId = _shopContext.Roles.Where(c => c.NormalizedName == "SELLER").FirstOrDefault();
             List<string> lSellerId = _shopContext.UserRoles.Where(c => c.RoleId == RoldId.Id).Select(c => c.UserId).ToList();
             Dictionary<string, int> myDictionary = new Dictionary<string, int>();
-            foreach (var selletId in lSellerId)
+
+            foreach (var sellerId in lSellerId)
             {
-                myDictionary.Add(selletId, 0);
+                myDictionary.Add(sellerId, 0);
             }
 
             foreach (var b in _shopContext.Bills.Where(c => c.BillStatus == "0").Select(c => c.sellerId).ToList())
@@ -75,23 +114,94 @@ namespace Project.Controllers
             }
 
             var minPair = myDictionary.MinBy(pair => pair.Value);
-            Bill temp1 = new Bill();
-            if (_SignInManager.IsSignedIn(User))
+
+            Bill newBill;
+            if (paymentCode == "2")
             {
-                temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, UserId = _SignInManager.UserManager.GetUserId(User), TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = address, ShippingFee = 0, TotalPrice = double.Parse(total) };
+                if (_SignInManager.IsSignedIn(User))
+                {
+                    newBill = new Models.Bill()
+                    {
+                        sellerId = minPair.Key,
+                        Email = email,
+                        UserId = _SignInManager.UserManager.GetUserId(User),
+                        TransportId = 1,
+                        BillStatus = "0",
+                        PaymentCode = int.Parse(paymentCode),
+                        PurchaseDate = DateTime.Now,
+                        PaymentMethod = "paypal",
+                        ShippingAddress = address,
+                        ShippingFee = 0,
+                        TotalPrice = double.Parse(totalAmount)
+                    };
+                }
+                else
+                {
+                    newBill = new Models.Bill()
+                    {
+                        sellerId = minPair.Key,
+                        Email = email,
+                        TransportId = 1,
+                        BillStatus = "0",
+                        PaymentCode = int.Parse(paymentCode),
+                        PurchaseDate = DateTime.Now,
+                        PaymentMethod = "paypal",
+                        ShippingAddress = address,
+                        ShippingFee = 0,
+                        TotalPrice = double.Parse(totalAmount)
+                    };
+                }
             }
             else
             {
-                temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = address, ShippingFee = 0, TotalPrice = double.Parse(total) };
-
+                if (_SignInManager.IsSignedIn(User))
+                {
+                    newBill = new Models.Bill()
+                    {
+                        sellerId = minPair.Key,
+                        Email = email,
+                        UserId = _SignInManager.UserManager.GetUserId(User),
+                        TransportId = 1,
+                        BillStatus = "0",
+                        PaymentCode = int.Parse(paymentCode),
+                        PurchaseDate = DateTime.Now,
+                        PaymentMethod = "cod",
+                        ShippingAddress = address,
+                        ShippingFee = 0,
+                        TotalPrice = double.Parse(totalAmount)
+                    };
+                }
+                else
+                {
+                    newBill = new Models.Bill()
+                    {
+                        sellerId = minPair.Key,
+                        Email = email,
+                        TransportId = 1,
+                        BillStatus = "0",
+                        PaymentCode = int.Parse(paymentCode),
+                        PurchaseDate = DateTime.Now,
+                        PaymentMethod = "cod",
+                        ShippingAddress = address,
+                        ShippingFee = 0,
+                        TotalPrice = double.Parse(totalAmount)
+                    };
+                }
             }
 
-            _shopContext.Bills.Add(temp1);
+            _shopContext.Bills.Add(newBill);
             _shopContext.SaveChanges();
 
-            foreach (var cartItem in getListItem())
+            foreach (var cartItem in GetCartItems())
             {
-                _shopContext.BillDetails.Add(new BillDetail() { BillId = temp1.BillId, ProductId = cartItem.ProductId, quantity = cartItem.Quantity, color = cartItem.color, size = cartItem.size });
+                _shopContext.BillDetails.Add(new BillDetail()
+                {
+                    BillId = newBill.BillId,
+                    ProductId = cartItem.ProductId,
+                    quantity = cartItem.Quantity,
+                    color = cartItem.color,
+                    size = cartItem.size
+                });
                 if (cartItem.CartItemId >= 0)
                 {
                     _shopContext.CartItems.Remove(cartItem);
@@ -100,8 +210,9 @@ namespace Project.Controllers
 
             _shopContext.SaveChanges();
             Response.Cookies.Delete("cart");
-            return View();
+            return newBill;
         }
+
 
         public IActionResult ProcessOrder()
         {
@@ -131,5 +242,105 @@ namespace Project.Controllers
 
             return cartItems;
         }
+
+
+        public List<CartItem> GetCartItems()
+        {
+            List<CartItem> cartItems = new List<CartItem>();
+
+            if (_SignInManager.IsSignedIn(User))
+            {
+                string userId = _SignInManager.UserManager.GetUserId(User);
+                int cartId = _shopContext.Carts
+                    .Where(c => c.UserId == userId)
+                    .Select(c => c.CartId)
+                    .FirstOrDefault();
+                cartItems = _shopContext.CartItems
+                    .Include(ci => ci.product)
+                    .Where(ci => ci.CartId == cartId)
+                    .ToList();
+            }
+
+            string? cookieValue = Request.Cookies["cart"];
+            if (cookieValue != null)
+            {
+                List<CartItem> cartListFromCookie = JsonConvert.DeserializeObject<List<CartItem>>(cookieValue);
+                cartItems.AddRange(cartListFromCookie);
+            }
+
+            cartItems = cartItems.OrderByDescending(p => p.CartItemId).ToList();
+
+            return cartItems;
+        }
+        private Payment CreatePayment(decimal totalAmount)
+        {
+            var apiContext = new APIContext(new OAuthTokenCredential("Abx8Hd9L7RUBlJdah8Fi5neref-JUamajEJWhcan_cR16sMYrEUTr_N7o8QUTWY3a-4S7fB914rHd3c2",
+                "EKaabtbIsmSo1Zmd-dY2fXOekaxfUJBRvjjpUJIDiY7b1d1tMZZ5CbiqTT1mQ4K-hIqp69VkAx8fF9Hi").GetAccessToken());
+
+            var payment = new Payment()
+            {
+                intent = "sale",
+                payer = new Payer() { payment_method = "paypal" },
+                transactions = new List<Transaction>()
+        {
+            new Transaction()
+            {
+                amount = new Amount()
+                {
+                    currency = "USD",
+                    total = totalAmount.ToString("F2")
+                },
+                description = "Payment for Order"
+            }
+        },
+                redirect_urls = new RedirectUrls()
+                {
+                    return_url = Url.Action("ExecutePayment", "Order", null, Request.Scheme),
+                    cancel_url = Url.Action("CancelPayment", "Order", null, Request.Scheme)
+                }
+            };
+
+            var createdPayment = payment.Create(apiContext);
+            return createdPayment;
+        }
+
+        public IActionResult PaymentWithPayPal(decimal total)
+        {
+            var payment = CreatePayment(total);
+            var approvalUrl = payment.links.FirstOrDefault(x => x.rel.ToLower() == "approval_url")?.href;
+
+            if (!string.IsNullOrEmpty(approvalUrl))
+            {
+                return Redirect(approvalUrl);
+            }
+
+            // Xử lý khi không có URL phê duyệt.
+            // Ví dụ: Hiển thị thông báo lỗi hoặc chuyển hướng người dùng đến trang lỗi.
+            return View("FailureView");
+        }
+
+        public async Task<IActionResult> ExecutePayment(string paymentId, string token, string PayerID)
+        {
+            var apiContext = new APIContext(new OAuthTokenCredential("Abx8Hd9L7RUBlJdah8Fi5neref-JUamajEJWhcan_cR16sMYrEUTr_N7o8QUTWY3a-4S7fB914rHd3c2",
+                "EKaabtbIsmSo1Zmd-dY2fXOekaxfUJBRvjjpUJIDiY7b1d1tMZZ5CbiqTT1mQ4K-hIqp69VkAx8fF9Hi").GetAccessToken());
+
+            var paymentExecution = new PaymentExecution() { payer_id = PayerID };
+            var executedPayment = new Payment() { id = paymentId }.Execute(apiContext, paymentExecution);
+
+            // Xử lý các bước tiếp theo sau khi thanh toán thành công
+            // Ví dụ: Cập nhật trạng thái đơn hàng, gửi email xác nhận, v.v.
+            // Lấy địa chỉ giao hàng
+            var shippingAddress = executedPayment.transactions[0].item_list.shipping_address;
+            string addressString = $"{shippingAddress.line1}, {shippingAddress.line2}, {shippingAddress.city}, {shippingAddress.state}, {shippingAddress.postal_code}, {shippingAddress.country_code}";
+
+            string publicemail = TempData["publicemail"] as string;
+            string publictotal = TempData["publictotal"] as string;
+            var newBill = CreateBill(publicemail, publictotal, "2", addressString);
+
+
+            return RedirectToAction("ProcessOrder");
+        }
     }
+
+
 }

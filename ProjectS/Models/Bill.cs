@@ -18,7 +18,7 @@ namespace Project.Models
         public string sellerId { get; set; } = null!;
         public string Email { get; set; }
 
-        public virtual Payment PaymentCodeNavigation { get; set; } = null!;
+        public virtual Payments PaymentCodeNavigation { get; set; } = null!;
         public virtual Transport Transport { get; set; } = null!;
         public virtual IdentityUser User { get; set; } = null!;
 
