@@ -48,6 +48,7 @@ namespace Project.Controllers
 
             if (string.IsNullOrEmpty(email))
             {
+                TempData["Error"] = "Không được để rỗng";
                 return RedirectToAction("Index", "Order");
             }
 
