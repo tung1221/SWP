@@ -261,7 +261,7 @@
                                             var email = user.Email;
                                             var username = email.Substring(0, email.IndexOf("@"));
                                         }
-                                        <a asp-area="Identity" asp-page="/Account/Manage/Index">  @username</a>
+                                        <a href="/Home/Address">  @username</a>
                                     </li>
                                 }
                             </ul>

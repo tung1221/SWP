@@ -62,7 +62,6 @@
                             </div>
                         </div>
                     }
-
                     <br>
                     <br />
                     <h3>Thêm địa chỉ</h3>
@@ -99,6 +98,11 @@
                             <div class="row">
                                 <div class="col-md-3">
                                    <input type="text" asp-for="@Model.SpecificAdd">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @Html.ValidationMessageFor(model => model.SpecificAdd, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>

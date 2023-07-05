@@ -43,12 +43,19 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProcessOrder(string email, string total, int payment)
+        public IActionResult ProcessOrder(string email, string total, int payment, string address)
         {
 
             if (string.IsNullOrEmpty(email))
             {
                 TempData["Error"] = "Không được để rỗng";
+                return RedirectToAction("Index", "Order");
+            }
+
+            _logger.LogError("xxxxx" + address);
+            if (string.IsNullOrEmpty(address))
+            {
+                TempData["ErrorA"] = "Thêm địa chỉ nhận hàng";
                 return RedirectToAction("Index", "Order");
             }
 
@@ -71,11 +78,11 @@ namespace Project.Controllers
             Bill temp1 = new Bill();
             if (_SignInManager.IsSignedIn(User))
             {
-                temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, UserId = _SignInManager.UserManager.GetUserId(User), TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
+                temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, UserId = _SignInManager.UserManager.GetUserId(User), TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = address, ShippingFee = 0, TotalPrice = double.Parse(total) };
             }
             else
             {
-                temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = "", ShippingFee = 0, TotalPrice = double.Parse(total) };
+                temp1 = new Models.Bill() { sellerId = minPair.Key, Email = email, TransportId = 1, BillStatus = "0", PaymentCode = payment, PurchaseDate = DateTime.Now, PaymentMethod = "momo", ShippingAddress = address, ShippingFee = 0, TotalPrice = double.Parse(total) };
 
             }
 
