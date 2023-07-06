@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\dashbroadcss\charts\**" />
+    <Content Remove="wwwroot\dashbroadcss\charts\**" />
+    <EmbeddedResource Remove="wwwroot\dashbroadcss\charts\**" />
+    <None Remove="wwwroot\dashbroadcss\charts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.21.0" />
     <PackageReference Include="MailKit" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
@@ -18,6 +26,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
     <PackageReference Include="MimeKit" Version="4.0.0" />
+    <PackageReference Include="PayPal" Version="1.9.1" />
+    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
   </ItemGroup>
 

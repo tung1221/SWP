@@ -1,0 +1,126 @@
+﻿@model List<Bill>
+<style>
+    .bill-item {
+        border: 1px solid #ccc;
+        padding: 25px;
+        text-align: left;
+        background-color: #efeffe;
+        margin: 25px;
+        border-radius: 10px;
+    }
+
+        .bill-item h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .bill-item p {
+            margin-bottom: 5px;
+        }
+</style>
+
+<div>
+
+    <!-- Start Bradcaump area -->
+    <div class="col-12">
+        <nav class="mainmenu__nav  d-block">
+            <ul class="main__menu">
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center; ">
+                    <a href="/cart/processbill?status=''">Tất cả</a>
+
+                </li>
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
+                    <a href="/cart/processbill?status=0">Đã đặt hàng</a>
+
+                </li>
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
+                    <a href="/cart/processbill?status=1">Đã nhận đơn</a>
+
+                </li>
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
+                    <a href="/cart/processbill?status=2">Đang giao hàng</a>
+
+                </li>
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
+                    <a href="/cart/processbill?status=3">Đã hoàn thành</a>
+
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+    <!-- End Bradcaump area -->
+    <div class="wishlist-area ptb--120 bg__white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="wishlist-content">
+                        <div class="wishlist-table table-responsive" style="text-align: center;">
+                            @if (Model == null)
+                            {
+                                <img src="~/images/logo/shopping-bag.png" style="width: 150px;height: 150px;">
+                                <p>Không có đơn hàng nào</p>
+                            }
+                            else
+                            {
+                                @foreach (var bill in Model)
+                                {
+
+                                    <div class="bill-item">
+                                        <div class="bill-item-inner">
+                                            <h3>Id Đơn hàng: @bill.BillId</h3>
+                                            <p>
+                                                Tiến trình:
+                                                
+                                                    <span class="status-badge primary">
+                                                        <i class='bx bxs-circle me-1'></i>Đã giao hàng thành công
+                                                    </span>
+                                                
+                                            </p>
+                                            <p>Tổng giá tiền: @bill.TotalPrice,000vnd</p>
+                                            <p>Các sản phẩm: @string.Join(", ", bill.BillDetails.Select(bd => bd.Product.ProductName))</p>
+                                            
+                                            <!-- Xử lý phản hồi nếu bill.Status là 4 -->
+                                            @if (bill.BillStatus == "3")
+                                            {
+                                                foreach (var billDetail in bill.BillDetails)
+                                                {
+                                                    if (!billDetail.IsFeedbackSubmitted)
+                                                    {
+                                                        <div class="feedback-form">
+                                                            <h3>Phản hồi cho sản phẩm: @billDetail.Product.ProductName</h3>
+                                                            <img src="@billDetail.Product.ImageMain" style="max-width: 25%;margin: 20px;">
+                                                            <form method="post" asp-controller="Feedback" asp-action="Create">
+                                                                <input type="hidden" name="billId" value="@bill.BillId" />
+                                                                <input type="hidden" name="productId" value="@billDetail.ProductId" />
+                                                                <div class="mb-3">
+                                                                    <label for="feedbackTitle_@billDetail.ProductId" class="form-label">Tiêu đề</label>
+                                                                    <input type="text" class="form-control" id="feedbackTitle_@billDetail.ProductId" name="feedbackTitle" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="feedbackDetail_@billDetail.ProductId" class="form-label">Nội dung</label>
+                                                                    <textarea class="form-control" id="feedbackDetail_@billDetail.ProductId" name="feedbackDetail" rows="3" required></textarea>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Gửi</button>
+                                                            </form>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

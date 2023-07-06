@@ -1,42 +1,66 @@
 ﻿﻿@{
     ViewData["Title"] = "Home Page";
+    var listBlog = ViewData["listBlog"] as List<Blog>;
+    var count = 0;
 }
 @model List<Product>
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@if (!string.IsNullOrEmpty((string)ViewData["EDetailProduct"]))
+{
+    <script>
+        var thongBao = "Sản phảm bạn vừa tiềm kiếm không tồn tại, click OK để tiếp tục.";
+        alert(thongBao);
+    </script>
+}
+
 <div class="slider__container slider--one">
     <div class="slider__activation__wrap owl-carousel owl-theme">
-        <!-- Start Single Slide -->
-        <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(/images/slider/bg/1.png) no-repeat scroll center center / cover ;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-4">
-                        <div class="slider__inner">
-                            <h1>New Product <span class="text--theme">Collection</span></h1>
-                            <div class="slider__btn">
-                                <a class="htc__btn" href="cart.html">shop now</a>
+        @if (listBlog != null)
+        {
+            foreach (var l in listBlog)
+            {
+                foreach (var i in l.ImageBlogs)
+                {
+                    if (i.IsBigImg == true)
+                    {
+                        <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(@i.ImageURL) no-repeat scroll center center / cover ;">
+                            <div class="container">
+                                <div class="row">
+                                    @if (count % 2 == 0)
+                                    {
+                                        count++;
+                                        <div class="col-lg-8  offset-lg-4">
+                                            <div class="slider__inner">
+                                                <h1>New Product <span class="text--theme">Collection</span></h1>
+                                                <div class="slider__btn">
+                                                    <a class="htc__btn" href="/blog/BlogDetails?blogId=@l.Blogid">shop now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        count++;
+                                        <div class="col-lg-8">
+                                            <div class="slider__inner">
+                                                <h1>New Product <span class="text--theme">Collection</span></h1>
+                                                <div class="slider__btn">
+                                                    <a class="htc__btn" href="/blog/BlogDetails?blogId=@l.Blogid">shop now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Single Slide -->
-        <!-- Start Single Slide -->
-        <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url(/images/slider/bg/2.png) no-repeat scroll center center / cover ;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="slider__inner">
-                            <h1>New Product <span class="text--theme">Collection</span></h1>
-                            <div class="slider__btn">
-                                <a class="htc__btn" href="cart.html">shop now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    }
+                    break;
+                }
+
+
+            }
+        }
         <!-- End Single Slide -->
     </div>
 </div>
@@ -64,7 +88,7 @@
                                 <div class="product__inner">
                                     <div class="pro__thumb">
                                         <a href="#">
-                                            <img src="~/images/product/@item.ImageMain" alt="product images">
+                                            <img src="@item.ImageMain" alt="product images">
                                         </a>
                                     </div>
                                     <div class="product__hover__info">
@@ -74,15 +98,15 @@
                                         </ul>
                                     </div>
                                     <div class="add__to__wishlist">
-                                        <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" href="wishlist.html"><span class="ti-heart"></span></a>
+                                        <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" asp-route-id="@item.ProductId" asp-action="AddWishList" asp-controller="Product"><span class="ti-heart"></span></a>
                                     </div>
                                 </div>
                                 <div class="product__details">
-                                    <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId">Simple Black Clock</a></h2>
+                                    <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId">@item.ProductName</a></h2>
                                     <ul class="product__price">
-                                        @if (item.Discount == null)
+                                        @if (item.IsAvailble == false)
                                         {
-                                            <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
+                                            <li style="padding-left: 0px" class="new__price">Hết hàng</li>
                                         }
                                         else
                                         {
@@ -96,6 +120,8 @@
                                                 <li class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
                                             }
                                         }
+
+
                                     </ul>
                                 </div>
                             </div>
@@ -106,3 +132,4 @@
         </div>
     </section>
 }
+

@@ -15,6 +15,24 @@
           }
         }
       },
+      "CloudinaryDotNet/1.21.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Html.Abstractions": "2.2.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -107,6 +125,55 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Text.Encodings.Web": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Features": "2.2.0",
+          "System.Text.Encodings.Web": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Http.Features/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {
             "related": ".xml"
           }
         }
@@ -2034,6 +2101,43 @@
           }
         }
       },
+      "PayPal/1.9.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "compile": {
+          "lib/net451/PayPal.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net451/PayPal.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "PayPalCheckoutSdk/1.0.4": {
+        "type": "package",
+        "dependencies": {
+          "PayPalHttp": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/PayPalCheckoutSdk.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PayPalCheckoutSdk.dll": {}
+        }
+      },
+      "PayPalHttp/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/PayPalHttp-Dotnet.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PayPalHttp-Dotnet.dll": {}
+        }
+      },
       "Pomelo.EntityFrameworkCore.MySql/6.0.1": {
         "type": "package",
         "dependencies": {
@@ -3787,6 +3891,24 @@
         "packageIcon.png"
       ]
     },
+    "CloudinaryDotNet/1.21.0": {
+      "sha512": "ln7vw2WwpwmdB3bqKHV5fOTLQBV074KPI/WoMxXrIlSAZTBKjNHm6AcEJa2nz9yVIa17+r4/9yI+h4oJORZ1QA==",
+      "type": "package",
+      "path": "cloudinarydotnet/1.21.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CloudinaryIcon.png",
+        "cloudinarydotnet.1.21.0.nupkg.sha512",
+        "cloudinarydotnet.nuspec",
+        "lib/net452/CloudinaryDotNet.dll",
+        "lib/net452/CloudinaryDotNet.xml",
+        "lib/netstandard1.3/CloudinaryDotNet.dll",
+        "lib/netstandard1.3/CloudinaryDotNet.xml",
+        "lib/netstandard2.0/CloudinaryDotNet.dll",
+        "lib/netstandard2.0/CloudinaryDotNet.xml"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -3921,6 +4043,45 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
         "microsoft.aspnetcore.cryptography.keyderivation.6.0.15.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
+      "sha512": "Y4rs5aMEXY8G7wJo5S3EEt6ltqyOTr/qOeZzfn+hw/fuQj5GppGckMY5psGLETo1U9hcT5MmAhaT5xtusM1b5g==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.html.abstractions/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.xml",
+        "microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.html.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
+      "sha512": "Nxs7Z1q3f1STfLYKJSVXCs1iBl+Ya6E8o4Oy1bCxJ/rNI44E/0f6tbsrVqAWfB7jlnJfyaAtIalBVxPKUPQb4Q==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.http.abstractions/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.xml",
+        "microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.http.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Http.Features/2.2.0": {
+      "sha512": "ziFz5zH8f33En4dX81LW84I6XrYXKf9jg6aM39cM+LffN9KJahViKZ61dGMSO2gd3e+qe5yBRwsesvyqlZaSMg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.http.features/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.xml",
+        "microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.http.features.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore/6.0.15": {
@@ -6578,6 +6739,47 @@
         "lib/netstandard2.0/NuGet.Versioning.xml",
         "nuget.versioning.6.3.1.nupkg.sha512",
         "nuget.versioning.nuspec"
+      ]
+    },
+    "PayPal/1.9.1": {
+      "sha512": "b3vq6Lc9CwSooCX2tsZ02zb7E/K/cA6EILCoMynue+ZeVuitJNqt0YwxPnp7uN0Pccob02oDlpAjRLH+GRCRxA==",
+      "type": "package",
+      "path": "paypal/1.9.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/PayPal.dll",
+        "lib/net40/PayPal.xml",
+        "lib/net45/PayPal.dll",
+        "lib/net45/PayPal.xml",
+        "lib/net451/PayPal.dll",
+        "lib/net451/PayPal.xml",
+        "paypal.1.9.1.nupkg.sha512",
+        "paypal.nuspec"
+      ]
+    },
+    "PayPalCheckoutSdk/1.0.4": {
+      "sha512": "4fsOPj6SOJurbVf5ANg7NQ5TNvSYmtngf3dpJN11xEk6BP+5Rn6OcaaTbUx+bVnnYmgaoe5LbRZe52QpAjuwqg==",
+      "type": "package",
+      "path": "paypalcheckoutsdk/1.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/PayPalCheckoutSdk.dll",
+        "paypalcheckoutsdk.1.0.4.nupkg.sha512",
+        "paypalcheckoutsdk.nuspec"
+      ]
+    },
+    "PayPalHttp/1.0.1": {
+      "sha512": "Jlg8e9Egwxk+sfkIoGIkjQS+uxGNIOnY6NbUkWXKJiEGGqryeV9bIRNtSfjSgs/g02JcIQbKRFQW+8amtSo3ig==",
+      "type": "package",
+      "path": "paypalhttp/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/PayPalHttp-Dotnet.dll",
+        "paypalhttp.1.0.1.nupkg.sha512",
+        "paypalhttp.nuspec"
       ]
     },
     "Pomelo.EntityFrameworkCore.MySql/6.0.1": {
@@ -10625,6 +10827,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "CloudinaryDotNet >= 1.21.0",
       "MailKit >= 4.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.15",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.15",
@@ -10633,23 +10836,30 @@
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.15",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.13",
       "MimeKit >= 4.0.0",
+      "PayPal >= 1.9.1",
+      "PayPalCheckoutSdk >= 1.0.4",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dell\\.nuget\\packages\\": {}
+    "C:\\Users\\tung\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\SWP\\ProjectS\\Project.csproj",
+      "projectUniqueName": "D:\\test\\SWP\\ProjectS\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "E:\\SWP\\ProjectS\\Project.csproj",
-      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "E:\\SWP\\ProjectS\\obj\\",
+      "projectPath": "D:\\test\\SWP\\ProjectS\\Project.csproj",
+      "packagesPath": "C:\\Users\\tung\\.nuget\\packages\\",
+      "outputPath": "D:\\test\\SWP\\ProjectS\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tung\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10657,7 +10867,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10676,6 +10885,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "CloudinaryDotNet": {
+            "target": "Package",
+            "version": "[1.21.0, )"
+          },
           "MailKit": {
             "target": "Package",
             "version": "[4.0.0, )"
@@ -10710,6 +10923,14 @@
             "target": "Package",
             "version": "[4.0.0, )"
           },
+          "PayPal": {
+            "target": "Package",
+            "version": "[1.9.1, )"
+          },
+          "PayPalCheckoutSdk": {
+            "target": "Package",
+            "version": "[1.0.4, )"
+          },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[6.0.1, )"
@@ -10734,8 +10955,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'PayPal 1.9.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "PayPal",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

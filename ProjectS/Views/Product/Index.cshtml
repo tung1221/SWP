@@ -1,32 +1,35 @@
 ﻿@model List<Product>
 @{
     var subCate = ViewData["subCate"] as SubCategory;
+    var listSubCate = ViewData["listSubCate"] as List<SubCategory>;
 }
-<div class="body__overlay"></div>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/4.jpg) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+    </div>
 </div>
 
 
 <section class="htc__product__area shop__page ptb--130 bg__white">
     <div class="container">
         <div class="htc__product__container">
-            <!-- Start Product MEnu -->
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="filter__menu__container">
                         <div class="product__menu">
 
-
-                            @foreach (var l in ViewData["listSubCate"] as List<SubCategory>)
+                            @if (listSubCate != null)
                             {
-                                if (l.SubCategoryId == subCate.SubCategoryId)
+                                foreach (var l in listSubCate)
                                 {
-                                    <a style="color: red; font-size: 17px; margin-right:25px">@l.Name</a>
-                                }
-                                else
-                                {
-                                    <a asp-controller="Product" asp-action="Index" asp-route-gender="@ViewData["gender"]" asp-route-id="@l.SubCategoryId" style="font-size: 17px; margin-right:25px">@l.Name</a>
-
+                                    if (subCate != null && l.SubCategoryId == subCate.SubCategoryId)
+                                    {
+                                        <a style="color: red; font-size: 17px; margin-right:25px">@l.Name</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Product" asp-action="Index" asp-route-gender="@ViewData["gender"]" asp-route-id="@l.SubCategoryId" style="font-size: 17px; margin-right:25px">@l.Name</a>
+                                    }
                                 }
                             }
 
@@ -36,13 +39,14 @@
                                 Tìm kiếm theo giá
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Giá: Giá thấp đến cao</a></li>
-                                <li><a class="dropdown-item" href="#">Giá: giá cao đến thấp</a></li>
+                                <li><a asp-route-mode="1" asp-route-gender="@ViewData["gender"]" asp-route-id="@ViewData["id"]" asp-controller="Product" class="dropdown-item">Giá: Giá thấp đến cao</a></li>
+                                <li><a asp-route-mode="2" asp-route-gender="@ViewData["gender"]" asp-route-id="@ViewData["id"]" asp-controller="Product" class="dropdown-item">Giá: giá cao đến thấp</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
 
 
             <div class="row product__list">
@@ -56,7 +60,7 @@
                             <div class="product__inner">
                                 <div class="pro__thumb">
                                     <a href="#">
-                                        <img src="/images/product/@l.ImageMain" alt="product images">
+                                        <img src="@l.ImageMain" alt="product images">
                                     </a>
                                 </div>
                                 <div class="product__hover__info">
@@ -65,15 +69,17 @@
                                         <li><a title="Add TO Cart" asp-action="Index" asp-controller="Cart"><span class="ti-shopping-cart"></span></a></li>
                                     </ul>
                                 </div>
+                                <div class="add__to__wishlist">
+                                    <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" asp-action="" asp-controller="Product"><span class="ti-heart"></span></a>
+                                </div>
 
                             </div>
                             <div class="product__details">
-                                <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@l.ProductId">Brone Lamp Glasses</a></h2>
+                                <h2><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@l.ProductId">@l.ProductName</a></h2>
                                 <ul class="product__price">
-
-                                    @if (l.Discount == null)
+                                    @if (l.IsAvailble == false)
                                     {
-                                        <li style="padding-left: 0px" class="new__price">@(l.ProductPrice - l.Discount).000vnd</li>
+                                        <li style="padding-left: 0px" class="new__price">Hết hàng</li>
                                     }
                                     else
                                     {
@@ -87,6 +93,8 @@
                                             <li class="new__price">@(l.ProductPrice - l.Discount).000vnd</li>
                                         }
                                     }
+
+
                                 </ul>
                             </div>
                         </div>

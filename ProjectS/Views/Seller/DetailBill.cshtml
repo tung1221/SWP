@@ -1,0 +1,28 @@
+﻿@model Bill
+@{
+    Layout = "~/Views/Shared/_DashLayout.cshtml";
+}
+<div>
+    <div>
+        <a href="/Seller/ViewAll">Trở về</a>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.OutOfStockMessage))
+    {
+        <div class="alert alert-warning">
+            @ViewBag.OutOfStockMessage
+        </div>
+    }
+
+    <div>
+        <h2>Thông tin đơn hàng</h2>
+        <div>
+            <h2>Id đơn hàng: @Model.BillId</h2>
+            <h2>Tên khách hàng: @Model.Email</h2>
+            <h2>Các sản phẩm: @string.Join(", ", @Model.BillDetails.Select(bd => bd.Product.ProductName))</h2>
+            <h2>Giá : @Model.TotalPrice,000vnd</h2>
+        </div>
+        <button><a href="/Seller/Delete?billId=@Model.BillId">Hoàn đơn</a></button>
+    </div>
+</div>
+
+

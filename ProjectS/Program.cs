@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Project.Service;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Org.BouncyCastle.Tls;
+using WebApplication6.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddOptions();
 var mailsetting = builder.Configuration.GetSection("MailSettings");
 builder.Services.Configure<MailSettings>(mailsetting);
 builder.Services.AddSingleton<IEmailSender, SendMailService>();
+var cloudsetting = builder.Configuration.GetSection("CloudinarySettings");
+builder.Services.Configure<CloudinarySettings>(cloudsetting);
+builder.Services.AddSingleton<ICloudinaryService, CloudinaryService>();
 
 
 builder.Services.AddControllersWithViews();
@@ -54,7 +58,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.SignIn.RequireConfirmedAccount = true;
 }).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ShopContext>();
+
+//builder.Services.AddSession();
+
 var app = builder.Build();
+
+//app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -74,6 +83,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Admin}/{action=DashProduct}/{id?}");
 
 app.Run();

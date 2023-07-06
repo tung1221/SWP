@@ -6,7 +6,7 @@ namespace Project.Models
     {
         public int BillId { get; set; }
         public int PaymentCode { get; set; }
-        public string UserId { get; set; } = null!;
+        public string? UserId { get; set; }
         public int TransportId { get; set; }
         public DateTime PurchaseDate { get; set; }
         public string BillStatus { get; set; } = null!;
@@ -15,8 +15,10 @@ namespace Project.Models
         public string? Note { get; set; }
         public double ShippingFee { get; set; }
         public double TotalPrice { get; set; }
+        public string sellerId { get; set; } = null!;
+        public string Email { get; set; }
 
-        public virtual Payment PaymentCodeNavigation { get; set; } = null!;
+        public virtual Payments PaymentCodeNavigation { get; set; } = null!;
         public virtual Transport Transport { get; set; } = null!;
         public virtual IdentityUser User { get; set; } = null!;
 

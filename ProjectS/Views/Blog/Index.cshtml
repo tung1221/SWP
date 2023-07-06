@@ -1,87 +1,58 @@
-﻿@{
-    var blogs = ViewData["Blogs"] as List<Blog>;
-    var imageBlogs = ViewData["ImageBlogs"] as List<ImageBlog>;
-}
+﻿@model IEnumerable<dynamic>
 
-
-
-
-<link rel="stylesheet" href="~/css/blog.css" />
-
-<!-- Start Blog Area -->
-<div class="htc__blog__area bg__white ptb--120">
-    <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ; position: relative;">
-        <div class="ht__bradcaump__wrap">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="bradcaump__inner text-center">
-                            <h2 class="bradcaump-title">Blog</h2>
-                            <nav class="bradcaump-inner">
-                                <a class="breadcrumb-item" href="/Home/Index">Home</a>
-                                <span class="brd-separetor">/</span>
-                                <span class="breadcrumb-item active">Blog</span>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
+<!-- blogcss -->
+<link rel="stylesheet" href="~/blogcss/css/style.css">
+<!-- end blogcss -->
+<!-- royal_loader -->
+<div style="background-color: #ffffff;" class="">
+    <div class="boxed no-padding bg-img" style="background-image: url('https://res.cloudinary.com/dtwmfo4fl/image/upload/v1687962616/blog-bg_gjxwsw.jpg');">
+        <div class="sub-header depen-on-img d-flex justify-content-center align-items-center" style="width: 70%;">
+            <img src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1687962616/blog-bg_gjxwsw.jpg" class="img-responsive" alt="Image">
+            <div class="sub-header-inner center-center">
+                <h2>BLOG</h2>
             </div>
         </div>
     </div>
+
+
+    <!-- /subheader -->
+
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blog-list">
 
-
-        <div class="row blog__wrap blog--page clearfix">
-            @foreach (var item in blogs.Zip(imageBlogs, (blog, imageBlog) => new { Blog = blog, ImageBlog = imageBlog }))
-            {
-                var blog = item.Blog;
-                var imageBlog = item.ImageBlog;
-
-                <div class="col-md-6 col-lg-6 col-sm-12">
-                    <div class="blog foo">
-                        <div class="blog__inner">
-                            <div class="blog__thumb">
-                                <a href="/Blog/BlogDetails?blogId=@blog.Blogid">
-                                    <div class="image-container">
-                                        <img src="~/images/blog/@imageBlog.ImageURL" alt="blog images">
-                                    </div>
-                                </a>
-
-                                <div class="blog__post__time">
-                                    <div class="post__time--inner">
-                                        <span class="date">14</span>
-                                        <span class="month">sep</span>
-                                    </div>
+                    @foreach (var blog in Model)
+                    {
+                        <div class="item-post pt--30">
+                            <a href="/blog/BlogDetails?blogId=@blog.Blogid">
+                                <img src="@blog.FirstImage" class="img-responsive" alt="Image">
+                            </a>
+                            <div class="desc">
+                                <h4><a href="/blog/BlogDetails?blogId=@blog.Blogid">@blog.name </a></h4>
+                                <div class="meta">
+                                    <span class="meta-date">@blog.DateUp.ToString("MMMM, dd\"th\", yyyy")</span><span class="meta-author"> - by <a href="/blog/BlogDetails?blogId=@blog.Blogid">Crophos</a> </span><span class="meta-cate"> - in <a href="blog.html">Design</a></span>
                                 </div>
-                            </div>
-                            <div class="blog__hover__info">
-                                <div class="blog__hover__action">
-                                    <ul class="bl__meta">
-                                        <li>By: <a href="#">Phongdz</a></li>
-                                        <li>Product</li>
-                                    </ul>
-                                    <p class="blog__des">
-                                        <a href="blog-details.html">@imageBlog.ImageURL</a>
-                                    </p>
-                                    <div class="blog__btn">
-                                        <a class="read__more__btn" href="blog-details.html">read more</a>
-                                    </div>
+                                <div class="meta">
                                 </div>
+
+                                @if (blog.content.Length > 195)
+                                {
+                                    <p>@blog.content.Substring(0, 194) ...</p>
+                                }
+                                else
+                                {
+                                    <p>@blog.content</p>
+                                }
+
+                                <a href="/blog/BlogDetails?blogId=@blog.Blogid" class="ot-btn border-dark">Read More</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
-        </div>
-        <!-- Start Load More Button -->
-        <div class="row mt--60">
-            <div class="col-md-12">
-                <div class="htc__loadmore__btn">
-                    <a href="#">load more</a>
+                        <hr style="background-color: #896868;height:3px">
+                    }
                 </div>
             </div>
         </div>
-        <!-- End Load More Button -->
     </div>
+    <!-- /Bloglist -->
 </div>
-<!-- End Blog Area -->

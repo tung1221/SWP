@@ -8,7 +8,7 @@ using Project.Models;
 
 namespace Project.Admin.User
 {
-	//[Authorize]
+	[Authorize(Roles = "Admin")]
 
 	public class IndexModel : PageModel
 	{

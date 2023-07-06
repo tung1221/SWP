@@ -10,6 +10,44 @@
         e.Collection(c => c.SubCategories).Load();
     }
 
+
+    var user = SignInManager.UserManager.GetUserAsync(User).Result;
+
+    if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            ViewBag.ShowAdminButton = true;
+        }
+        else
+        {
+            ViewBag.ShowAdminButton = false;
+        }
+
+        if (User.IsInRole("Marketing"))
+        {
+            ViewBag.ShowMarketingButton = true;
+        }
+        else
+        {
+            ViewBag.ShowMarketingButton = false;
+        }
+
+        if (User.IsInRole("Seller"))
+        {
+            ViewBag.ShowSellerButton = true;
+        }
+        else
+        {
+            ViewBag.ShowSellerButton = false;
+        }
+    }
+    else
+    {
+        ViewBag.ShowAdminButton = false;
+        ViewBag.ShowMarketingButton = false;
+        ViewBag.ShowSellerButton = false;
+    }
 }
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -70,7 +108,10 @@
                                                     <ul class="mega__item">
                                                         @foreach (var ls in l.SubCategories)
                                                         {
-                                                            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="false" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                            if (ls.typeGender == null || ls.typeGender == true)
+                                                            {
+                                                                <li><a asp-controller="Product" asp-action="Index" asp-route-gender="false" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                            }
                                                         }
                                                     </ul>
                                                 </li>
@@ -86,8 +127,12 @@
                                                     <a class="mega__title">@l.CategoryName</a>
                                                     <ul class="mega__item">
                                                         @foreach (var ls in l.SubCategories)
+
                                                         {
-                                                            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="true" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                            if (ls.typeGender == null || ls.typeGender == false)
+                                                            {
+                                                                <li><a asp-controller="Product" asp-action="Index" asp-route-gender="true" asp-route-id="@ls.SubCategoryId">@ls.Name</a></li>
+                                                            }
                                                         }
                                                     </ul>
                                                 </li>
@@ -99,73 +144,48 @@
                                 </ul>
                             </nav>
 
-                            <div class="mobile-menu clearfix d-block d-lg-none">
-                                <nav id="mobile_dropdown">
-                                    <ul>
-                                        <li>
-                                            <a href="index.html">Home</a>
-                                            <ul>
-                                                <li><a href="index.html">Home 1</a></li>
-                                                <li><a href="index-2.html">Home 2</a></li>
-                                                <li><a href="index-3.html">Home 3</a></li>
-                                                <li><a href="index-4.html">Home 4</a></li>
-                                                <li><a href="index-5.html">Home 5</a></li>
-                                                <li><a href="index-6.html">Home 6</a></li>
-                                                <li><a href="index-7.html">Home 7</a></li>
-                                                <li><a href="index-8.html">Home 8</a></li>
-                                                <li><a href="index-9.html">Home 9</a></li>
-                                                <li><a href="index-10.html">Home 10</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li>
-                                            <a href="blog.html">blog</a>
+                            @*   <div class="mobile-menu clearfix d-block d-lg-none">
+                            <nav id="mobile_dropdown">
+                            <ul>
+                            <li>
+                            <a href="index.html">Home</a>
+                            </li>
+                            <li><a href="about.html">About</a></li>
+                            <li>
+                            <a href="blog.html">blog</a>
 
-                                        </li>
-                                        <li>
-                                            <a href="shop.html">Shop</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="shop.html">Shop Pages</a>
-                                                    <ul>
-                                                        <li><a href="shop.html">shop</a></li>
-                                                        <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                                        <li><a href="cart.html">cart</a></li>
-                                                        <li><a href="checkout.html">checkout</a></li>
-                                                        <li><a href="wishlist.html">wishlist</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="shop.html">Product Types</a>
-                                                    <ul>
-                                                        <li><a href="product-details.html">Simple Product</a></li>
-                                                        <li><a href="product-details.html">Variable Product</a></li>
-                                                        <li><a href="product-details.html">Grouped Product</a></li>
-                                                        <li><a href="product-details.html">Downloadable Product</a></li>
-                                                        <li><a href="product-details.html">Simple Product</a></li>
-                                                    </ul>
-                                                </li>
-                                                <!-- End Single Mega MEnu -->
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">pages</a>
-                                            <ul>
-                                                <li><a href="about.html">about</a></li>
-                                                <li><a href="shop.html">shop</a></li>
-                                                <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                                <li><a href="product-details.html">product details</a></li>
-                                                <li><a href="cart.html">cart</a></li>
-                                                <li><a href="wishlist.html">wishlist</a></li>
-                                                <li><a href="checkout.html">checkout</a></li>
-                                                <li><a href="team.html">team</a></li>
-                                                <li><a href="login-register.html">login & register</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                            </li>
+                            <li>
+                            <a href="shop.html">Shop</a>
+                            <ul>
+                            <li>
+                            <a href="shop.html">Shop Pages</a>
+                            <ul>
+                            <li><a href="shop.html">shop</a></li>
+                            <li><a href="shop-sidebar.html">shop sidebar</a></li>
+                            <li><a href="cart.html">cart</a></li>
+                            <li><a href="checkout.html">checkout</a></li>
+                            <li><a href="wishlist.html">wishlist</a></li>
+                            </ul>
+                            </li>
+                            <li>
+                            <a href="shop.html">Product Types</a>
+                            <ul>
+                            <li><a href="product-details.html">Simple Product</a></li>
+                            <li><a href="product-details.html">Variable Product</a></li>
+                            <li><a href="product-details.html">Grouped Product</a></li>
+                            <li><a href="product-details.html">Downloadable Product</a></li>
+                            <li><a href="product-details.html">Simple Product</a></li>
+                            </ul>
+                            </li>
+                            <!-- End Single Mega MEnu -->
+                            </ul>
+                            </li>
+
+                            <li><a href="contact.html">contact</a></li>
+                            </ul>
+                            </nav>
+                            </div>*@
                         </div>
                         <!-- End MAinmenu Ares -->
                         <div class="col-md-2 col-lg-2 col-6">
@@ -175,23 +195,73 @@
                                 @if (!SignInManager.IsSignedIn(User))
                                 {
                                     <li><a asp-area="Identity" asp-page="/Account/Login"><span class="ti-user"></span></a></li>
-
                                 }
                                 else
                                 {
-                                    <li><a asp-area="Identity" asp-page="/Account/Manage/Index"><span class="ti-user"></span></a></li>
+                                    <li>
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle-no-caret" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span class="ti-user"></span>
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a href="/Home/Address" class="dropdown-item">Hồ sơ</a></li>
+                                                <li style=" cursor: pointer; padding-left: 0px" class="nav-item">
+                                                    <a class="dropdown-item" href="/Cart/ProcessBill">
+                                                        Đơn hàng
+                                                    </a>
+                                                </li>
+                                                @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
+                                                {
+                                                    <li style="padding-left: 0px" class="nav-item">
+                                                        <a class="dropdown-item" href="/admin/index">
+                                                            Admin
+                                                        </a>
+                                                    </li>
+                                                }
+
+                                                @if (ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
+                                                {
+                                                    <li style="padding-left: 0px" class="nav-item">
+                                                        <a class="dropdown-item" href="/Marketing/Index">
+                                                            Marketing
+                                                        </a>
+                                                    </li>
+                                                }
+
+                                                @if (ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
+                                                {
+                                                    <li style="padding-left: 0px" class="nav-item">
+                                                        <a class="dropdown-item" href="/Seller/Index">
+                                                            Seller
+                                                        </a>
+                                                    </li>
+                                                }
+
+
+                                                <li style="padding-left: 0px; padding-right: 15px" class="nav-item">
+                                                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                        <button style="padding-left: 15px; margin-right: 20px" id="logout" type="submit" class="dropdown-item nav-link btn btn-link text-dark">Đăng xuất</button>
+                                                    </form>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
 
                                 }
 
-
-                                <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
-                                <li class="toggle__menu d-none d-md-block"><span class="ti-menu"></span></li>
+                                <li class=""> <a asp-action="WishList" asp-controller="Product"> <span class="ti-heart"></span></a></li>
+                                <li class=""> <a asp-action="Index" asp-controller="Cart"> <span class="ti-shopping-cart"></span></a></li>
                                 @if (SignInManager.IsSignedIn(User))
                                 {
                                     <li class="nav-item">
-                                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                            <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                                        </form>
+                                        @{
+
+                                            var email = user.Email;
+                                            var username = email.Substring(0, email.IndexOf("@"));
+                                        }
+                                        <a href="/Home/Address">  @username</a>
                                     </li>
                                 }
                             </ul>
@@ -214,8 +284,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="search__inner">
-                                <form action="#" method="get">
-                                    <input placeholder="Search here... " type="text">
+                                <form asp-action="Search" asp-controller="Product" method="get">
+                                    <input name="name" placeholder="Search here... " type="text">
                                     <button type="submit"></button>
                                 </form>
                                 <div class="search__close__btn">
@@ -227,114 +297,6 @@
                 </div>
             </div>
             <!-- End Search Popap -->
-            <!-- Start Offset MEnu -->
-            <div class="offsetmenu">
-                <div class="offsetmenu__inner">
-                    <div class="offsetmenu__close__btn">
-                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                    </div>
-                    <div class="off__contact">
-                        <div class="logo">
-                            <a href="index.html">
-                                <img src="~/images/logo/uniqlo.png" alt="logo">
-                            </a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
-                    </div>
-                    <ul class="sidebar__thumd">
-                        <li><a href="#"><img src="images/sidebar-img/1.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="images/sidebar-img/2.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="images/sidebar-img/3.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="images/sidebar-img/4.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="images/sidebar-img/5.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="images/sidebar-img/6.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="images/sidebar-img/7.jpg" alt="sidebar images"></a></li>
-                        <li><a href="#"><img src="images/sidebar-img/8.jpg" alt="sidebar images"></a></li>
-                    </ul>
-                    <div class="offset__widget">
-                        <div class="offset__single">
-                            <h4 class="offset__title">Language</h4>
-                            <ul>
-                                <li><a href="#"> Engish </a></li>
-                                <li><a href="#"> French </a></li>
-                                <li><a href="#"> German </a></li>
-                            </ul>
-                        </div>
-                        <div class="offset__single">
-                            <h4 class="offset__title">Currencies</h4>
-                            <ul>
-                                <li><a href="#"> USD : Dollar </a></li>
-                                <li><a href="#"> EUR : Euro </a></li>
-                                <li><a href="#"> POU : Pound </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="offset__sosial__share">
-                        <h4 class="offset__title">Follow Us On Social</h4>
-                        <ul class="off__soaial__link">
-                            <li><a class="bg--twitter" href="https://twitter.com/devitemsllc" target="_blank" title="Twitter"><i class="zmdi zmdi-twitter"></i></a></li>
-
-                            <li><a class="bg--instagram" href="https://www.instagram.com/devitems/" target="_blank" title="Instagram"><i class="zmdi zmdi-instagram"></i></a></li>
-
-                            <li><a class="bg--facebook" href="https://www.facebook.com/devitems/?ref=bookmarks" target="_blank" title="Facebook"><i class="zmdi zmdi-facebook"></i></a></li>
-
-                            <li><a class="bg--googleplus" href="https://plus.google.com/" target="_blank" title="Google Plus"><i class="zmdi zmdi-google-plus"></i></a></li>
-
-                            <li><a class="bg--google" href="#" target="_blank" title="Google"><i class="zmdi zmdi-google"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- End Offset MEnu -->
-            <!-- Start Cart Panel -->
-            <div class="shopping__cart">
-                <div class="shopping__cart__inner">
-                    <div class="offsetmenu__close__btn">
-                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                    </div>
-                    <div class="shp__cart__wrap">
-                        <div class="shp__single__product">
-                            <div class="shp__pro__thumb">
-                                <a href="#">
-                                    <img src="images/product/sm-img/1.jpg" alt="product images">
-                                </a>
-                            </div>
-                            <div class="shp__pro__details">
-                                <h2><a href="product-details.html">BO&Play Wireless Speaker</a></h2>
-                                <span class="quantity">QTY: 1</span>
-                                <span class="shp__price">$105.00</span>
-                            </div>
-                            <div class="remove__btn">
-                                <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                            </div>
-                        </div>
-                        <div class="shp__single__product">
-                            <div class="shp__pro__thumb">
-                                <a href="#">
-                                    <img src="images/product/sm-img/2.jpg" alt="product images">
-                                </a>
-                            </div>
-                            <div class="shp__pro__details">
-                                <h2><a href="product-details.html">Brone Candle</a></h2>
-                                <span class="quantity">QTY: 1</span>
-                                <span class="shp__price">$25.00</span>
-                            </div>
-                            <div class="remove__btn">
-                                <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="shoping__total">
-                        <li class="subtotal">Subtotal:</li>
-                        <li class="total__price">$130.00</li>
-                    </ul>
-                    <ul class="shopping__btn">
-                        <li><a href="cart.html">View Cart</a></li>
-                        <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End Cart Panel -->
         </div>
         <!-- End phan tren -->
         <!-- Start sldie -->
@@ -443,8 +405,6 @@
     <script src="~/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
-
 </html>
 
 

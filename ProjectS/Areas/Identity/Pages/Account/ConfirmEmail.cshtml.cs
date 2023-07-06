@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Project.Data;
 
 namespace Project.Areas.Identity.Pages.Account
 {
@@ -18,11 +19,13 @@ namespace Project.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ShopContext _shopContext;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> temp)
+        public ConfirmEmailModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> temp, ShopContext temp2)
         {
             _signInManager = temp;
             _userManager = userManager;
+            _shopContext = temp2;
         }
 
         /// <summary>
@@ -47,10 +50,12 @@ namespace Project.Areas.Identity.Pages.Account
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
             StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
-            
-            if(result.Succeeded)
+
+            if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
+                _shopContext.Carts.Add(new Models.Cart() { UserId = userId });
+                _shopContext.SaveChanges();
                 return RedirectToPage("/Index");
 
             }
@@ -59,7 +64,7 @@ namespace Project.Areas.Identity.Pages.Account
                 return Content("Lỗi confirm");
             }
 
-            
+
             //return Page();
         }
     }

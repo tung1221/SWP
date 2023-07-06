@@ -1,278 +1,256 @@
-﻿
-@{
-    var imageBlogs = ViewData["ImageBlogs"] as List<ImageBlog>;
-    var blog = ViewData["Blog"] as Blog;
-    var viewProductById = ViewData["ViewProductById"] as List<Product>;
+﻿@{
+    var Blog = ViewData["Blog"] as Blog;
+
+    var check = 0;
+    var check1 = 0;
+    var check2 = 0;
+    if (Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 1)
+        check1 = 1;
+    if (Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 2 && Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 2)
+        check = 1;
+    if (Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 3 && Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList().Count >= 4)
+        check2 = 1;
 }
-<link rel="stylesheet" href="~/css/blog.css" />
+@model Blog
+<!-- blogcss -->
+<link rel="stylesheet" href="~/blogcss/css/style.css">
+<!-- end blogcss -->
 
-<div class="htc__blog__area bg__white ptb--120">
-<!-- Start Bradcaump area -->
-<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ; position: relative;">
-    <div class="ht__bradcaump__wrap">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">Blog Details</h2>
-                        <nav class="bradcaump-inner">
-                            <a class="breadcrumb-item" href="/Home/Index">Home</a>
-                            <span class="brd-separetor">/</span>
-                            <span class="breadcrumb-item active">Blog Details</span>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- End Bradcaump area -->
-    <!-- Start Product Details -->
-    <section class="htc__product__details pt--20 pb--50 bg__white">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-lg-6 col-sm-12">
-                    <div class="product__details__container">
-                        <!-- Start Big image -->
-                        <div class="product__big__images">
-                            <div class="portfolio-full-image tab-content">
-                                @foreach (var image in imageBlogs)
-                                {
-                                    <div role="tabpanel" class="tab-pane @(image == imageBlogs.First() ? "active" : "")" id="img-tab-@(image.ImageBlogId)">
-                                        <img src="~/images/blog/@image.ImageURL" alt="full-image" style="max-width: 450px">
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        <!-- End Big image -->
-                    </div>
+
+<section class="htc__product__area shop__page ptb--130 bg__white">
+
+    <div id="page">
+        <!-- Mobile Menu -->
+        <!-- /Mobile Menu -->
+        <!-- /End Header 1 Warp -->
+        @if (check1 == 1)
+        {
+            <section class="boxed no-padding bg-img" style="background-image: url(@Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[0])">
+                <div class="sub-header full">
                 </div>
-                <div class="col-md-12 col-lg-6 col-sm-12 smt-30 xmt-30">
-                    <div class="htc__product__details__inner">
-                        <div class="pro__detl__title">
-                            <h2>Collection</h2>
-                        </div>
-                        <div class="pro__details">
-                            <p>
-                                <h2 class="ing-content-detailblog">@blog.content</h2>
-                            </p>
-                        </div>
-                        <div class="pro__social__share">
-                            <h2>Share :</h2>
-                            <ul class="pro__soaial__link">
-                                <li><a href="https://twitter.com/devitemsllc" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="https://www.instagram.com/devitems/" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
-                                <li><a href="https://www.facebook.com/devitems/?ref=bookmarks" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="https://plus.google.com/" target="_blank"><i class="zmdi zmdi-google-plus"></i></a></li>
+            </section>
+        }
+
+        <!-- /subheader -->
+
+        <section style="padding-top: 0px">
+            <div class="container">
+                <div class="row">
+                    <article style="padding: 0px 135px; " class="post">
+                        <h1 style="  margin-top: 60px; font-family: Poppins-SVN, Kailasa, Noto Sans; margin-bottom: 30px; font-weight: 800">@Model.name</h1>
+                        <div style="margin-top: 45px; margin-bottom: 45px" class="col-md-12">
+                            <strong class="dark-color">SHARE THIS ARTICLE</strong> <br />
+                            <ul class="widget-social-list-2 left">
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://vietcetera.com/" target="_blank"><i class="fa ti-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa ti-twitter-alt" aria-hidden="true"></i></a></li>
+                                <li>
+                                    <a href="https://www.instagram.com/?url=https://vietcetera.com/"><i class="fa ti-instagram" aria-hidden="true"></i></a>
+                                </li>
+                                <li><a href="#"><i class="fa ti-pinterest" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Product Details -->
-    <!-- Start Small images -->
-    <div class="nav product__small__images pb--50" role="tablist">
-        <div class="row">
-            @foreach (var image in imageBlogs)
-            {
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <a href="#img-tab-@(image.ImageBlogId)" role="tab" data-bs-toggle="tab" onclick="changeBigImage('~/images/blog/@image.ImageURL')">
-                        <img src="~/images/blog/@image.ImageURL" alt="small-image" style="max-width: 200px">
-                    </a>
-                </div>
-            }
-        </div>
-    </div>
-    <!-- End Small images -->
-    <!-- Start Product tab -->
-<section class="htc__product__details__tab bg__white pb--120">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-lg-12 col-sm-12">
-                <ul class="nav product__deatils__tab mb--60" role="tablist">
-                    <li role="presentation" class="active">
-                            <a class="active" href="#productinblog" role="tab" data-bs-toggle="tab">Product In Blog</a>
-                    </li>
-                  
-                    <li role="presentation">
-                        <a href="#reviews" role="tab" data-bs-toggle="tab">Reviews</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product__details__tab__content">
-                    <!-- Start Single Content -->
-                     <div role="tabpanel" id="productinblog" class="product__tab__content active">
-                            <div class="row product__list">
-                                @foreach (var item in viewProductById)
-                                {
+                        <div class="col-md-12">
+                            <p style="color: #585656; font-family: Merriweather;font-size: 23px;font-weight: 300;line-height: 35px;">
+                                @Model.content
+                            </p>
+                        </div>
 
-
-                                    <div class="col-md-3 single__pro col-lg-3 col-md-4 cat--1 col-sm-12">
-                                        <div class="product foo">
-                                            <div class="product__inner">
-                                                <div class="pro__thumb">
-                                                    <a href="#">
-                                                        <img src="~/images/product/@item.ImageMain" alt="product images">
-                                                    </a>
-                                                </div>
-                                                <div class="product__hover__info">
-                                                    <ul class="product__action">
-                                                        <li><a data-bs-toggle="modal" data-bs-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                        <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="add__to__wishlist">
-                                                    <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" href="wishlist.html"><span class="ti-heart"></span></a>
-                                                </div>
+                        @if (check == 1)
+                        {
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                        <img src="@Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[1]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="Image">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                                <img src="@Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[0]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
                                             </div>
-                                            <div class="product__details">
-                                                <h2><a href="product-details.html">Simple Black Clock</a></h2>
-                                                <ul class="product__price">
-                                                    <li class="old__price"></li>
-                                                    <li class="new__price">@item.ProductPrice vnd</li>
-                                                </ul>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                                <img src="@Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[1]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
                                             </div>
                                         </div>
                                     </div>
-                                }
-                            </div>
-                    </div>
-                <!-- End Single Content -->
-                    
-                    <!-- Start Single Content -->
-                    <div role="tabpanel" id="reviews" class="product__tab__content">
-                        <div class="review__address__inner">
-                            <!-- Start Single Review -->
-                            <div class="pro__review">
-                                <div class="review__thumb">
-                                    <img src="images/review/1.jpg" alt="review images">
                                 </div>
-                                <div class="review__details">
-                                    <div class="review__info">
-                                        <h4><a href="#">Gerald Barnes</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                        </ul>
-                                        <div class="rating__send">
-                                            <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
+                            </div>
+                        }
+
+                        @if (Model.isCollection)
+                        {
+                            @if (check2 == 1)
+                            {
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                                    <img src="@Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[2]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                                    <img src="@Model.ImageBlogs.Where(p => p.IsBigImg == false).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[3]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" alt="Image">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="review__date">
-                                        <span>27 Jun, 2022 at 2:30pm</span>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                </div>
-                            </div>
-                            <!-- End Single Review -->
-                            <!-- Start Single Review -->
-                            <div class="pro__review ans">
-                                <div class="review__thumb">
-                                    <img src="images/review/2.jpg" alt="review images">
-                                </div>
-                                <div class="review__details">
-                                    <div class="review__info">
-                                        <h4><a href="#">Gerald Barnes</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                        </ul>
-                                        <div class="rating__send">
-                                            <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
+
+                                    <div class="col-md-8">
+                                        <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;">
+                                            <img src="@Model.ImageBlogs.Where(p => p.IsBigImg).OrderBy(p => p.ImageBlogId).Select(p => p.ImageURL).ToList()[2]" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="Image">
                                         </div>
                                     </div>
-                                    <div class="review__date">
-                                        <span>27 Jun, 2022 at 2:30pm</span>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
                                 </div>
-                            </div>
-                            <!-- End Single Review -->
+                            }
+                        }
+
+
+                        <div style="margin-top: 50px" class="col-md-12">
+                            <p style="color: #585656; font-family: Merriweather;font-size: 23px;font-weight: 300;line-height: 35px;">
+                                @Model.content2
+                            </p>
                         </div>
-                        <!-- Start RAting Area -->
-                        <div class="rating__wrap">
-                            <h2 class="rating-title">Write  A review</h2>
-                            <h4 class="rating-title-2">Your Rating</h4>
-                            <div class="rating__list">
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                            </div>
-                        </div>
-                        <!-- End RAting Area -->
-                        <div class="review__box">
-                            <form id="review-form">
-                                <div class="single-review-form">
-                                    <div class="review-box name">
-                                        <input type="text" placeholder="Type your name">
-                                        <input type="email" placeholder="Type your email">
-                                    </div>
-                                </div>
-                                <div class="single-review-form">
-                                    <div class="review-box message">
-                                        <textarea placeholder="Write your review"></textarea>
-                                    </div>
-                                </div>
-                                <div class="review-btn">
-                                    <a class="fv-btn" href="#">submit review</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- End Single Content -->
+                    </article>
                 </div>
             </div>
-        </div>
+        </section>
+        <!-- /article Post -->
+
+
+        <section class=" no-padding">
+            <div class="container">
+                <div style="padding: 0px 135px" class="row">
+                    @if (Model.isCollection)
+                    {
+                        <div style="padding-left: 0px" class="col-md-12">
+                            <h2 style="text-align: center">Bộ sưu tập</h2>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="padding-left: 0px" class="col-md-12">
+                            <h2>RELATED POSTS</h2>
+                        </div>
+                    }
+                    <div class="row">
+                        @foreach (var item in Model.Products)
+                        {
+                            <div style="padding-left: 0px" class="col-md-3 single__pro col-lg-3 col-md-4 cat--1 col-sm-12">
+                                <div style="padding-left: 0px" class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            <a href="#">
+                                                <img src="@item.ImageMain" alt="product images">
+                                            </a>
+                                        </div>
+                                        <div class="product__hover__info">
+                                            <ul class="product__action">
+                                                <li><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId" title="Quick View" class="quick-view modal-view detail-link"><span class="ti-plus"></span></a></li>
+                                                <li><a title="Add TO Cart" asp-controller="Cart" asp-action="Index"><span class="ti-shopping-cart"></span></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="add__to__wishlist">
+                                            <a data-bs-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" asp-route-id="@item.ProductId" asp-action="AddWishList" asp-controller="Product"><span class="ti-heart"></span></a>
+                                        </div>
+                                    </div>
+                                    <div class="product__details">
+                                        <h2 style="margin-bottom: 10px"><a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId">@item.ProductName</a></h2>
+                                        <ul class="product__price">
+                                            @if (item.IsAvailble == false)
+                                            {
+                                                <li style="padding-left: 0px" class="new__price">Hết hàng</li>
+                                            }
+                                            else
+                                            {
+                                                if (item.Discount == 0)
+                                                {
+                                                    <li style="padding-left: 0px" class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="old__price">@(item.ProductPrice).000vnd</li>
+                                                    <li class="new__price">@(item.ProductPrice - item.Discount).000vnd</li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /relate post -->
+        @if (Model.isCollection != true)
+        {
+            <section class="no-padding mgt-60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="padding: 0px 135px" class="list-comments">
+                                <h2>COMMENTS</h2>
+                                <ul class="commentlist">
+                                    <li>
+                                        <div class="user-image"><img src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688368768/4_ntnoty.jpg" alt="" class="img-responsive"></div>
+                                        <div class="comment-right">
+                                            <div class="comment-info">
+                                                <strong class="dark-color pull-left name">Angela Allen</strong> <div class="date-comment grey-color pull-right">July, 19th, 2016 on 10.30 PM</div>
+                                            </div>
+                                            <p>Nunc risus ex, tempus quis purus ac, tempor consequat ex. Vivamus sem magna, maximus at est id, maximus aliquet nunc. Suspendisse lacinia velit a eros porttitor, in interdum ante faucibus.</p>
+                                            <a class="c-reply" href="#">Reply</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <ul class="children">
+                                            <li>
+                                                <div class="user-image"><img class="img-responsive" src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688368768/4_ntnoty.jpg" alt=""></div>
+                                                <div class="comment-right">
+                                                    <div class="comment-info">
+                                                        <strong class="dark-color pull-left name">Smatha Hughes</strong> <div class="date-comment grey-color pull-right">23 minutes ago</div>
+                                                    </div>
+                                                    <p>Tristique Aenean Ultricies Amet.</p>
+                                                    <a class="c-reply" href="#">Reply</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="user-image"><img class="img-responsive" src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688368768/4_ntnoty.jpg" alt=""></div>
+                                                <div class="comment-right">
+                                                    <div class="comment-info">
+                                                        <strong class="dark-color pull-left name">James Cemeron</strong> <div class="date-comment grey-color pull-right">53 minutes ago</div>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                                                    <a class="c-reply" href="#">Reply</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="user-image"><img class="img-responsive" src="https://res.cloudinary.com/dtwmfo4fl/image/upload/v1688368768/4_ntnoty.jpg" alt=""></div>
+                                        <div class="comment-right">
+                                            <div class="comment-info">
+                                                <strong class="dark-color pull-left name">Betty Perterson</strong> <div class="date-comment grey-color pull-right">19 hours ago</div>
+                                            </div>
+                                            <p>Dolor Condimentum Lorem Vestibulum Sollicitudin.</p>
+                                            <a class="c-reply" href="#">Reply</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line-top-right w-680"></div>
+            </section>
+        }
+
+        <!-- /Comment List -->
     </div>
 </section>
-
-</div>
-
-
 

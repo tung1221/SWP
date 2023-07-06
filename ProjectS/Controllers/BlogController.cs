@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Project.Data;
 using Project.Models;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Reflection.Metadata;
 
 namespace Project.Controllers
 {
@@ -17,46 +20,42 @@ namespace Project.Controllers
 
         public IActionResult Index()
         {
-            var result = from a in _context.Blogs
-                         join b in _context.ImageBlogs on a.Blogid equals b.BlogId
-                         select new { Blog = a, ImageBlog = b };
+            var blogs = _context.Blogs
+            .Include(b => b.ImageBlogs)
+            .Where(b => b.ImageBlogs.Any(ib => ib.IsBigImg == true))
+            .Select(b => new
+            {
+                b.name,
+                b.Blogid,
+                b.HomeStatus,
+                b.content,
+                b.DateUp,
+                FirstImage = b.ImageBlogs.Single(ib => ib.IsBigImg == true).ImageURL
+            })
+            .ToList();
 
-            var blogs = result.Select(r => r.Blog).ToList();
-            var imageBlogs = result.Select(r => r.ImageBlog).ToList();
 
-            ViewData["Blogs"] = blogs;
-            ViewData["ImageBlogs"] = imageBlogs;
 
-            return View();
+            return View(blogs);
         }
+
 
         public IActionResult BlogDetails(int blogId)
         {
-            var viewProductById = _context.Products
-                .Where(p => p.HomeStatus == true && p.BlogId == blogId)
-                .ToList();
+            var check = _context.Blogs.Find(blogId);
 
-            var blog = _context.Blogs.FirstOrDefault(b => b.Blogid == blogId);
-
-            if (blog == null)
+            if (check == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
-
-            var images = _context.ImageBlogs.Where(i => i.BlogId == blogId).ToList();
-
-            ViewData["Blog"] = blog;
-            ViewData["ImageBlogs"] = images;
-            ViewData["ViewProductById"] = viewProductById;
-
-            return View();
+            else
+            {
+                var blog = _context.Blogs
+               .Include(b => b.Products)
+               .Include(b => b.ImageBlogs)
+               .FirstOrDefault(b => b.Blogid == blogId);
+                return View(blog);
+            }
         }
-
-
-
-
-
-
-
     }
 }

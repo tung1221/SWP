@@ -1,0 +1,136 @@
+﻿@model List<Bill>
+<style>
+    .bill-item {
+        border: 1px solid #ccc;
+        padding: 25px;
+        text-align: left;
+        background-color: #efeffe;
+        margin: 25px;
+        border-radius: 10px;
+    }
+
+        .bill-item h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .bill-item p {
+            margin-bottom: 5px;
+        }
+</style>
+
+<div>
+
+    <!-- Start Bradcaump area -->
+    <div class="col-12">
+        <nav class="mainmenu__nav  d-block">
+            <ul class="main__menu">
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center; ">
+                    <a href="/cart/processbill?status=''">Tất cả</a>
+
+                </li>
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
+                    <a href="/cart/processbill?status=0">Đã đặt hàng</a>
+
+                </li>
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
+                    <a href="/cart/processbill?status=1">Đã nhận đơn</a>
+
+                </li>
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
+                    <a href="/cart/processbill?status=2">Đang giao hàng</a>
+
+                </li>
+                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
+                    <a href="/cart/processbill?status=3">Đã hoàn thành</a>
+
+                </li> 
+            </ul>
+        </nav>
+    </div>
+    <!-- End Bradcaump area -->
+    <div class="wishlist-area ptb--120 bg__white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="wishlist-content">
+                        <div class="wishlist-table table-responsive" style="text-align: center;">
+                            @if (Model == null)
+                            {
+                                <img src="~/images/logo/shopping-bag.png" style="width: 150px;height: 150px;">
+                                <p>Không có đơn hàng nào</p>
+                            }
+                            else
+                            {
+                                @foreach (var bill in Model)
+                                {
+
+                                    <div class="bill-item">
+                                        <div class="bill-item-inner">
+                                            <h3>Id Đơn hàng: @bill.BillId</h3>
+                                            <p>
+                                                Tiến trình:
+                                                @if (bill.BillStatus == "0")
+                                                {
+                                                    <span class="status-badge success">
+                                                        <i class='bx bxs-circle me-1'></i>Đã Đặt Hàng
+                                                    </span>
+                                                }
+                                                else if (bill.BillStatus == "1")
+                                                {
+                                                    <span class="status-badge warning">
+                                                        <i class='bx bxs-circle me-1'></i>Đã nhận đơn
+                                                        </span>
+                                                }
+                                                else if (bill.BillStatus == "2")
+                                                {
+                                                    <span class="status-badge primary">
+                                                        <i class='bx bxs-circle me-1'></i>Đang giao hàng
+                                                    </span>
+                                                }
+                                                else if (bill.BillStatus == "3")
+                                                {
+                                                    <span class="status-badge success">
+                                                        <i class='bx bxs-circle me-1'></i>Đã hoàn thành
+                                                    </span>
+                                                }
+                                                
+                                            </p>
+                                            <p>Tổng giá tiền: @bill.TotalPrice,000vnd</p>
+                                            <p>Các sản phẩm: @string.Join(", ", bill.BillDetails.Select(bd => bd.Product.ProductName))</p>
+
+                                            <!-- Xử lý phản hồi nếu bill.Status là 3-->
+                                            @if (bill.BillStatus == "3")
+                                            {
+                                                foreach (var billDetail in bill.BillDetails)
+                                                {
+                                                    if (!billDetail.IsFeedbackSubmitted)
+                                                    {
+                                                        <div class="feedback-form">
+                                                            <h3>Phản hồi cho sản phẩm: @billDetail.Product.ProductName</h3>
+                                                            <img src="@billDetail.Product.ImageMain">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                <a href="/cart/processbillfb?status=3">Gửi Feedback</a>
+                                                                    </button>
+                                                            
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
