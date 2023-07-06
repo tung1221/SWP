@@ -15,7 +15,6 @@ namespace Project.Controllers
         }
         public IActionResult Index()
         {
-            LoadRoleUser();
             DateTime now = DateTime.Now;
             var x = _shopContext.Bills.Where(p => p.PurchaseDate.Year == now.Year).Where(p => p.BillStatus.Equals("3")).ToList();
             double total = 0;
@@ -52,7 +51,6 @@ namespace Project.Controllers
 		{
 			var feedbacks = _shopContext.Feedbacks.ToList();
 
-			LoadRoleUser();
 			return View(feedbacks);
 		}
 
@@ -77,46 +75,7 @@ namespace Project.Controllers
 			}
 			return RedirectToAction("cfFeedback", "admin");
 		}
-		private void LoadRoleUser()
-		{
-			var user = HttpContext.User;
-
-			if (user.Identity.IsAuthenticated)
-			{
-				if (user.IsInRole("Admin"))
-				{
-					ViewBag.ShowAdminButton = true;
-				}
-				else
-				{
-					ViewBag.ShowAdminButton = false;
-				}
-
-				if (user.IsInRole("Marketing"))
-				{
-					ViewBag.ShowMarketingButton = true;
-				}
-				else
-				{
-					ViewBag.ShowMarketingButton = false;
-				}
-
-				if (user.IsInRole("Seller"))
-				{
-					ViewBag.ShowSellerButton = true;
-				}
-				else
-				{
-					ViewBag.ShowSellerButton = false;
-				}
-			}
-			else
-			{
-				ViewBag.ShowAdminButton = false;
-				ViewBag.ShowMarketingButton = false;
-				ViewBag.ShowSellerButton = false;
-			}
-		}
+		
 
 	}
 }

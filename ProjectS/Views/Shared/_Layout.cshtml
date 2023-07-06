@@ -9,45 +9,14 @@
         var e = _shopContext.Entry(c);
         e.Collection(c => c.SubCategories).Load();
     }
-
-
     var user = SignInManager.UserManager.GetUserAsync(User).Result;
 
-    if (User.Identity.IsAuthenticated)
-    {
-        if (User.IsInRole("Admin"))
-        {
-            ViewBag.ShowAdminButton = true;
-        }
-        else
-        {
-            ViewBag.ShowAdminButton = false;
-        }
-
-        if (User.IsInRole("Marketing"))
-        {
-            ViewBag.ShowMarketingButton = true;
-        }
-        else
-        {
-            ViewBag.ShowMarketingButton = false;
-        }
-
-        if (User.IsInRole("Seller"))
-        {
-            ViewBag.ShowSellerButton = true;
-        }
-        else
-        {
-            ViewBag.ShowSellerButton = false;
-        }
-    }
-    else
-    {
-        ViewBag.ShowAdminButton = false;
-        ViewBag.ShowMarketingButton = false;
-        ViewBag.ShowSellerButton = false;
-    }
+}
+@{
+    var users = Context.User;
+    var isAdmin = users.Identity.IsAuthenticated && users.IsInRole("Admin");
+    var isMarketing = users.Identity.IsAuthenticated && users.IsInRole("Marketing");
+    var isSeller = users.Identity.IsAuthenticated && users.IsInRole("Seller");
 }
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -211,7 +180,7 @@
                                                         Đơn hàng
                                                     </a>
                                                 </li>
-                                                @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
+                                                @if (isAdmin)
                                                 {
                                                     <li style="padding-left: 0px" class="nav-item">
                                                         <a class="dropdown-item" href="/admin/index">
@@ -220,7 +189,7 @@
                                                     </li>
                                                 }
 
-                                                @if (ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
+                                                @if (isMarketing)
                                                 {
                                                     <li style="padding-left: 0px" class="nav-item">
                                                         <a class="dropdown-item" href="/Marketing/Index">
@@ -229,7 +198,7 @@
                                                     </li>
                                                 }
 
-                                                @if (ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
+                                                @if (isSeller)
                                                 {
                                                     <li style="padding-left: 0px" class="nav-item">
                                                         <a class="dropdown-item" href="/Seller/Index">

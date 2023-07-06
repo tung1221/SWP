@@ -23,14 +23,12 @@ namespace Project.Controllers
 
 		public IActionResult Index()
 		{
-			LoadRoleUser();
 
 			return View();
 		}
 
 		public IActionResult ViewAll()
 		{
-			LoadRoleUser();
 			List<Bill> bills = _shopContext.Bills.ToList()
 				.Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 3)
 				.ToList();
@@ -41,7 +39,6 @@ namespace Project.Controllers
 
 		public IActionResult ViewOrder()
 		{
-			LoadRoleUser();
 			var currentUser = HttpContext.User;
 
 			if (currentUser.Identity.IsAuthenticated)
@@ -67,7 +64,6 @@ namespace Project.Controllers
 
 		public IActionResult DetailBill(int billId)
 		{
-			LoadRoleUser();
 
 			var bill = _shopContext.Bills.
 					Include(b => b.BillDetails)
@@ -95,46 +91,7 @@ namespace Project.Controllers
 			}
 
 		}
-		private void LoadRoleUser()
-		{
-			var user = HttpContext.User;
-
-			if (user.Identity.IsAuthenticated)
-			{
-				if (user.IsInRole("Admin"))
-				{
-					ViewBag.ShowAdminButton = true;
-				}
-				else
-				{
-					ViewBag.ShowAdminButton = false;
-				}
-
-				if (user.IsInRole("Marketing"))
-				{
-					ViewBag.ShowMarketingButton = true;
-				}
-				else
-				{
-					ViewBag.ShowMarketingButton = false;
-				}
-
-				if (user.IsInRole("Seller"))
-				{
-					ViewBag.ShowSellerButton = true;
-				}
-				else
-				{
-					ViewBag.ShowSellerButton = false;
-				}
-			}
-			else
-			{
-				ViewBag.ShowAdminButton = false;
-				ViewBag.ShowMarketingButton = false;
-				ViewBag.ShowSellerButton = false;
-			}
-		}
+		
 
 		public IActionResult Delete(int billId)
 		{
