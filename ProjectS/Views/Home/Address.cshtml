@@ -21,22 +21,38 @@
             {
 
                 <form asp-action="Address" asp-controller="Home" method="post">
-                    <span style="font-size: 18px; font-weight: 400 ">Tài khoản: </span>
-                    <br />
-                    <span> @_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().Substring(0, _shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().IndexOf("@")) </span>
-                    <br>
-                    <br />
-                    <label>
-                        <span style="font-size: 18px; font-weight: 400">Số điện thoại: </span>
-                        <input value="@_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.PhoneNumber).FirstOrDefault()" type="text" name="phone" /> <br />
-                        @if (ViewData["Error"] != null)
-                        {
-                            <br>
-                            <span class="text-danger">@ViewData["Error"]</span>
-                        }
-                    </label>
-                    <br>
-                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span style="font-size: 18px; font-weight: 400 ">Tài khoản: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span> @_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().Substring(0, _shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().IndexOf("@")) </span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span style="font-size: 18px; font-weight: 400">Số điện thoại: </span>
+
+                        </div>
+                        <div class="col-md-6">
+                            <input value="@_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.PhoneNumber).FirstOrDefault()" type="text" name="phone" /> <br />
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            @if (ViewData["Error"] != null)
+                            {
+                                <span class="text-danger">@ViewData["Error"]</span>
+                            }
+                        </div>
+                    </div>
+
+
+
                     @foreach (var l in _shopContext.Addresses.Where(p => p.UserId == SignInManager.UserManager.GetUserId(User)))
                     {
                         if (count == 0)
