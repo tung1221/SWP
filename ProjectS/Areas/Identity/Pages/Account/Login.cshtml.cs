@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Project.Data;
 
 namespace Project.Areas.Identity.Pages.Account
 {
@@ -22,13 +23,15 @@ namespace Project.Areas.Identity.Pages.Account
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ShopContext _shopContext;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager , ShopContext shopContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _shopContext = shopContext;
         }
 
         /// <summary>
@@ -119,7 +122,24 @@ namespace Project.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
 
-                        return LocalRedirect(returnUrl);
+                    var x = _shopContext.Roles.Where(p => p.Name.Equals("Admin")).Select(p => p.Id).ToList();
+
+                    if (x.Count > 0)
+                    {
+                        var n = _shopContext.Users.Where(p => p.Email == Input.Email).Select(p => p.Id).ToList();
+                        if (n.Count > 0)
+                        {
+                            var t = _shopContext.UserRoles.Where(p => p.UserId.Equals(n[0])).Where(p => p.RoleId.Equals(x[0])).ToList();
+                            if (t.Count > 0)
+                            {
+                                return Redirect("/Admin/Index");
+                            }
+                        }
+                    
+                    }
+
+
+                    return LocalRedirect(returnUrl);
 
 
                 }

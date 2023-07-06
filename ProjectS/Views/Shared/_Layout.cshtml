@@ -9,14 +9,45 @@
         var e = _shopContext.Entry(c);
         e.Collection(c => c.SubCategories).Load();
     }
+
+
     var user = SignInManager.UserManager.GetUserAsync(User).Result;
 
-}
-@{
-    var users = Context.User;
-    var isAdmin = users.Identity.IsAuthenticated && users.IsInRole("Admin");
-    var isMarketing = users.Identity.IsAuthenticated && users.IsInRole("Marketing");
-    var isSeller = users.Identity.IsAuthenticated && users.IsInRole("Seller");
+    if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            ViewBag.ShowAdminButton = true;
+        }
+        else
+        {
+            ViewBag.ShowAdminButton = false;
+        }
+
+        if (User.IsInRole("Marketing"))
+        {
+            ViewBag.ShowMarketingButton = true;
+        }
+        else
+        {
+            ViewBag.ShowMarketingButton = false;
+        }
+
+        if (User.IsInRole("Seller"))
+        {
+            ViewBag.ShowSellerButton = true;
+        }
+        else
+        {
+            ViewBag.ShowSellerButton = false;
+        }
+    }
+    else
+    {
+        ViewBag.ShowAdminButton = false;
+        ViewBag.ShowMarketingButton = false;
+        ViewBag.ShowSellerButton = false;
+    }
 }
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -109,7 +140,7 @@
 
                                         </ul>
                                     </li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li><a href="/Home/Contact">contact</a></li>
                                 </ul>
                             </nav>
 
@@ -180,7 +211,7 @@
                                                         Đơn hàng
                                                     </a>
                                                 </li>
-                                                @if (isAdmin)
+                                                @if (ViewBag.ShowAdminButton != null && ViewBag.ShowAdminButton)
                                                 {
                                                     <li style="padding-left: 0px" class="nav-item">
                                                         <a class="dropdown-item" href="/admin/index">
@@ -189,19 +220,19 @@
                                                     </li>
                                                 }
 
-                                                @if (isMarketing)
+                                                @if (ViewBag.ShowMarketingButton != null && ViewBag.ShowMarketingButton)
                                                 {
                                                     <li style="padding-left: 0px" class="nav-item">
-                                                        <a class="dropdown-item" href="/Marketing/Index">
+                                                        <a class="dropdown-item" href="/Admin/Index">
                                                             Marketing
                                                         </a>
                                                     </li>
                                                 }
 
-                                                @if (isSeller)
+                                                @if (ViewBag.ShowSellerButton != null && ViewBag.ShowSellerButton)
                                                 {
                                                     <li style="padding-left: 0px" class="nav-item">
-                                                        <a class="dropdown-item" href="/Seller/Index">
+                                                        <a class="dropdown-item" href="/Admin/Index">
                                                             Seller
                                                         </a>
                                                     </li>
@@ -284,7 +315,7 @@
                         <div class="ft__widget">
                             <div class="ft__logo">
                                 <a href="index.html">
-                                    <img src="~/images/logo/uniqlo.png" alt="footer logo">
+                                    <img src="/images/logo/Logo.png" alt="footer logo">
                                 </a>
                             </div>
                             <div class="footer__details">

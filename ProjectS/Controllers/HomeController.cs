@@ -23,6 +23,8 @@ namespace Project.Controllers
 
         public IActionResult Index(string mode)
         {
+         
+
             var listProduct = _shopContext.Products.Where(p => p.HomeStatus == true);
             if (mode != null)
             {
@@ -64,7 +66,7 @@ namespace Project.Controllers
             else
             {
                 _shopContext.Users.Find(signInManager.UserManager.GetUserId(User)).PhoneNumber = phone;
-                _shopContext.Addresses.Add(new Address() { UserId = signInManager.UserManager.GetUserId(User), District = a.District, Province = a.Province, Town = a.Town , SpecificAdd = a.SpecificAdd });
+                _shopContext.Addresses.Add(new Address() { UserId = signInManager.UserManager.GetUserId(User), District = a.District, Province = a.Province, Town = a.Town, SpecificAdd = a.SpecificAdd });
                 _shopContext.SaveChanges();
                 return View();
             }
@@ -84,6 +86,11 @@ namespace Project.Controllers
                 _shopContext.SaveChanges();
                 return Redirect("/Home/Address");
             }
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
         }
     }
 }

@@ -6,134 +6,139 @@
     int count = 0;
 }
 
-<div style=" margin-top: 70px">
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <ul class="nav nav-pills flex-column">
-                <li style=" border-radius: 6px; background-color:black" class="nav-item"><a style="color: white" class="nav-link " href="/Home/Address">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="/user/changeEmail">Email</a></li>
-                <li class="nav-item"><a class="nav-link" href="/user/changePass">Password</a></li>
-            </ul>
-        </div>
-        <div style="border-left: 2px solid black" class="col-md-9">
-            @if (SignInManager.IsSignedIn(User))
-            {
+<section style="padding-top: 20px" class="htc__product__details pt--120 pb--100 bg__white">
+    <div style=" margin-top: 70px">
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="nav nav-pills flex-column">
+                    <li style=" border-radius: 6px; background-color:#0D6EFD" class="nav-item"><a style="color: white" class="nav-link " href="/Home/Address">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user/changeEmail">Email</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user/changePass">Password</a></li>
+                </ul>
+            </div>
+            <div style="border-left: 2px solid black" class="col-md-9">
+                @if (SignInManager.IsSignedIn(User))
+                {
 
-                <form asp-action="Address" asp-controller="Home" method="post">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <span style="font-size: 18px; font-weight: 400 ">Tài khoản: </span>
+                    <form asp-action="Address" asp-controller="Home" method="post">
+                        <div style="margin-bottom: 12px" class="row">
+                            <div class="col-md-3">
+                                <span style="font-size: 22px; font-weight: 700 ">Tài khoản: </span>
+                            </div>
+                            <div class="col-md-3">
+                                <span style="font-size: 22px; font-weight: 700">Số điện thoại: </span>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <span> @_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().Substring(0, _shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().IndexOf("@")) </span>
-
+                        <div style="margin-bottom: 12px" class="row">
+                            <div class="col-md-3">
+                                <input type="text" readonly value="@_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().Substring(0, _shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().IndexOf("@")) ">
+                            </div>
+                            <div class="col-md-3">
+                                <input value="@_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.PhoneNumber).FirstOrDefault()" type="text" name="phone" /> <br />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <span style="font-size: 18px; font-weight: 400">Số điện thoại: </span>
-
+                        <div style="margin-bottom: 12px" class="row">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-3">
+                                @if (ViewData["Error"] != null)
+                                {
+                                    <span class="text-danger">@ViewData["Error"]</span>
+                                }
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <input value="@_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.PhoneNumber).FirstOrDefault()" type="text" name="phone" /> <br />
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                        </div>
-                        <div class="col-md-6">
-                            @if (ViewData["Error"] != null)
-                            {
-                                <span class="text-danger">@ViewData["Error"]</span>
-                            }
-                        </div>
-                    </div>
 
 
 
-                    @foreach (var l in _shopContext.Addresses.Where(p => p.UserId == SignInManager.UserManager.GetUserId(User)))
-                    {
-                        if (count == 0)
+                        @foreach (var l in _shopContext.Addresses.Where(p => p.UserId == SignInManager.UserManager.GetUserId(User)))
                         {
-                            <span style="font-size: 18px">Địa chỉ</span> <br />
-                            count++;
+                            if (count == 0)
+                            {
+                                <span style=" margin-top: 35px; margin-bottom: 20px; font-size: 22px; font-weight: 700">Địa chỉ</span> <br />
+                                count++;
+                            }
+                            <div style="margin-right: 300px">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <input type="text" readonly value="@l.Province">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" readonly value="@l.Town">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" readonly value="@l.District">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" readonly value="@l.SpecificAdd">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="/Home/Remove?id=@l.AddressId">
+                                            <i class="ti-close"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         }
-                        <div style="margin-right: 300px">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <span>@l.Province</span>
+                        <br>
+                        <br />
+                        <h3 style=" margin-top: 0px; margin-bottom: 5px; font-size: 22px; font-weight: 700">Thêm địa chỉ</h3>
+                        <div>
+                            <div style="margin-right: 300px">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <select asp-for="@Model.Province" class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
+                                            <option value="" selected>Chọn tỉnh thành</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select name="Town" class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
+                                            <option value="" selected>Chọn quận huyện</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select name="District" class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
+                                            <option value="" selected>Chọn phường xã</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <span>@l.Town</span>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.ValidationMessageFor(model => model.Town, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <span>@l.District</span>
+                                <h3 style=" margin-top: 35px; margin-bottom: 20px; font-size: 22px; font-weight: 700">Thêm địa chỉ</h3>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="text" asp-for="@Model.SpecificAdd">
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <span>@l.SpecificAdd</span> <a href="/Home/Remove?id=@l.AddressId"><i class="ti-close"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    <br>
-                    <br />
-                    <h3>Thêm địa chỉ</h3>
-                    <div>
-                        <div style="margin-right: 300px">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <select asp-for="@Model.Province" class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
-                                        <option value="" selected>Chọn tỉnh thành</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select name="Town" class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
-                                        <option value="" selected>Chọn quận huyện</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select name="District" class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
-                                        <option value="" selected>Chọn phường xã</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-md-3">
-                                    @Html.ValidationMessageFor(model => model.Town, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-md-3">
-                                    @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <input type="text" asp-for="@Model.SpecificAdd">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    @Html.ValidationMessageFor(model => model.SpecificAdd, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        @Html.ValidationMessageFor(model => model.SpecificAdd, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <input type="text" asp-for="@Model.AddressId" value="1" hidden>
-                    <input type="text" asp-for="@Model.UserId" value="1" hidden>
-                    <input style=" margin-top: 10px; width: 50px; background-color: black; color: white; border-radius: 4px" type="submit" value="save" />
-                </form>
-            }
-            else
-            {
-                <h1 class="btn btn-danger">Access Denied</h1>
-            }
+                        <input type="text" asp-for="@Model.AddressId" value="1" hidden>
+                        <input type="text" asp-for="@Model.UserId" value="1" hidden>
+                        <input style=" margin-top: 10px; width: 50px; background-color: black; color: white; border-radius: 4px" type="submit" value="save" />
+                    </form>
+                }
+                else
+                {
+                    <h1 class="btn btn-danger">Access Denied</h1>
+                }
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
