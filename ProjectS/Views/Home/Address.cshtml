@@ -5,24 +5,23 @@
 @{
     int count = 0;
 }
-<h1>Manage your account</h1>
-<div>
-    <h2>Change your account settings</h2>
+
+<div style=" margin-top: 70px">
     <hr />
     <div class="row">
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column">
-                <li style=" border-radius: 6px; background-color: rgb(13, 110, 253)" class="nav-item"><a style="color: white" class="nav-link" href="/Home/Address">Profile</a></li>
+                <li style=" border-radius: 6px; background-color:black" class="nav-item"><a style="color: white" class="nav-link " href="/Home/Address">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="/user/changeEmail">Email</a></li>
                 <li class="nav-item"><a class="nav-link" href="/user/changePass">Password</a></li>
             </ul>
         </div>
-        <div class="col-md-9">
+        <div style="border-left: 2px solid black" class="col-md-9">
             @if (SignInManager.IsSignedIn(User))
             {
-             
+
                 <form asp-action="Address" asp-controller="Home" method="post">
-                    <span style="font-size: 18px; font-weight: 400 " >Tài khoản: </span>
+                    <span style="font-size: 18px; font-weight: 400 ">Tài khoản: </span>
                     <br />
                     <span> @_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().Substring(0, _shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.Email).FirstOrDefault().IndexOf("@")) </span>
                     <br>
@@ -30,7 +29,7 @@
                     <label>
                         <span style="font-size: 18px; font-weight: 400">Số điện thoại: </span>
                         <input value="@_shopContext.Users.Where(p => p.Id == SignInManager.UserManager.GetUserId(User)).Select(p => p.PhoneNumber).FirstOrDefault()" type="text" name="phone" /> <br />
-                        @if(   ViewData["Error"] != null)
+                        @if (ViewData["Error"] != null)
                         {
                             <br>
                             <span class="text-danger">@ViewData["Error"]</span>
@@ -42,7 +41,7 @@
                     {
                         if (count == 0)
                         {
-                            <span style="font-size: 18px">Địa chỉ</span> <br /> 
+                            <span style="font-size: 18px">Địa chỉ</span> <br />
                             count++;
                         }
                         <div style="margin-right: 300px">
@@ -97,7 +96,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                   <input type="text" asp-for="@Model.SpecificAdd">
+                                    <input type="text" asp-for="@Model.SpecificAdd">
                                 </div>
                             </div>
                             <div class="row">
@@ -109,7 +108,7 @@
                     </div>
                     <input type="text" asp-for="@Model.AddressId" value="1" hidden>
                     <input type="text" asp-for="@Model.UserId" value="1" hidden>
-                    <input type="submit" value="save" />
+                    <input style=" margin-top: 10px; width: 50px; background-color: black; color: white; border-radius: 4px" type="submit" value="save" />
                 </form>
             }
             else
