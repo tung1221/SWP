@@ -35,20 +35,18 @@
 
                 </li>
                 <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
-                    <a href="/cart/processbill?status=1">Đang xử lý</a>
+                    <a href="/cart/processbill?status=1">Đã nhận đơn</a>
 
                 </li>
                 <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
-                    <a href="/cart/processbill?status=2">Đã nhận hàng</a>
+                    <a href="/cart/processbill?status=2">Đang giao hàng</a>
 
                 </li>
                 <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
-                    <a href="/cart/processbill?status=3">Đang giao hàng</a>
+                    <a href="/cart/processbill?status=3">Đã hoàn thành</a>
 
                 </li>
-                <li class="status-menu-item" style="border-top: 1px solid;border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;width: 170px;text-align: center;">
-                    <a href="/cart/processbill?status=4">Đã giao hàng</a>
-                </li>
+                
             </ul>
         </nav>
     </div>
@@ -84,7 +82,7 @@
                                             <p>Các sản phẩm: @string.Join(", ", bill.BillDetails.Select(bd => bd.Product.ProductName))</p>
                                             
                                             <!-- Xử lý phản hồi nếu bill.Status là 4 -->
-                                            @if (bill.BillStatus == "4")
+                                            @if (bill.BillStatus == "3")
                                             {
                                                 foreach (var billDetail in bill.BillDetails)
                                                 {

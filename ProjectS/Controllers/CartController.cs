@@ -295,10 +295,7 @@ namespace Project.Controllers
 					{
 						bills = bills.Where(b => b.BillStatus == "3");
 					}
-					else if (status == "4")
-					{
-						bills = bills.Where(b => b.BillStatus == "4");
-					}
+					
 				}
 
 				var billList = bills.ToList();
@@ -331,10 +328,14 @@ namespace Project.Controllers
 
                 if (!string.IsNullOrEmpty(status))
                 {
-                    if (status == "4")
+                    if (status == "3")
                     {
-                        bills = bills.Where(b => b.BillStatus == "4");
+                        bills = bills.Where(b => b.BillStatus == "3");
                     }
+					else
+					{
+						return NotFound();
+					}
                     
                 }
 

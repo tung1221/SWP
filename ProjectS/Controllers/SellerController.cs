@@ -32,7 +32,7 @@ namespace Project.Controllers
 		{
 			LoadRoleUser();
 			List<Bill> bills = _shopContext.Bills.ToList()
-				.Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 4)
+				.Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 3)
 				.ToList();
 
 			return View(bills);
@@ -50,7 +50,7 @@ namespace Project.Controllers
 					.Where(bill => bill.Email == currentUser.Identity.Name)
 					.ToList();
 
-				bills = bills.Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 4)
+				bills = bills.Where(bill => int.TryParse(bill.BillStatus, out int billStatus) && billStatus < 3)
 					.ToList();
 
 				return View(bills);
@@ -251,10 +251,18 @@ namespace Project.Controllers
 				}
 				else
 				{
-					int billStatus = int.Parse(bill.BillStatus) + 1;
-					bill.BillStatus = billStatus.ToString();
-					_shopContext.SaveChanges();
-				}
+                    if (int.Parse(bill.BillStatus) < 3)
+                    {
+
+                        int billStatus = int.Parse(bill.BillStatus) + 1;
+                        bill.BillStatus = billStatus.ToString();
+                        _shopContext.SaveChanges();
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
 			}
 
 
@@ -330,9 +338,17 @@ namespace Project.Controllers
 				}
 				else
 				{
-					int billStatus = int.Parse(bill.BillStatus) + 1;
-					bill.BillStatus = billStatus.ToString();
-					_shopContext.SaveChanges();
+					if (int.Parse(bill.BillStatus) <3)
+					{
+
+						int billStatus = int.Parse(bill.BillStatus) + 1;
+						bill.BillStatus = billStatus.ToString();
+						_shopContext.SaveChanges();
+					}
+					else
+					{
+						return NotFound();
+					}
 				}
 			}
 
